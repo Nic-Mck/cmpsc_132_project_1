@@ -1,0 +1,119 @@
+Necessary keyboard commands : 
+
+	1. add student
+	2. edit student's data
+	3. delete a student
+	4. display student data
+	5. exit application
+
+
+
+-------------------------------------------------------------------
+
+
+CLASS: STUDENT
+	Attributes:
+		Name:str (First, Middle, Last)
+		Id_num:int
+		mailing_address:object
+		email_addresses:list[object]
+		phone_number:list[object]
+		birth_date:object(Date_Class)
+		Acceptance_date:object(Date_Class)
+		Semester:object
+		intended_major:str
+
+	Methods:
+		Constructor -> None
+		Getters / Setters
+		display_data -> str
+
+-------------------------------------------------------------------
+
+CLASS: ADDRESS
+	Attributes:
+		Street Address:str
+		City:str
+		State:str
+		Zip_Code:str      
+		type:str (permanent, local, etc.)
+
+	Methods: 
+		constructor -> None 
+		getters / setters
+		display -> str
+
+-------------------------------------------------------------------
+
+CLASS: EMAIL_ADDRESS
+	Attributes: 
+		address:str
+		type:str (personal, work, academic)
+
+	Methods: 
+		constructor -> None
+		getters / setters
+		display -> str
+
+-------------------------------------------------------------------
+
+CLASS: PHONE_NUMBER
+	Attributes: 
+		phone_number:str
+		type:str
+	
+	Methods:
+		constructor -> None
+		getters / setters
+		display -> str
+
+-------------------------------------------------------------------
+
+CLASS: DATE
+	Attributes:
+		Day:str
+		Month:str
+		Year:str
+	Methods:
+		constructor -> None
+		getters / setters
+		display -> str
+
+-------------------------------------------------------------------
+
+CLASS: SEMESTER
+	Attributes: 
+		cur_sem:str (spring, summer, fall, winter)
+		year:str
+
+	Methods: 
+		constructor -> None
+		getters / setters
+		display -> str
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Program Structure: 
+	Initialize student list
+	
+	while not exit
+		get input
+		if 1 then 
+			get data for new student
+			append new student to student list
+		if 2 then 
+			get student id num
+			display student attributes
+			get attribute num to edit
+			get new value
+
+			insert new value
+		if 3 then
+			get student id_num
+			remove student with id 'id_num' from student_list
+		if 4 then 
+			get student id_nume
+			display student with id 'id_num' data
+		if 5 then 
+			break
