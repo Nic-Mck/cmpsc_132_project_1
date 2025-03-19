@@ -30,45 +30,6 @@ CLASS: STUDENT
 
 -------------------------------------------------------------------
 
-CLASS: ADDRESS
-	Attributes:
-		Street Address:str
-		City:str
-		State:str
-		Zip_Code:str      
-		type:str (permanent, local, etc.)
-
-	Methods: 
-		constructor -> None 
-		getters / setters
-		display -> str
-
--------------------------------------------------------------------
-
-CLASS: EMAIL_ADDRESS
-	Attributes: 
-		address:str
-		type:str (personal, work, academic)
-
-	Methods: 
-		constructor -> None
-		getters / setters
-		display -> str
-
--------------------------------------------------------------------
-
-CLASS: PHONE_NUMBER
-	Attributes: 
-		phone_number:str
-		type:str
-	
-	Methods:
-		constructor -> None
-		getters / setters
-		display -> str
-
--------------------------------------------------------------------
-
 CLASS: DATE
 	Attributes:
 		Day:str
@@ -117,3 +78,44 @@ Program Structure:
 			display student with id 'id_num' data
 		if 5 then 
 			break
+
+
+
+DONE
+
+CLASS: ADDRESS
+	Attributes:
+		Street Address:str
+		City:str
+		State:str
+		Zip_Code:str      
+		type:str (permanent, local, etc.)
+
+	Methods: 
+		constructor -> None 
+		getters / setters
+		display -> str
+
+-------------------------------------------------------------------
+
+CLASS: EMAIL_ADDRESS
+	Attributes: 
+		address:str
+		type:str (personal, work, academic)
+
+	Methods: 
+		constructor -> None
+		getters / setters
+		display -> str
+
+-------------------------------------------------------------------
+
+CLASS: PHONE_NUMBER
+	Attributes: 
+		phone_number:str
+		type:str
+	
+	Methods:
+		constructor -> None
+		getters / setters
+		display -> str
