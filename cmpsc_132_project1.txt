@@ -10,7 +10,6 @@ Necessary keyboard commands :
 
 -------------------------------------------------------------------
 
-
 CLASS: STUDENT
 	Attributes:
 		Name:str (First, Middle, Last)
@@ -52,7 +51,6 @@ CLASS: SEMESTER
 		getters / setters
 		display -> str
 
--------------------------------------------------------------------
 -------------------------------------------------------------------
 
 Program Structure: 
