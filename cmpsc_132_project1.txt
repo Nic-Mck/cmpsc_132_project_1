@@ -29,18 +29,6 @@ CLASS: STUDENT
 
 -------------------------------------------------------------------
 
-CLASS: DATE
-	Attributes:
-		Day:str
-		Month:str
-		Year:str
-	Methods:
-		constructor -> None
-		getters / setters
-		display -> str
-
--------------------------------------------------------------------
-
 CLASS: SEMESTER
 	Attributes: 
 		cur_sem:str (spring, summer, fall, winter)
@@ -117,3 +105,15 @@ CLASS: PHONE_NUMBER
 		constructor -> None
 		getters / setters
 		display -> str
+
+CLASS: DATE
+	Attributes:
+		Day:str
+		Month:str
+		Year:str
+	Methods:
+		constructor -> None
+		getters / setters
+		display -> str
+
+-------------------------------------------------------------------
