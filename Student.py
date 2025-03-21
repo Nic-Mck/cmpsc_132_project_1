@@ -40,7 +40,7 @@ class Student:
 
     def set_email_addresses(self, email_addresses):
         if isinstance(email_addresses, EmailAddress):
-            self.__email_addresses = email_addresses
+            self.__email_addresses = [email_addresses] # Edge case of a single email instead of a list of emails
 
         if isinstance(email_addresses, list):
             self.__email_addresses = []
@@ -48,7 +48,7 @@ class Student:
                 if isinstance(i, EmailAddress):
                     self.__email_addresses.append(i)
                 else:
-                    print(f'Error: {i} is not a Phone Number')
+                    print(f'Error: {i} is not a Email Address')
         else:
             print(f'Error: Email Address Invalid')
 
@@ -57,7 +57,7 @@ class Student:
 
     def set_phone_numbers(self, phone_numbers):
         if isinstance(phone_numbers, PhoneNumber):
-            self.__phone_numbers = phone_numbers
+            self.__phone_numbers = [phone_numbers] # Edge case of a single number instead of list of nums
 
         if isinstance(phone_numbers, list):
             self.__phone_numbers = []
@@ -123,7 +123,7 @@ class Student:
         return f'\nStudent Name: {self.get_name()}\nStudent ID: {self.get_id_num()}\n'\
                f'Email Addresses:\n{email_list}\nPhone Numbers: \n{phone_list}\n'\
                f'Birth Date: {self.get_birthdate()}\nAcceptance Date: {self.get_acceptance_date()}\n'\
-               f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}'
+               f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}\n'
 
 if __name__ == '__main__':
 
