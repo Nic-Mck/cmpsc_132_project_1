@@ -161,3 +161,11 @@ if __name__ == '__main__':
 
     s2.set_phone_numbers(s2_phones)
     print(s2)
+
+    #Date ADT Test
+
+    a_date1 = Date('6','24','2023')
+    b_date1 = Date('12','24','2004')
+    s2.set_acceptance_date(a_date1)
+    s2.set_birthdate(b_date1)
+    print(s2)
