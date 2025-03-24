@@ -85,7 +85,7 @@ def construct_student() -> Student.Student :
 
 def main() -> None : 
     exit_application:bool = False # Keeps track of wether or not app should close
-    students:list[Student.Student] = [Student.Student("Last, First", 1, "0/0/0000", "1/1/1111", "Fall", "Compsci")]
+    students:list[Student.Student] = [Student.Student("Last, First", "", 1, "0/0/0000", "1/1/1111", "Fall", "Compsci")]
 
     while not exit_application : 
         print_main_menu() 
