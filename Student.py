@@ -4,7 +4,7 @@
 
 # This module defines students in an advisor system as specified
 
-from StudentAttributes import Address, EmailAddress, PhoneNumber
+from StudentAttributes import Address, EmailAddress, PhoneNumber, Date
 
 
 class Student:
@@ -83,7 +83,7 @@ class Student:
         return self.__phone_numbers
 
     def set_birthdate(self, birthdate):
-        if birthdate:
+        if isinstance(birthdate, Date):
             self.__birthdate = birthdate
         else:
             print(f'Error: Invalid Date')
@@ -92,7 +92,7 @@ class Student:
         return self.__birthdate
 
     def set_acceptance_date(self, acceptance_date):
-        if acceptance_date:
+        if isinstance(acceptance_date, Date):
             self.__acceptance_date = acceptance_date
         else:
             print(f'Error: Invalid Date')
