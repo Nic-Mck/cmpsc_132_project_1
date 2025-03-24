@@ -89,10 +89,10 @@ def main() -> None :
 
     while not exit_application : 
         print_main_menu() 
-        response:int = int(input("Enter your choice: "))
+        response:str = str(input("Enter your choice: "))
 
         match response : 
-            case 1 : # Add student
+            case '1' : # Add student
                 new_student = construct_student()
 
                 if new_student is None : 
@@ -100,7 +100,7 @@ def main() -> None :
                 else : 
                     students.append(new_student)
 
-            case 2 : # Edit Data
+            case '2' : # Edit Data
                 try :
                     edit_student(students) 
 
@@ -108,7 +108,7 @@ def main() -> None :
                 except Exception as e : 
                     print(f'Failed to edit student data due to error: {e}')
 
-            case 3 : # Delete Student
+            case '3' : # Delete Student
                 success:bool = False
                 id_to_del:int = int(input("Enter id number of student you want to delete: "))
             
@@ -123,7 +123,7 @@ def main() -> None :
                 if not success : 
                     print("Failed to delete, student not found\n")
 
-            case 4 : # Display Student
+            case '4' : # Display Student
                 success:bool = False
                 id_to_display:int = int(input("Enter id number of student to display: "))
 
@@ -136,7 +136,7 @@ def main() -> None :
                 if not success : 
                     print("Failed to display student, student not found\n")
 
-            case 5 : # Exit
+            case '5' : # Exit
                 exit_application = True
                 print("Exiting...")
 
