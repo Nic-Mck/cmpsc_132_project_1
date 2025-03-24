@@ -9,9 +9,10 @@ from StudentAttributes import Address, EmailAddress, PhoneNumber
 
 class Student:
 
-    def __init__(self, name ='', id_num=0, birthdate='', acceptance_date='',
+    def __init__(self, name ='', address = '', id_num=0, birthdate='', acceptance_date='',
                  semester='', intended_major=''):
         self.__name = name
+        self.__address = address #or Address()
         self.__id_num = id_num
         self.__email_addresses = [] #or EmailAddress()
         self.__phone_numbers = []  #or PhoneNumber()
@@ -28,6 +29,15 @@ class Student:
 
     def get_name(self):
         return self.__name
+    
+    def set_address(self, address):
+        if isinstance(address, Address):
+            self.__address = address
+        else:
+            print(f'Error: Student Address Invalid')
+
+    def get_address(self):
+        return self.__address
 
     def set_id_num(self, id_num):
         if id_num and isinstance(id_num, int):
