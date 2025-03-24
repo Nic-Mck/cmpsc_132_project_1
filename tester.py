@@ -78,7 +78,7 @@ def construct_student() -> Student.Student :
     intended_major:str = str(input("Enter student's intended major: "))
 
     try : 
-        new_student:Student.Student = Student.Student(name, id_num, birthdate, acceptance_date, semester, intended_major)
+        new_student:Student.Student = Student.Student(name, '', id_num, birthdate, acceptance_date, semester, intended_major)
         return new_student
     except Exception as e : # No exceptions are setup atm, just returning None
         return None
