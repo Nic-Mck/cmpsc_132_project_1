@@ -157,7 +157,35 @@ class Date:
     def set_year(self, new_year:str) -> str : 
         self.__year = new_year
 
+class Semester:
 
+    def __init__(self, semester='', year=''):
+        self.__semester = semester
+        self.__year = year
+    
+    def set_semester(self, semester):
+        if len(semester) != 0:
+            self.__semester = semester
+        else:
+            print(f'Error: Semester Blank')
+    
+    def get_semester(self):
+        return self.__semester
+    
+    def set_year(self, year):
+        if len(year) != 0:
+            self.__year = year
+        else:
+            print(f'Error: Semester Year Blank')
+    
+    def get_year(self):
+        return self.__year
+    
+    def display(self):
+        print(f'{self.__semester} {self.__year}')
+
+    def __str__(self):
+        return f'{self.__semester} {self.__year}'
 
 if __name__ == '__main__':
 
@@ -175,6 +203,10 @@ if __name__ == '__main__':
     phone1 = PhoneNumber('610-303-3023', 'Cell')
     print(phone1)
 
-    #Date ADT Test
+    # Date ADT Test
     date1 = Date('10','16','2025')
     print(date1)
+
+    # Semester ADT Test
+    semester1 = Semester('Summer','2023')
+    print(semester1)
