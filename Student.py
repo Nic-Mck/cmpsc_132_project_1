@@ -148,7 +148,7 @@ if __name__ == '__main__':
     email2 = EmailAddress('sales@tunerdesign.org', 'Marketing')
     s2_emails = [email1, email2]
 
-    s2 = Student('Ed', '5066 Portola Ave' ,479998, '10/15/2003', '6/23/23',
+    s2 = Student('Michael DeSanta', '5066 Portola Ave' ,479998, '10/15/2003', '6/23/23',
                  'Summer 2023', 'Computer Science')
     s2.set_email_addresses(s2_emails)
     #print(s2)
