@@ -42,7 +42,7 @@ class Name:
             print(f'{self.__first} {self.__last}')
     
     def __str__(self):
-        if len(self.get_middle()) != 0: 
+        if self.__middle or len(self.get_middle()) != 0: 
             return f'{self.__first} {self.__middle} {self.__last}'
         else:
             return f'{self.__first} {self.__last}'
@@ -233,7 +233,7 @@ class Semester:
 if __name__ == '__main__':
 
     # Name ADT Test
-    name1 = Name('Pablo', 'Emilio', 'Escobar')
+    name1 = Name('Pablo', None, 'Escobar')
     print(name1)
 
     # Address ADT Test
