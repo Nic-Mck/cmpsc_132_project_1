@@ -4,6 +4,49 @@
 
 # This module defines attribute ADTs for the Student class
 
+class Name:
+
+    def __init__(self, first='', middle='', last=''):
+        self.__first = first
+        self.__middle = middle
+        self.__last = last
+
+    def set_first(self, first):
+        if len(first) != 0:
+            self.__first = first
+        else:
+            print(f'Error: First Name Blank')
+
+    def get_first(self):
+        return self.__first
+
+    def set_middle(self, middle):
+        self.__middle = middle      
+
+    def get_middle(self):
+        return self.__middle
+    
+    def set_last(self, last):
+        if len(last) != 0:
+            self.__last = last
+        else:
+            print(f'Error: Last Name Blank')
+
+    def get_first(self):
+        return self.__last
+    
+    def display(self):
+        if len(self.get_middle()) != 0: 
+            print(f'{self.__first} {self.__middle} {self.__last}')
+        else:
+            print(f'{self.__first} {self.__last}')
+    
+    def __str__(self):
+        if len(self.get_middle()) != 0: 
+            return f'{self.__first} {self.__middle} {self.__last}'
+        else:
+            return f'{self.__first} {self.__last}'
+
 class Address:
 
     def __init__(self, street_address='', city='', state='', zip_code='', address_type=''):
@@ -188,6 +231,10 @@ class Semester:
         return f'{self.__semester} {self.__year}'
 
 if __name__ == '__main__':
+
+    # Name ADT Test
+    name1 = Name('Pablo', 'Emilio', 'Escobar')
+    print(name1)
 
     # Address ADT Test
     address1 = Address('5066 Portola Drive', 'Rockford Hills', 'CA', '97707',
