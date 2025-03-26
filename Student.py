@@ -4,14 +4,14 @@
 
 # This module defines students in an advisor system as specified
 
-from StudentAttributes import Address, EmailAddress, PhoneNumber, Date, Semester
+from StudentAttributes import Name, Address, EmailAddress, PhoneNumber, Date, Semester
 
 
 class Student:
 
     def __init__(self, name ='', address = '', id_num=0, birthdate='', acceptance_date='',
                  start_semester='', intended_major=''):
-        self.__name = name
+        self.__name = name #or Name()
         self.__address = address #or Address()
         self.__id_num = id_num
         self.__email_addresses = [] #or EmailAddress()
@@ -22,7 +22,7 @@ class Student:
         self.__intended_major = intended_major
 
     def set_name(self, name):
-        if name:
+        if isinstance(name, Name):
             self.__name = name
         else:
             print(f'Error: Student Name Blank')
@@ -180,4 +180,10 @@ if __name__ == '__main__':
 
     s2_semester = Semester('Summer', '2023')
     s2.set_semester(s2_semester)
+    print(s2)
+
+    #Name ADT Test
+
+    s2_name = Name('Pablo', 'Emilio', 'Escobar')
+    s2.set_name(s2_name)
     print(s2)
