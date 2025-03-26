@@ -4,13 +4,13 @@
 
 # This module defines students in an advisor system as specified
 
-from StudentAttributes import Address, EmailAddress, PhoneNumber, Date
+from StudentAttributes import Address, EmailAddress, PhoneNumber, Date, Semester
 
 
 class Student:
 
     def __init__(self, name ='', address = '', id_num=0, birthdate='', acceptance_date='',
-                 semester='', intended_major=''):
+                 start_semester='', intended_major=''):
         self.__name = name
         self.__address = address #or Address()
         self.__id_num = id_num
@@ -18,7 +18,7 @@ class Student:
         self.__phone_numbers = []  #or PhoneNumber()
         self.__birthdate = birthdate #or Date()
         self.__acceptance_date = acceptance_date #or Date()
-        self.__semester = semester #or Semester()
+        self.__semester = start_semester #or Semester()
         self.__intended_major = intended_major
 
     def set_name(self, name):
@@ -101,7 +101,7 @@ class Student:
         return self.__acceptance_date
 
     def set_semester(self, semester):
-        if semester:
+        if isinstance(semester, Semester):
             self.__semester = semester
         else:
             print(f'Error; Invalid semester')
@@ -148,7 +148,7 @@ if __name__ == '__main__':
     email2 = EmailAddress('sales@tunerdesign.org', 'Marketing')
     s2_emails = [email1, email2]
 
-    s2 = Student('Ed', 479998, '10/15/2003', '6/23/23',
+    s2 = Student('Ed', '5066 Portola Ave' ,479998, '10/15/2003', '6/23/23',
                  'Summer 2023', 'Computer Science')
     s2.set_email_addresses(s2_emails)
     #print(s2)
@@ -162,10 +162,22 @@ if __name__ == '__main__':
     s2.set_phone_numbers(s2_phones)
     print(s2)
 
+    #Address ADT Test
+
+    s2_address = Address('5176 Whispymound Dr', 'Los Santos', 'CA', '97707', 'Residential')
+    s2.set_address(s2_address)
+    print(s2)
+
     #Date ADT Test
 
     a_date1 = Date('6','24','2023')
     b_date1 = Date('12','24','2004')
     s2.set_acceptance_date(a_date1)
     s2.set_birthdate(b_date1)
+    print(s2)
+
+    #Semester ADT Test
+
+    s2_semester = Semester('Summer', '2023')
+    s2.set_semester(s2_semester)
     print(s2)
