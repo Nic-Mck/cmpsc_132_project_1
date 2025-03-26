@@ -59,7 +59,7 @@ class Address:
         print(f'{self.__street_address}, {self.__city}, {self.__state} {self.__zip_code}')
 
     def __str__(self):
-        return f'{self.__street_address}, {self.__city}, {self.__state} {self.__zip_code}'
+        return f'{self.__street_address}, {self.__city}, {self.__state} {self.__zip_code} ({self.__address_type})'
 
 class EmailAddress:
 
