@@ -32,7 +32,7 @@ class Name:
         else:
             print(f'Error: Last Name Blank')
 
-    def get_first(self):
+    def get_last(self):
         return self.__last
     
     def display(self):
