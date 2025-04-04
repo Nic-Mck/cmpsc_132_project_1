@@ -226,7 +226,7 @@ class Semester:
         if isinstance(year, int) and 1900<year<2100:
             self.__year = year
         else:
-            print(f'Error: Semester Year Invalid')
+            raise ValueError(f'Error: Semester Year Invalid')
     
     def get_year(self):
         return self.__year
@@ -262,5 +262,5 @@ if __name__ == '__main__':
     print(date1)
 
     # Semester ADT Test
-    semester1 = Semester('Summer', '2023')
+    semester1 = Semester('Summer', 2023)
     print(semester1)
