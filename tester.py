@@ -22,23 +22,33 @@ def print_edit_menu() -> None :
     
 
 def edit_student_name(student:Student) -> bool :
-    new:str = input("Enter new name : ")
-    student.set_name(new)
+    new_first:str = input("Enter new first name : ")
+    new_middle:str = input("Enter new middle name : ")
+    new_last:str = input("Enter new last name : ")
+    student.set_name(Name(new_first, new_middle, new_last))
     return True
 
 def edit_student_birthdate(student:Student) -> bool : 
-    new:str = input("Enter new birthday : ")
-    student.set_birthdate(new)
+    new_day:str = input("Enter new birthdate day : ")
+    new_month:str = input("Enter new birthdate month : ")
+    new_year:str = input("Enter new birthdate year : ")
+
+    student.set_birthdate(Date(new_month, new_day, new_year))
     return True
 
 def edit_acceptance_date(student:Student) -> bool : 
-    new:str = input("Enter new acceptance date : ")
-    student.set_acceptance_date(new)
+    new_day:str = input("Enter new acceptance day : ")
+    new_month:str = input("Enter new acceptance month : ")
+    new_year:str = input("Enter new acceptance year : ")
+
+    student.set_acceptance_date(Date(new_month, new_day, new_year))
     return True
 
 def edit_student_semester(student:Student) -> bool : 
     new:str = input("Enter new semester : ")
-    student.set_semester(new)
+    year:int = int(input("Enter the year : "))
+
+    student.set_semester(Semester(new, year))
     return True
 
 def edit_student_intended_major(student:Student) -> bool :
@@ -109,6 +119,13 @@ def construct_student() -> Student.Student :
         acceptance_date:str = str(input("Enter student's acceptance date: "))
         semester:str = str(input("Enter current sememster: "))
         intended_major:str = str(input("Enter student's intended major: "))
+
+        test_blank_list = [name, birthdate, acceptance_date, semester, intended_major]
+
+        for case in test_blank_list : 
+            if len(case.strip()) == 0 :
+                print(f'Error, attribute {case} cannot be blank')
+                return None
 
     # Catch errors and print to user to prevent program crash
     except Exception as e : 
