@@ -12,7 +12,7 @@ class Name:
         self.__last = last
 
     def set_first(self, first):
-        if len(first) != 0:
+        if first:
             self.__first = first
         else:
             print(f'Error: First Name Blank')
@@ -27,7 +27,7 @@ class Name:
         return self.__middle
     
     def set_last(self, last):
-        if len(last) != 0:
+        if last:
             self.__last = last
         else:
             print(f'Error: Last Name Blank')
@@ -57,7 +57,7 @@ class Address:
         self.__address_type = address_type
 
     def set_street_address(self, street_address):
-        if len(street_address) != 0:
+        if street_address:
             self.__street_address = street_address
         else:
             print(f'Error: Street Address Blank')
@@ -66,7 +66,7 @@ class Address:
         return self.__street_address
 
     def set_city(self, city):
-        if len(city) != 0:
+        if city:
             self.__city = city
         else:
             print(f'Error: City Blank')
@@ -75,7 +75,7 @@ class Address:
         return self.__city
 
     def set_state(self, state):
-        if len(state) != 0:
+        if state:
             self.__state = state
         else:
             print(f'Error: State Blank')
@@ -84,7 +84,7 @@ class Address:
         return self.__state
 
     def set_zip_code(self, zip_code):
-        if len(zip_code) != 0:
+        if zip_code:
             self.__zip_code = zip_code
         else:
             print(f'Error: Zip Code Blank')
@@ -93,7 +93,7 @@ class Address:
         return self.__zip_code
 
     def set_address_type(self, address_type):
-        if len(address_type) != 0:
+        if address_type:
             self.__address_type = address_type
         else:
             print(f'Error: Address Type Blank')
@@ -111,7 +111,7 @@ class EmailAddress:
         self.__email_type = email_type
 
     def set_address(self, address):
-        if len(address) != 0:
+        if address:
             self.__address = address
         else:
             print(f'Error: Email Address Blank')
@@ -120,7 +120,7 @@ class EmailAddress:
         return self.__address
 
     def set_email_type(self, email_type):
-        if len(email_type) != 0:
+        if email_type:
             self.__email_type = email_type
         else:
             print(f'Error: Email Type Blank')
@@ -144,7 +144,7 @@ class PhoneNumber:
         self.__phone_type = phone_type
 
     def set_phone_number(self, phone_number):
-        if len(phone_number) != 0:
+        if phone_number:
             self.__phone_number = phone_number
         else:
             print(f'Error: Phone Number Blank')
@@ -153,7 +153,7 @@ class PhoneNumber:
         return self.__phone_number
 
     def set_phone_type(self, phone_type):
-        if len(phone_type) != 0:
+        if phone_type:
             self.__phone_type = phone_type
         else:
             print(f'Error: Phone Type Blank')
@@ -212,7 +212,7 @@ class Semester:
         if semester.capitalize() in self.valid_sems:
             self.__semester = semester
         else:
-            raise ValueError(f'Error: Semester Blank')
+            raise ValueError(f'Error: Semester Type Invalid')
     
     def get_semester(self):
         return self.__semester
@@ -221,7 +221,7 @@ class Semester:
         if isinstance(year, int) and 1900<year<2100:
             self.__year = year
         else:
-            print(f'Error: Semester Year Blank')
+            print(f'Error: Semester Year Invalid')
     
     def get_year(self):
         return self.__year
