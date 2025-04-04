@@ -119,9 +119,9 @@ class Student:
         return self.__intended_major
 
     def display_data(self):
-        # temporary implementations
         email_list = "\n".join(str(e) for e in self.__email_addresses) if self.__email_addresses else "[]"
         phone_list = "\n".join(str(e) for e in self.__phone_numbers) if self.__phone_numbers else "[]"
+
         print(f'\nStudent Name: {self.get_name()}\nStudent Address: {self.get_address()}\nStudent ID: {self.get_id_num()}\n'
               f'Email Addresses:\n{email_list}\nPhone Numbers: {phone_list}\n'
               f'Birth Date: {self.get_birthdate()}\nAcceptance Date: {self.get_acceptance_date()}\n'
@@ -130,6 +130,7 @@ class Student:
     def __str__(self):
         email_list = "\n".join(str(e) for e in self.__email_addresses) if self.__email_addresses else "[]"
         phone_list = "\n".join(str(e) for e in self.__phone_numbers) if self.__phone_numbers else "[]"
+        
         return f'\nStudent Name: {self.get_name()}\nStudent Address: {self.get_address()}\nStudent ID: {self.get_id_num()}\n'\
                f'Email Addresses:\n{email_list}\nPhone Numbers: \n{phone_list}\n'\
                f'Birth Date: {self.get_birthdate()}\nAcceptance Date: {self.get_acceptance_date()}\n'\
