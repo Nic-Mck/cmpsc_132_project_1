@@ -202,17 +202,22 @@ class Date:
 
 class Semester:
 
-    valid_sems = ['Summer', 'Fall', 'Spring']
+    valid_sems = ['summer', 'fall', 'spring']
 
     def __init__(self, semester='', year=0):
-        self.__semester = semester
+
+        if semester.lower() in self.valid_sems:
+            self.__semester = semester
+        else:
+            raise ValueError(f'Error: Invalid Semester Value')
+        
         self.__year = year
     
     def set_semester(self, semester):
-        if semester.capitalize() in self.valid_sems:
+        if semester.lower() in self.valid_sems:
             self.__semester = semester
         else:
-            raise ValueError(f'Error: Semester Type Invalid')
+            raise ValueError(f'Error: Invalid Semester Value')
     
     def get_semester(self):
         return self.__semester
