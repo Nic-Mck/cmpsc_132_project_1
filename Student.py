@@ -120,7 +120,7 @@ class Student:
         if isinstance(semester, (Semester,str)):
             self.__semester = semester
         else:
-            print(f'Error; Invalid semester')
+            print(f'Error: Invalid semester')
 
     def get_semester(self):
         return self.__semester
