@@ -64,6 +64,14 @@ class Student:
 
     def get_email_addresses(self):
         return self.__email_addresses
+    
+    def append_email_address(self, new_email:EmailAddress) -> bool : 
+        if not isinstance(new_email, EmailAddress) : 
+            raise Exception('Not an Email Address Object')
+            return False
+
+        self.__email_addresses.append(new_email) 
+        return True
 
     def set_phone_numbers(self, phone_numbers):
         if isinstance(phone_numbers, PhoneNumber):
@@ -81,6 +89,14 @@ class Student:
 
     def get_phone_numbers(self):
         return self.__phone_numbers
+    
+    def append_phone_number(self, new_phone_number:PhoneNumber) -> bool : 
+        if not isinstance(new_phone_number, PhoneNumber) : 
+            raise Exception("New Phone Number is not a PhoneNumber Object")
+            return False
+        
+        self.__phone_numbers.append(new_phone_number)
+        return True
 
     def set_birthdate(self, birthdate):
         if isinstance(birthdate, Date):

@@ -1,4 +1,5 @@
-import Student 
+import Student
+from StudentAttributes import *
 
 def print_main_menu() -> None : 
     print(f'\n1. Add Student\n'
@@ -15,7 +16,57 @@ def print_edit_menu() -> None :
           '3. Acceptance Date\n'
           '4. Semester\n'
           '5. Intended Major\n'
+          '6. Add Email Address\n'
+          '7. Add Phone Number\n'
           )
+    
+
+def edit_student_name(student:Student) -> bool :
+    new:str = input("Enter new name : ")
+    student.set_name(new)
+    return True
+
+def edit_student_birthdate(student:Student) -> bool : 
+    new:str = input("Enter new birthday : ")
+    student.set_birthdate(new)
+    return True
+
+def edit_acceptance_date(student:Student) -> bool : 
+    new:str = input("Enter new acceptance date : ")
+    student.set_acceptance_date(new)
+    return True
+
+def edit_student_semester(student:Student) -> bool : 
+    new:str = input("Enter new semester : ")
+    student.set_semester(new)
+    return True
+
+def edit_student_intended_major(student:Student) -> bool :
+    new:str = input("Enter new major : ")
+    student.set_intended_major(new)
+    return True
+
+def add_email_address(student:Student) -> bool : 
+    address:str = input("Enter new email address : ")
+    add_type:str = input("Enter email address type : ")
+    
+    new_email = EmailAddress(address, add_type)
+
+    # Attempt to append email and return True or False for Success or Failure
+    return student.append_email_address(new_email)
+
+
+def add_phone_number(student:Student) -> bool : 
+    new_number:str = input("Enter new phone number : ")
+    new_number_type:str = input("Enter phone number type (Business, Personal, Etc.) : ")
+    
+    new_phone_number:PhoneNumber = PhoneNumber(new_number, new_number_type)
+    
+    # Attempt to append phone number and return True or False for Success or Failure
+    return student.append_phone_number(new_phone_number)
+
+
+
 
 def edit_student(students) -> None : 
     success:bool = False
@@ -28,54 +79,40 @@ def edit_student(students) -> None :
 
             match sub_menu_choice : 
                 case 1 : # Name
-                    new:str = input("Enter new name : ")
-                    student.set_name(new)
-                    success = True
-
+                    success = edit_student_name(student)
                 case 2 : # Birthdate
-                    new:str = input("Enter new birthday : ")
-                    student.set_birthdate(new)
-                    success = True
-
+                    success = edit_student_birthdate(student)
                 case 3 : #Acceptance Date
-                    new:str = input("Enter new acceptance date : ")
-                    student.set_acceptance_date(new)
-                    success = True
-
+                    success = edit_acceptance_date(student)
                 case 4 : # Semester 
-                    new:str = input("Enter new semester : ")
-                    student.set_semester(new)
-                    success = True
-
+                    success = edit_student_semester(student)
                 case 5 : # Intended Major
-                    new:str = input("Enter new major : ")
-                    student.set_intended_major(new)
-                    success = True
-
+                    success = edit_student_intended_major(student)
+                case 6 : # Add an email address
+                    success = add_email_address(student)
+                case 7 : # Add a phone number
+                    success = add_phone_number(student)
                 case _ : # Default Case
                     raise Exception("Invalid submenu choice")
                 
             break # Exit loop as student was found
 
-                # FIXME
-                # We should probably also have options for editing email addresses and phone numbers,
-                # But we would need to grab all of the necessary info to construct the objects from the user
-                # And I am far too lazy to do that at this moment
-                #
-                # Ommitted option to change student id num as that is a unique identifier that should probably never change
-                # Lots of these prolly SHOULDN'T ever change but it doesn't hurt to have the option
-
-
+    # If student wasn't found, raise exception
     if not success : 
         raise Exception("Student not found")
 
 def construct_student() -> Student.Student : 
-    name:str = str(input("Enter student's name: "))
-    id_num:int = int(input("Enter student's id number: "))
-    birthdate:str = str(input("Enter students birthdate: "))
-    acceptance_date:str = str(input("Enter student's acceptance date: "))
-    semester:str = str(input("Enter current sememster: "))
-    intended_major:str = str(input("Enter student's intended major: "))
+    try : 
+        name:str = str(input("Enter student's name: "))
+        id_num:int = int(input("Enter student's id number: "))
+        birthdate:str = str(input("Enter students birthdate: "))
+        acceptance_date:str = str(input("Enter student's acceptance date: "))
+        semester:str = str(input("Enter current sememster: "))
+        intended_major:str = str(input("Enter student's intended major: "))
+
+    # Catch errors and print to user to prevent program crash
+    except Exception as e : 
+        print(e)
 
     try : 
         new_student:Student.Student = Student.Student(name, '', id_num, birthdate, acceptance_date, semester, intended_major)

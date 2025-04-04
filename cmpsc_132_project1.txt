@@ -7,7 +7,6 @@ Necessary keyboard commands :
 	5. exit application
 
 
-
 -------------------------------------------------------------------
 
 CLASS: STUDENT
@@ -26,18 +25,6 @@ CLASS: STUDENT
 		Constructor -> None
 		Getters / Setters
 		display_data -> str
-
--------------------------------------------------------------------
-
-CLASS: SEMESTER
-	Attributes: 
-		cur_sem:str (spring, summer, fall, winter)
-		year:str
-
-	Methods: 
-		constructor -> None
-		getters / setters
-		display -> str
 
 -------------------------------------------------------------------
 
@@ -117,3 +104,13 @@ CLASS: DATE
 		display -> str
 
 -------------------------------------------------------------------
+
+CLASS: SEMESTER
+	Attributes: 
+		cur_sem:str (spring, summer, fall, winter)
+		year:str
+
+	Methods: 
+		constructor -> None
+		getters / setters
+		display -> str
