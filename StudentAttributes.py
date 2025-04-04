@@ -202,21 +202,23 @@ class Date:
 
 class Semester:
 
-    def __init__(self, semester='', year=''):
+    valid_sems = ['Summer', 'Fall', 'Spring']
+
+    def __init__(self, semester='', year=0):
         self.__semester = semester
         self.__year = year
     
     def set_semester(self, semester):
-        if len(semester) != 0:
+        if semester.capitalize() in self.valid_sems:
             self.__semester = semester
         else:
-            print(f'Error: Semester Blank')
+            raise ValueError(f'Error: Semester Blank')
     
     def get_semester(self):
         return self.__semester
     
     def set_year(self, year):
-        if len(year) != 0:
+        if isinstance(year, int) and 1900<year<2100:
             self.__year = year
         else:
             print(f'Error: Semester Year Blank')
@@ -255,5 +257,5 @@ if __name__ == '__main__':
     print(date1)
 
     # Semester ADT Test
-    semester1 = Semester('Summer','2023')
+    semester1 = Semester('Summer', '2023')
     print(semester1)
