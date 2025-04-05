@@ -104,7 +104,10 @@ def edit_student_semester(student:Student) -> bool :
     while True:
             try:
                 year:int = int(input("Enter the year : "))
-                break
+                if 1900 < year < 2100:
+                     break
+                else:
+                     print("Error: Semester year must be between 1900 and 2100")
             except ValueError:
                 print("Error: Semester year cannot be blank")
 
@@ -212,9 +215,12 @@ def construct_student() -> Student.Student :
         while True:
             try:
                 id_num:int = int(input("Enter student's id number: "))
-                break
+                if id_num > 0:
+                    break
+                else:
+                     print("Invalid input. Student ID number cannot be negative")
             except ValueError:
-                print("Invalid input. Please enter a valid student ID")
+                print("Invalid input. Please enter a valid student ID number")
         
         while True:
                 birthdate:str = str(input("Enter students birthdate (mm/dd/yyyy): "))
