@@ -22,43 +22,119 @@ def print_edit_menu() -> None :
     
 
 def edit_student_name(student:Student) -> bool :
-    new_first:str = input("Enter new first name : ")
+    while True:
+            new_first:str = input("Enter new first name : ")
+            if len(new_first) > 0:
+                break
+            else:
+                print("Error: First Name cannot be blank")
+
     new_middle:str = input("Enter new middle name : ")
-    new_last:str = input("Enter new last name : ")
+
+    while True:
+            new_last:str = input("Enter new last name : ")
+            if len(new_last) > 0:
+                break
+            else:
+                print("Error: Last Name cannot be blank")
+
     student.set_name(Name(new_first, new_middle, new_last))
     return True
 
 def edit_student_birthdate(student:Student) -> bool : 
-    new_day:str = input("Enter new birthdate day : ")
-    new_month:str = input("Enter new birthdate month : ")
-    new_year:str = input("Enter new birthdate year : ")
+
+    while True:
+            new_day:str = input("Enter new birthdate day : ")
+            if len(new_day) > 0:
+                break
+            else:
+                print("Error: Day cannot be blank")
+
+    while True:
+            new_month:str = input("Enter new birthdate month : ")
+            if len(new_month) > 0:
+                break
+            else:
+                print("Error: Month cannot be blank")
+
+    while True:
+            new_year:str = input("Enter new birthdate year : ")
+            if len(new_year) > 0:
+                break
+            else:
+                print("Error: Year cannot be blank")
 
     student.set_birthdate(Date(new_month, new_day, new_year))
     return True
 
 def edit_acceptance_date(student:Student) -> bool : 
-    new_day:str = input("Enter new acceptance day : ")
-    new_month:str = input("Enter new acceptance month : ")
-    new_year:str = input("Enter new acceptance year : ")
+    while True:
+            new_day:str = input("Enter new birthdate day : ")
+            if len(new_day) > 0:
+                break
+            else:
+                print("Error: Day cannot be blank")
+
+    while True:
+            new_month:str = input("Enter new birthdate month : ")
+            if len(new_month) > 0:
+                break
+            else:
+                print("Error: Month cannot be blank")
+
+    while True:
+            new_year:str = input("Enter new birthdate year : ")
+            if len(new_year) > 0:
+                break
+            else:
+                print("Error: Year cannot be blank")
 
     student.set_acceptance_date(Date(new_month, new_day, new_year))
     return True
 
 def edit_student_semester(student:Student) -> bool : 
-    new:str = input("Enter new semester : ")
-    year:int = int(input("Enter the year : "))
+    while True:
+            new:str = input("Enter new semester (Fall/Spring/Summer): ")
+            if len(new) > 0:
+                break
+            else:
+                print("Error: Semester cannot be blank")
+
+    while True:
+            year:int = int(input("Enter the year : "))
+            if year:
+                break
+            else:
+                print("Error: Semester cannot be blank")
 
     student.set_semester(Semester(new, year))
     return True
 
 def edit_student_intended_major(student:Student) -> bool :
-    new:str = input("Enter new major : ")
+    while True:
+            new:str = input("Enter new major : ")
+            if len(new) > 0:
+                break
+            else:
+                print("Error: Intended major cannot be blank")
+
     student.set_intended_major(new)
     return True
 
 def add_email_address(student:Student) -> bool : 
-    address:str = input("Enter new email address : ")
-    add_type:str = input("Enter email address type : ")
+    while True:
+            address:str = input("Enter new email address : ")
+            if len(address) > 0:
+                break
+            else:
+                print("Error: Email address blank")
+
+    while True:
+            add_type:str = input("Enter email address type : ")
+            if len(add_type) > 0:
+                break
+            else:
+                print("Error: Email type blank")
     
     new_email = EmailAddress(address, add_type)
 
@@ -67,8 +143,19 @@ def add_email_address(student:Student) -> bool :
 
 
 def add_phone_number(student:Student) -> bool : 
-    new_number:str = input("Enter new phone number : ")
-    new_number_type:str = input("Enter phone number type (Business, Personal, Etc.) : ")
+    while True:
+            new_number:str = input("Enter new phone number : ")
+            if len(new_number) > 0:
+                break
+            else:
+                print("Error: Phone number blank")
+
+    while True:
+            new_number_type:str = input("Enter phone number type (Business, Personal, Etc.) : ")
+            if len(new_number_type) > 0:
+                break
+            else:
+                print("Error: Phone type blank")
     
     new_phone_number:PhoneNumber = PhoneNumber(new_number, new_number_type)
     
@@ -113,12 +200,48 @@ def edit_student(students) -> None :
 
 def construct_student() -> Student.Student : 
     try : 
-        name:str = str(input("Enter student's name: "))
-        id_num:int = int(input("Enter student's id number: "))
-        birthdate:str = str(input("Enter students birthdate: "))
-        acceptance_date:str = str(input("Enter student's acceptance date: "))
-        semester:str = str(input("Enter current sememster: "))
-        intended_major:str = str(input("Enter student's intended major: "))
+        while True:
+                name:str = str(input("Enter student's name: "))
+                if len(name) > 0:
+                    break
+                else:
+                    print("Invalid input. Please enter a valid student Name.")
+
+        # Revise for Int data type
+        while True:
+                id_num:int = int(input("Enter student's id number: "))
+                if id_num:
+                    break
+                else:
+                    print("Invalid input. Please enter a valid student ID.")
+        
+        while True:
+                birthdate:str = str(input("Enter students birthdate (mm/dd/yyyy): "))
+                if len(birthdate) > 0:
+                    break
+                else:
+                    print("Invalid input. Please enter a valid date.")
+        
+        while True:
+                acceptance_date:str = str(input("Enter student's acceptance date (mm/dd/yyyy): "))
+                if len(acceptance_date) > 0:
+                    break
+                else:
+                    print("Invalid input. Please enter a valid date.")
+
+        while True:
+                semester:str = str(input("Enter current sememster: "))
+                if len(semester) > 0:
+                    break
+                else:
+                    print("Invalid input. Please enter a valid semester.")
+
+        while True:
+                intended_major:str = str(input("Enter student's intended major: "))
+                if len(intended_major) > 0:
+                    break
+                else:
+                    print("Invalid input. Please enter a valid major.")
 
         test_blank_list = [name, birthdate, acceptance_date, semester, intended_major]
 
@@ -143,6 +266,7 @@ def main() -> None :
 
     while not exit_application : 
         print_main_menu() 
+
         response:str = str(input("Enter your choice: "))
 
         match response : 
@@ -164,7 +288,12 @@ def main() -> None :
 
             case '3' : # Delete Student
                 success:bool = False
-                id_to_del:int = int(input("Enter id number of student you want to delete: "))
+                while True:
+                    try:
+                        id_to_del:int = int(input("Enter id number of student you want to delete: "))
+                        break
+                    except ValueError:
+                        print("Invalid input. Please enter a valid student ID to delete.")
             
                 # Find student with matching ID and delete from students array
                 for student in students : 
@@ -179,7 +308,13 @@ def main() -> None :
 
             case '4' : # Display Student
                 success:bool = False
-                id_to_display:int = int(input("Enter id number of student to display: "))
+                while True:
+                    try:
+
+                        id_to_display:int = int(input("Enter id number of student to display: "))
+                        break
+                    except ValueError:
+                        print("Invalid input. Please enter a valid student ID to display.")
 
                 for student in students : 
                     if student.get_id_num() == id_to_display : 

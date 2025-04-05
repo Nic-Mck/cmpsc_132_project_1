@@ -262,5 +262,5 @@ if __name__ == '__main__':
     print(date1)
 
     # Semester ADT Test
-    semester1 = Semester('Summer', 2023)
+    semester1 = Semester('Summer', '2023')
     print(semester1)
