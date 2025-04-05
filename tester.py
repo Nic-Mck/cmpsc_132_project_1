@@ -202,7 +202,7 @@ def edit_student(students) -> None :
     if not success : 
         raise Exception("Student not found")
 
-def construct_student() -> Student.Student : 
+def construct_student(students) -> Student.Student : 
     try : 
         while True:
                 name:str = str(input("Enter student's name: "))
@@ -216,9 +216,15 @@ def construct_student() -> Student.Student :
             try:
                 id_num:int = int(input("Enter student's id number: "))
                 if id_num > 0:
-                    break
+                    for student in students :
+                        if student.get_id_num() != id_num:
+                            break
+                        else:
+                            print("Error: Student ID is already in use")
+                            break
+                    break        
                 else:
-                     print("Invalid input. Student ID number cannot be negative")
+                    print("Invalid input. Student ID number cannot be negative")
             except ValueError:
                 print("Invalid input. Please enter a valid student ID number")
         
@@ -278,7 +284,7 @@ def main() -> None :
 
         match response : 
             case '1' : # Add student
-                new_student = construct_student()
+                new_student = construct_student(students)
 
                 if new_student is None : 
                     print("Failed to create student, try again\n")
