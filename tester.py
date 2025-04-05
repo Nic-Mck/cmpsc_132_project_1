@@ -100,12 +100,13 @@ def edit_student_semester(student:Student) -> bool :
             else:
                 print("Error: Semester cannot be blank")
 
+    # Revise for int data type
     while True:
-            year:int = int(input("Enter the year : "))
-            if year:
+            try:
+                year:int = int(input("Enter the year : "))
                 break
-            else:
-                print("Error: Semester cannot be blank")
+            except ValueError:
+                print("Error: Semester year cannot be blank")
 
     student.set_semester(Semester(new, year))
     return True
@@ -209,11 +210,11 @@ def construct_student() -> Student.Student :
 
         # Revise for Int data type
         while True:
+            try:
                 id_num:int = int(input("Enter student's id number: "))
-                if id_num:
-                    break
-                else:
-                    print("Invalid input. Please enter a valid student ID.")
+                break
+            except ValueError:
+                print("Invalid input. Please enter a valid student ID")
         
         while True:
                 birthdate:str = str(input("Enter students birthdate (mm/dd/yyyy): "))
