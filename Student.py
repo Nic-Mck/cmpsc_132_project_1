@@ -30,11 +30,13 @@ class Student:
     def get_name(self):
         return self.__name
     
-    def set_address(self, address):
+    def set_address(self, address) -> bool :
         if isinstance(address, (Address, str)):
             self.__address = address
+            return True
         else:
             print(f'Error: Student Address Invalid')
+            return False
 
     def get_address(self):
         return self.__address
