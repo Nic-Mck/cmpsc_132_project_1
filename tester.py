@@ -18,6 +18,7 @@ def print_edit_menu() -> None :
           '5. Intended Major\n'
           '6. Add Email Address\n'
           '7. Add Phone Number\n'
+          '8. Edit Home Address\n'
           )
     
 
@@ -145,7 +146,6 @@ def add_email_address(student:Student) -> bool :
     # Attempt to append email and return True or False for Success or Failure
     return student.append_email_address(new_email)
 
-
 def add_phone_number(student:Student) -> bool : 
     while True:
             new_number:str = input("Enter new phone number : ")
@@ -166,6 +166,33 @@ def add_phone_number(student:Student) -> bool :
     # Attempt to append phone number and return True or False for Success or Failure
     return student.append_phone_number(new_phone_number)
 
+def edit_home_address(student:Student) -> bool : 
+    new_street_adr:str = str(input("Enter Street Address : "))
+    while len(new_street_adr) <= 0 : 
+        print("Invalid, address cannot be blank")
+        new_street_adr = str(input("Enter Street Address : "))
+
+    new_city:str = str(input("Enter new city : "))
+    while len(new_city) <= 0 :
+         print("Invalid, City Name Cannot be blank")
+         new_city = str(input("Enter new city : "))
+    
+    new_state:str = str(input("Enter new state : "))
+    while len(new_state) <= 0 :
+        print("Invalid, State cannot be blank")
+        new_state:str = str(input("Enter new state : "))
+
+    new_zipcode:str = str(input("Enter new zipcode : "))
+    while len(new_zipcode) <= 0 :
+        print("Invalid, zipcode cannot be blank")
+        new_zipcode:str = str(input("Enter new zipcode : "))
+
+    new_addr_type:str = str(input("Enter address type : "))
+    while len(new_addr_type) <= 0 : 
+        print("Invalid, address type cannot be blank")
+        new_addr_type:str = str(input("Enter address type : "))
+
+    return student.set_address(Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type))
 
 
 
@@ -193,6 +220,8 @@ def edit_student(students) -> None :
                     success = add_email_address(student)
                 case 7 : # Add a phone number
                     success = add_phone_number(student)
+                case 8 : # Edit Address
+                    success = edit_home_address(student)
                 case _ : # Default Case
                     raise Exception("Invalid submenu choice")
                 
@@ -205,11 +234,11 @@ def edit_student(students) -> None :
 def construct_student(students) -> Student.Student : 
     try : 
         while True:
-                name:str = str(input("Enter student's name: "))
-                if len(name) > 0:
-                    break
-                else:
-                    print("Invalid input. Please enter a valid student Name.")
+            name:str = str(input("Enter student's name: "))
+            if len(name) > 0:
+                break
+            else:
+                print("Invalid input. Please enter a valid student Name.")
 
         # Revise for Int data type
         while True:
