@@ -211,8 +211,14 @@ class Semester:
         else:
             raise ValueError(f'Error: Invalid Semester Value')
         
-        self.__year = year
-    
+        try:
+            self.__year = int(year)
+            raise ValueError("Invalid input, enter an integer")
+        except Exception as e :
+            print(f'#Error: Please enter a valid semester year [1900-2100] ')
+            #FIXME
+            self.__year = "Invalid Input"
+
     def set_semester(self, semester):
         if semester.lower() in self.valid_sems:
             self.__semester = semester
@@ -241,15 +247,27 @@ class Course:
 
     valid_inst_methods = ['classroom', 'hybrid', 'remote']
     valid_status = ['completed', 'dropped', 'current']
-    valid_grades = ['A','B','C','D','F','N/A']
+    valid_grades = ['a','b','c','d','f','n/a']
 
     def __init__(self, course_num='', semester=Semester, inst_method='', status='', grade=''):
         
         self.__course_num = course_num
         self.__semester = semester
-        self.__inst_method = inst_method
-        self.__status = status
-        self.__grade = grade
+
+        if inst_method.lower() in self.valid_inst_methods:
+            self.__inst_method = inst_method
+        else:
+            raise ValueError(f'Error: Please enter a valid course instruction method')
+        
+        if status.lower() in self.valid_status:
+            self.__status = status
+        else:
+            raise ValueError(f'Error: Please enter a valid course status')
+        
+        if grade.lower() in self.valid_grades:
+            self.__grade = grade
+        else:
+            raise ValueError(f'Error: Please enter a valid course grade')
 
     # Note: Optimize this setter to take proper input and format it (eg. CMPSC 132)
     def set_course_num(self, course_num):
