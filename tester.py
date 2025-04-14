@@ -21,7 +21,6 @@ def print_edit_menu() -> None :
           '8. Edit Home Address\n'
           )
     
-
 def edit_student_name(student:Student) -> bool :
     while True:
             new_first:str = input("Enter new first name : ")
@@ -194,8 +193,6 @@ def edit_home_address(student:Student) -> bool :
 
     return student.set_address(Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type))
 
-
-
 def edit_student(students) -> None : 
     success:bool = False
     id_to_edit:int = int(input("Enter id number of student you wish to edit: "))
@@ -305,7 +302,7 @@ def construct_student(students) -> Student.Student :
 
 def main() -> None : 
     exit_application:bool = False # Keeps track of wether or not app should close
-    students:list[Student.Student] = [Student.Student("Last, First", "", 1, "0/0/0000", "1/1/1111", "Fall", "Compsci")]
+    students:list[Student.Student] = [Student.Student("Last, First", "Test Address", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci")]
 
     while not exit_application : 
         print_main_menu() 
