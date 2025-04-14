@@ -236,6 +236,74 @@ class Semester:
 
     def __str__(self):
         return f'{self.__semester} {self.__year}'
+    
+class Course:
+
+    valid_inst_methods = ['classroom', 'hybrid', 'remote']
+    valid_status = ['completed', 'dropped', 'current']
+    valid_grades = ['A','B','C','D','F','N/A']
+
+    def __init__(self, course_num='', semester=Semester, inst_method='', status='', grade=''):
+        
+        self.__course_num = course_num
+        self.__semester = semester
+        self.__inst_method = inst_method
+        self.__status = status
+        self.__grade = grade
+
+    # Note: Optimize this setter to take proper input and format it (eg. CMPSC 132)
+    def set_course_num(self, course_num):
+        if course_num:
+            self.__course_num = course_num
+        else:
+            raise ValueError(f'Error: Course Number Blank')
+
+    def get_course_num(self):
+        return self.__course_num
+    
+    def set_semester(self, semester):
+        if isinstance(semester, Semester):
+            self.__semester = semester 
+        else:
+            raise ValueError(f'Error: Please enter a valid semester')
+
+    def get_semester(self):
+        return self.__semester
+    
+    def set_inst_method(self, inst_method):
+        if inst_method.lower() in self.valid_inst_methods:
+            self.__inst_method = inst_method
+        else:
+            raise ValueError(f'Error: Please enter a valid course instruction method')
+        
+    def get_inst_method(self):
+        return self.__inst_method
+    
+    def set_status(self, status):
+        if status.lower() in self.valid_status:
+            self.__status = status
+        else:
+            raise ValueError(f'Error: Please enter a valid course status')
+        
+    def get_status(self):
+        return self.__status
+    
+    def set_grade(self, grade):
+        if grade.lower() in self.valid_grades:
+            self.__grade = grade
+        else:
+            raise ValueError(f'Error: Please enter a valid course grade')
+        
+    def get_grade(self):
+        return self.__grade
+    
+    # Note: Optimize print & display outputs for this Class
+    def display(self):
+        print(f'Course ID: {self.__course_num}\nSemester Taken: {self.__semester}\nInstruction Method: {self.__inst_method}\nStatus: {self.__status}\nGrade: {self.__grade.upper()}')
+
+    def __str__(self):
+        return f'Course ID: {self.__course_num}\nSemester Taken: {self.__semester}\nInstruction Method: {self.__inst_method}\nStatus: {self.__status}\nGrade: {self.__grade.upper()}'
+
 
 if __name__ == '__main__':
 
@@ -262,5 +330,9 @@ if __name__ == '__main__':
     print(date1)
 
     # Semester ADT Test
-    semester1 = Semester('Summer', '2023')
+    semester1 = Semester('Summer', 2023)
     print(semester1)
+
+    # Course ADT Test
+    course1 = Course('CMPSC 132', semester1, 'Classroom', 'Current', 'a')
+    print(course1)
