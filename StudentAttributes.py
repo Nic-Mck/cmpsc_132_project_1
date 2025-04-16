@@ -15,7 +15,7 @@ class Name:
             else:
                 raise ValueError(f'Error: First Name Blank')
         except ValueError as e:
-            print(f'Error: Please enter a valid first name')
+            print(f'Error: First Name Blank')
             self.__first = '(First)'
         except TypeError as e:
             print(f'Error: Please enter a valid first name')
@@ -31,7 +31,7 @@ class Name:
             else:
                 raise ValueError(f'Error: Last Name Blank')
         except ValueError as e:
-            print(f'Error: Please enter a valid last name')
+            print(f'Error: Last Name Blank')
             self.__last = '(Last)'
         except TypeError as e:
             print(f'Error: Please enter a valid last name')
@@ -137,10 +137,37 @@ class Address:
 class EmailAddress:
 
     def  __init__(self, address='', email_type=''):
-        self.__address = address
-        self.__email_type = email_type
+        try:
+            if not isinstance(address, str):
+                raise TypeError(f'Error: Please enter a valid email address')
+            if address:
+                self.__address = address
+            else:
+                raise ValueError(f'Error: Email Address Blank')
+        except ValueError as e:
+            print(f'Error: Email Address Blank')
+            self.__address = 'example@domain.com'
+        except TypeError as e:
+            print(f'Error: Please enter a valid email address')
+            self.__address = 'example@domain.com'
+        
+        try:
+            if not isinstance(email_type, str):
+                raise TypeError(f'Error: Please enter a valid email address')
+            if email_type:
+                self.__email_type = email_type
+            else:
+                raise ValueError(f'Error: Email Type Blank')
+        except ValueError as e:
+            print(f'Error: Email Type Blank')
+            self.__email_type = 'Email Type'
+        except TypeError as e:
+            print(f'Error: Please enter a valid email address type (ex. Personal, Work, Business)')
+            self.__email_type = 'Email Type'
 
     def set_address(self, address):
+        if not isinstance(address, str):
+            raise TypeError(f'Error: Please enter a valid email address')
         if address:
             self.__address = address
         else:
@@ -150,6 +177,8 @@ class EmailAddress:
         return self.__address
 
     def set_email_type(self, email_type):
+        if not isinstance(email_type, str):
+            raise TypeError(f'Error: Please enter a valid email address type (ex. Personal, Work, Business)')
         if email_type:
             self.__email_type = email_type
         else:
