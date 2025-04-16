@@ -21,11 +21,13 @@ class Student:
         self.__semester = start_semester #or Semester()
         self.__intended_major = intended_major
 
-    def set_name(self, name):
+    def set_name(self, name) -> int :
         if isinstance(name, (Name,str)):
             self.__name = name
+            return 1
         else:
             print(f'Error: Student Name Blank')
+            return 0
 
     def get_name(self):
         return self.__name
@@ -50,7 +52,7 @@ class Student:
     def get_id_num(self):
         return self.__id_num
 
-    def set_email_addresses(self, email_addresses):
+    def set_email_addresses(self, email_addresses) -> int:
         if isinstance(email_addresses, (EmailAddress, str)):
             self.__email_addresses = [email_addresses] # Edge case of a single email instead of a list of emails
 
@@ -59,21 +61,24 @@ class Student:
             for i in email_addresses:
                 if isinstance(i, (EmailAddress,str)):
                     self.__email_addresses.append(i)
+                    return 1
                 else:
                     print(f'Error: {i} is not a Email Address')
+                    return 0
         else:
             print(f'Error: Email Address Invalid')
+            return 0
 
     def get_email_addresses(self):
         return self.__email_addresses
     
-    def append_email_address(self, new_email:EmailAddress) -> bool : 
+    def append_email_address(self, new_email:EmailAddress) -> int : 
         if not isinstance(new_email, (EmailAddress, str)) : 
             raise Exception('Not an Email Address Object')
-            return False
+            return 0
 
         self.__email_addresses.append(new_email) 
-        return True
+        return 1
 
     def set_phone_numbers(self, phone_numbers):
         if isinstance(phone_numbers, (PhoneNumber,str)):
@@ -92,46 +97,54 @@ class Student:
     def get_phone_numbers(self):
         return self.__phone_numbers
     
-    def append_phone_number(self, new_phone_number:PhoneNumber) -> bool : 
+    def append_phone_number(self, new_phone_number:PhoneNumber) -> int : 
         if not isinstance(new_phone_number, (PhoneNumber,str)) : 
             raise Exception("New Phone Number is not a PhoneNumber Object")
-            return False
+            return 0
         
         self.__phone_numbers.append(new_phone_number)
-        return True
+        return 1
 
-    def set_birthdate(self, birthdate):
+    def set_birthdate(self, birthdate) -> int:
         if isinstance(birthdate, (Date,str)):
             self.__birthdate = birthdate
+            return 1
         else:
             print(f'Error: Invalid Date')
+            return 0
 
     def get_birthdate(self):
         return self.__birthdate
 
-    def set_acceptance_date(self, acceptance_date):
+    def set_acceptance_date(self, acceptance_date) -> int:
         if isinstance(acceptance_date, (Date,str)):
             self.__acceptance_date = acceptance_date
+            return 1
         else:
             print(f'Error: Invalid Date')
+            return 0
 
     def get_acceptance_date(self):
         return self.__acceptance_date
 
-    def set_semester(self, semester):
+    def set_semester(self, semester) -> int :
         if isinstance(semester, (Semester,str)):
             self.__semester = semester
+            return 1
         else:
             print(f'Error: Invalid semester')
+            return 0
 
     def get_semester(self):
         return self.__semester
 
-    def set_intended_major(self, intended_major):
+    def set_intended_major(self, intended_major) -> int :
         if intended_major:
             self.__intended_major = intended_major
+            return 1
         else:
             print(f'Error: Please enter a valid major')
+            return 0
 
     def get_intended_major(self):
         return self.__intended_major
