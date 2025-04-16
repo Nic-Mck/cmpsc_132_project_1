@@ -7,15 +7,43 @@
 class Name:
 
     def __init__(self, first='', middle='', last=''):
-        self.__first = first
+        try:
+            if not isinstance(first, str):
+                raise TypeError(f'Error: Please enter a valid first name')
+            if first:
+                self.__first = first
+            else:
+                raise ValueError(f'Error: First Name Blank')
+        except ValueError as e:
+            print(f'Error: Please enter a valid first name')
+            self.__first = '(First)'
+        except TypeError as e:
+            print(f'Error: Please enter a valid first name')
+            self.__first = '(First)'
+
         self.__middle = middle
-        self.__last = last
+
+        try:
+            if not isinstance(last, str):
+                raise TypeError(f'Error: Please enter a valid last name')
+            if last:
+                self.__last = last
+            else:
+                raise ValueError(f'Error: Last Name Blank')
+        except ValueError as e:
+            print(f'Error: Please enter a valid last name')
+            self.__last = '(Last)'
+        except TypeError as e:
+            print(f'Error: Please enter a valid last name')
+            self.__last = '(Last)'
 
     def set_first(self, first):
+        if not isinstance(first, str):
+            raise TypeError(f'Error: Please enter a valid first name')
         if first:
             self.__first = first
         else:
-            print(f'Error: First Name Blank')
+            raise ValueError(f'Error: First Name Blank')
 
     def get_first(self):
         return self.__first
@@ -27,10 +55,12 @@ class Name:
         return self.__middle
     
     def set_last(self, last):
+        if not isinstance(last, str):
+            raise TypeError(f'Error: Please enter a valid last name')
         if last:
             self.__last = last
         else:
-            print(f'Error: Last Name Blank')
+            raise ValueError(f'Error: Last Name Blank')
 
     def get_last(self):
         return self.__last
@@ -60,7 +90,7 @@ class Address:
         if street_address:
             self.__street_address = street_address
         else:
-            print(f'Error: Street Address Blank')
+            raise ValueError(f'Error: Street Address Blank')
 
     def get_street_address(self):
         return self.__street_address
@@ -69,7 +99,7 @@ class Address:
         if city:
             self.__city = city
         else:
-            print(f'Error: City Blank')
+            raise ValueError(f'Error: City Blank')
 
     def get_city(self):
         return self.__city
@@ -78,7 +108,7 @@ class Address:
         if state:
             self.__state = state
         else:
-            print(f'Error: State Blank')
+            raise ValueError(f'Error: State Blank')
 
     def get_state(self):
         return self.__state
@@ -87,7 +117,7 @@ class Address:
         if zip_code:
             self.__zip_code = zip_code
         else:
-            print(f'Error: Zip Code Blank')
+            raise ValueError(f'Error: Zip Code Blank')
 
     def get_zip_code(self):
         return self.__zip_code
@@ -96,7 +126,7 @@ class Address:
         if address_type:
             self.__address_type = address_type
         else:
-            print(f'Error: Address Type Blank')
+            raise ValueError(f'Error: Address Type Blank')
 
     def display(self):
         print(f'{self.__street_address}, {self.__city}, {self.__state} {self.__zip_code}')
@@ -114,7 +144,7 @@ class EmailAddress:
         if address:
             self.__address = address
         else:
-            print(f'Error: Email Address Blank')
+            raise ValueError(f'Error: Email Address Blank')
 
     def get_address(self):
         return self.__address
@@ -123,7 +153,7 @@ class EmailAddress:
         if email_type:
             self.__email_type = email_type
         else:
-            print(f'Error: Email Type Blank')
+            raise ValueError(f'Error: Email Type Blank')
 
     def get_email_type(self):
         return self.__email_type
@@ -147,7 +177,7 @@ class PhoneNumber:
         if phone_number:
             self.__phone_number = phone_number
         else:
-            print(f'Error: Phone Number Blank')
+            raise ValueError(f'Error: Phone Number Blank')
 
     def get_phone_number(self):
         return self.__phone_number
@@ -156,7 +186,7 @@ class PhoneNumber:
         if phone_type:
             self.__phone_type = phone_type
         else:
-            print(f'Error: Phone Type Blank')
+            raise ValueError(f'Error: Phone Type Blank')
 
     def get_phone_type(self):
         return self.__phone_type
