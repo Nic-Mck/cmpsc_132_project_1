@@ -331,7 +331,11 @@ def delete_student(students) -> int :
 
 def main() -> None : 
     exit_application:bool = False # Keeps track of wether or not app should close
-    students:list[Student.Student] = [Student.Student("Last, First", "Test Address", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci")]
+    students:list[Student.Student] = [
+                                      Student.Student("First Tester", "1234 Test Lane, Media PA", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci"),
+                                      Student.Student("Second Tester", "5678 Campus DR, Media PA", 0, "1/1/1111", "2/2/2222", "Spring", "Engineering"),
+                                      Student.Student("Third Tester", "9101112 Road Road, Phil PA", 2, "2/2/2222", "3/3/3333", "Summer", "Finance")
+    ]
 
     while not exit_application : 
         print_main_menu() 
