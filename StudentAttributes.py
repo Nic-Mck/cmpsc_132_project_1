@@ -80,13 +80,79 @@ class Name:
 class Address:
 
     def __init__(self, street_address='', city='', state='', zip_code='', address_type=''):
-        self.__street_address = street_address
-        self.__city = city
-        self.__state = state
-        self.__zip_code = zip_code
-        self.__address_type = address_type
+        try:
+            if not isinstance(street_address, str):
+                raise TypeError(f'Error: Please enter a valid street address')
+            if street_address:
+                self.__street_address = street_address
+            else:
+                raise ValueError(f'Error: Street Address Blank')
+        except ValueError as e:
+            print(f'Error: Street Address Blank')
+            self.__street_address = '111 Example St'
+        except TypeError as e:
+            print(f'Error: Please enter a valid street address')
+            self.__street_address = '111 Example St'
+
+        try:
+            if not isinstance(city, str):
+                raise TypeError(f'Error: Please enter a valid city name')
+            if city:
+                self.__city = city
+            else:
+                raise ValueError(f'Error: City Name Blank')
+        except ValueError as e:
+            print(f'Error: City Name Blank')
+            self.__city = 'City'
+        except TypeError as e:
+            print(f'Error: Please enter a valid city name')
+            self.__city = 'City'
+
+        try:
+            if not isinstance(state, str):
+                raise TypeError(f'Error: Please enter a valid state/provincial name')
+            if state:
+                self.__state = state
+            else:
+                raise ValueError(f'Error: State/Provincial Name Blank')
+        except ValueError as e:
+            print(f'Error: State/Provincial Name Blank')
+            self.__state = 'State'
+        except TypeError as e:
+            print(f'Error: Please enter a valid state/provincial name')
+            self.__state = 'State'  
+        
+        try:
+            if not isinstance(zip_code, (str,int)):
+                raise TypeError(f'Error: Please enter a valid zip code [XXXXX]')
+            if zip_code:
+                self.__zip_code = zip_code
+            else:
+                raise ValueError(f'Error: Zip Code Blank')
+        except ValueError as e:
+            print(f'Error: Zip Code Blank')
+            self.__zip_code = 'XXXXX'
+        except TypeError as e:
+            print(f'Error: Please enter a valid zip code [XXXXX]')
+            self.__zip_code = 'XXXXX'
+        
+        try:
+            if not isinstance(address_type, str):
+                raise TypeError(f'Error: Please enter a valid address type (eg. Home, Business)')
+            if address_type:
+                self.__address_type = address_type
+            else:
+                raise ValueError(f'Error: Address Type Blank')
+        except ValueError as e:
+            print(f'Error: Address Type Blank')
+            self.__address_type = 'Address Type'
+        except TypeError as e:
+            print(f'Error: Please enter a valid address type (eg. Home, Business)')
+            self.__address_type = 'Address Type'
 
     def set_street_address(self, street_address):
+        if not isinstance(street_address, str):
+            raise TypeError(f'Error: Please enter a valid street address')
         if street_address:
             self.__street_address = street_address
         else:
@@ -96,24 +162,30 @@ class Address:
         return self.__street_address
 
     def set_city(self, city):
+        if not isinstance(city, str):
+            raise TypeError(f'Error: Please enter a valid city name')
         if city:
             self.__city = city
         else:
-            raise ValueError(f'Error: City Blank')
+            raise ValueError(f'Error: City Name Blank')
 
     def get_city(self):
         return self.__city
 
     def set_state(self, state):
+        if not isinstance(state, str):
+            raise TypeError(f'Error: Please enter a valid state/provincial name')
         if state:
             self.__state = state
         else:
-            raise ValueError(f'Error: State Blank')
+            raise ValueError(f'Error: State/Provincial Name Blank')
 
     def get_state(self):
         return self.__state
 
     def set_zip_code(self, zip_code):
+        if not isinstance(zip_code, (str,int)):
+            raise TypeError(f'Error: Please enter a valid zip code [XXXXX]')
         if zip_code:
             self.__zip_code = zip_code
         else:
@@ -123,6 +195,8 @@ class Address:
         return self.__zip_code
 
     def set_address_type(self, address_type):
+        if not isinstance(address_type, str):
+            raise TypeError(f'Error: Please enter a valid address type (eg. Home, Business)')
         if address_type:
             self.__address_type = address_type
         else:
@@ -199,10 +273,37 @@ class EmailAddress:
 class PhoneNumber:
 
     def __init__(self, phone_number='', phone_type=''):
-        self.__phone_number = phone_number
-        self.__phone_type = phone_type
+        try:
+            if not isinstance(phone_number, (str,int)):
+                raise TypeError(f'Error: Please enter a valid phone number (eg. XXX-XXX-XXXX, 4840002222)')
+            if phone_number:
+                self.__phone_number = phone_number
+            else:
+                raise ValueError(f'Error: Phone Number Blank')
+        except ValueError as e:
+            print(f'Error: Phone Number Blank')
+            self.__phone_number = "XXX-XXX-XXXX"
+        except TypeError as e:
+            print(f'Error: Please enter a valid phone number (eg. XXX-XXX-XXXX, 4840002222)')
+            self.__phone_number = "XXX-XXX-XXXX"
+
+        try:
+            if not isinstance(phone_type, str):
+                raise TypeError(f'Error: Please enter a valid phone type (eg. Cell, Home, Work)')
+            if phone_type:
+                self.__phone_type = phone_type
+            else:
+                raise ValueError(f'Error: Phone Type Blank')
+        except ValueError as e:
+            print(f'Error: Phone Type Blank')
+            self.__phone_type = 'Phone Type'
+        except TypeError as e:
+            print(f'Error: Please enter a valid phone type (eg. Cell, Home, Work)')
+            self.__phone_type = 'Phone Type'
 
     def set_phone_number(self, phone_number):
+        if not isinstance(phone_number, (str,int)):
+            raise TypeError(f'Error: Please enter a valid phone number (eg. XXX-XXX-XXXX, 4840002222)')
         if phone_number:
             self.__phone_number = phone_number
         else:
@@ -212,6 +313,8 @@ class PhoneNumber:
         return self.__phone_number
 
     def set_phone_type(self, phone_type):
+        if not isinstance(phone_type, str):
+            raise TypeError(f'Error: Please enter a valid phone type (eg. Cell, Home, Work)')
         if phone_type:
             self.__phone_type = phone_type
         else:
