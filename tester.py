@@ -300,6 +300,35 @@ def construct_student(students) -> Student.Student :
     except Exception as e : # No exceptions are setup atm, just returning None
         return None
 
+def delete_student(students) -> int : 
+    while True:
+        try:
+            id_to_del:int = int(input("Enter id number of student you want to delete or -1 to go back : "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid student ID to delete.")
+
+    if id_to_del == -1 : # Go back a menu indicator
+         return 0
+    
+    # Find student with matching ID and delete from students array
+    for student in students : 
+        if student.get_id_num() == id_to_del : 
+            student.display_data()
+            do_delete:bool = int(input("\nIs this the correct student to delete? (1 for yes, 0 for no) : "))
+
+            if do_delete : 
+                students.remove(student)
+                print("Student successfully deleted\n")
+                success = True
+                return 1
+            else : 
+                print("\nWrong student indicated, searching for another student with same ID...")
+                continue
+
+    print("Failed to delete, student not found")
+    return -1
+
 def main() -> None : 
     exit_application:bool = False # Keeps track of wether or not app should close
     students:list[Student.Student] = [Student.Student("Last, First", "Test Address", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci")]
@@ -327,24 +356,12 @@ def main() -> None :
                     print(f'Failed to edit student data due to error: {e}')
 
             case '3' : # Delete Student
-                success:bool = False
-                while True:
-                    try:
-                        id_to_del:int = int(input("Enter id number of student you want to delete: "))
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a valid student ID to delete.")
-            
-                # Find student with matching ID and delete from students array
-                for student in students : 
-                    if student.get_id_num() == id_to_del : 
-                        students.remove(student)
-                        print("Student successfully deleted\n")
-                        success = True
-                        break
-                
-                if not success : 
-                    print("Failed to delete, student not found\n")
+                success:int = delete_student(students)
+
+                # While the user doesn't want to return to the main menu,
+                # Continue getting ID's to delete   
+                while success != 0 : 
+                    success:int = delete_student(students)
 
             case '4' : # Display Student
                 success:bool = False
