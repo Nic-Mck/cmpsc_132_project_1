@@ -329,13 +329,32 @@ def delete_student(students) -> int :
     print("Failed to delete, student not found")
     return -1
 
+def display_student(students) -> int : 
+    while True:
+        try:
+            id_to_display:int = int(input("Enter id number of student to display or -1 to go back : "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid student ID to display.")
+
+    # If user wishes to go back, return 0 to indicate this to main loop
+    if id_to_display == -1 : 
+         return 0 
+    
+    for student in students : 
+        if student.get_id_num() == id_to_display : 
+            print(student)
+            return 1
+        
+    print("Student not found.")
+
 def main() -> None : 
     exit_application:bool = False # Keeps track of wether or not app should close
     students:list[Student.Student] = [
                                       Student.Student("First Tester", "1234 Test Lane, Media PA", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci"),
-                                      Student.Student("Second Tester", "5678 Campus DR, Media PA", 0, "1/1/1111", "2/2/2222", "Spring", "Engineering"),
+                                      Student.Student("Second Tester", "5678 Campus DR, Media PA", 1, "1/1/1111", "2/2/2222", "Spring", "Engineering"),
                                       Student.Student("Third Tester", "9101112 Road Road, Phil PA", 2, "2/2/2222", "3/3/3333", "Summer", "Finance")
-    ]
+                                    ]
 
     while not exit_application : 
         print_main_menu() 
@@ -368,23 +387,11 @@ def main() -> None :
                     success:int = delete_student(students)
 
             case '4' : # Display Student
-                success:bool = False
-                while True:
-                    try:
-
-                        id_to_display:int = int(input("Enter id number of student to display: "))
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a valid student ID to display.")
-
-                for student in students : 
-                    if student.get_id_num() == id_to_display : 
-                        success = True
-                        print(student)
-                        break
+                success:int = display_student(students)
                 
-                if not success : 
-                    print("Failed to display student, student not found\n")
+                # While the user doesn't want to go back, keep getting ID's to display
+                while success != 0 : 
+                     success:int = display_student(students)
 
             case '5' : # Exit
                 exit_application = True
