@@ -9,6 +9,58 @@ def print_main_menu() -> None :
           '5. Exit\n'
          )
     
+def edit_student(students) -> None : 
+    success:int = 0
+    
+    id_to_edit:int = int(input("Enter id number of student you wish to edit or -1 to go back: "))
+    
+    # If user wants to go back, return go back signal
+    if id_to_edit == -1 : 
+         return -1
+
+    for student in students : 
+        if student.get_id_num() == id_to_edit : 
+            student.display_data()
+            correct_student:int = int(input("Is this the correct student? (1 for yes, 0 for no) : "))
+
+            if correct_student : 
+                continue_editing:int = 1
+
+                while continue_editing != -1 : 
+                    print_edit_menu()
+                    sub_menu_choice:int = int(input("Enter submenu choice or -1 to go back: "))
+
+                    match sub_menu_choice : 
+                        case -1 : # Go back
+                              continue_editing = -1
+                              success = -1
+                        case 1 : # Name
+                            success = edit_student_name(student)
+                        case 2 : # Birthdate
+                            success = edit_student_birthdate(student)
+                        case 3 : #Acceptance Date
+                            success = edit_acceptance_date(student)
+                        case 4 : # Semester 
+                            success = edit_student_semester(student)
+                        case 5 : # Intended Major
+                            success = edit_student_intended_major(student)
+                        case 6 : # Add an email address
+                            success = add_email_address(student)
+                        case 7 : # Add a phone number
+                            success = add_phone_number(student)
+                        case 8 : # Edit Address
+                            success = edit_home_address(student)
+                        case _ : # Default Case
+                            raise Exception("Invalid submenu choice")
+                    
+                break # Exit loop as student was found
+            else : 
+                print("Searching for another student with same ID...")
+
+    # If student wasn't found, raise exception
+    if success == 0: 
+        raise Exception("Student not found")
+    
 def print_edit_menu() -> None : 
     print(f'\nAttributes:\n'
           '1. Name\n'
@@ -21,7 +73,7 @@ def print_edit_menu() -> None :
           '8. Edit Home Address\n'
           )
     
-def edit_student_name(student:Student) -> bool :
+def edit_student_name(student:Student) -> int :
     while True:
             new_first:str = input("Enter new first name : ")
             if len(new_first) > 0:
@@ -38,10 +90,9 @@ def edit_student_name(student:Student) -> bool :
             else:
                 print("Error: Last Name cannot be blank")
 
-    student.set_name(Name(new_first, new_middle, new_last))
-    return True
+    return student.set_name(Name(new_first, new_middle, new_last))
 
-def edit_student_birthdate(student:Student) -> bool : 
+def edit_student_birthdate(student:Student) -> int : 
 
     while True:
             new_day:str = input("Enter new birthdate day : ")
@@ -64,10 +115,9 @@ def edit_student_birthdate(student:Student) -> bool :
             else:
                 print("Error: Year cannot be blank")
 
-    student.set_birthdate(Date(new_month, new_day, new_year))
-    return True
+    return student.set_birthdate(Date(new_month, new_day, new_year))
 
-def edit_acceptance_date(student:Student) -> bool : 
+def edit_acceptance_date(student:Student) -> int : 
     while True:
             new_day:str = input("Enter new birthdate day : ")
             if len(new_day) > 0:
@@ -89,10 +139,9 @@ def edit_acceptance_date(student:Student) -> bool :
             else:
                 print("Error: Year cannot be blank")
 
-    student.set_acceptance_date(Date(new_month, new_day, new_year))
-    return True
+    return student.set_acceptance_date(Date(new_month, new_day, new_year))
 
-def edit_student_semester(student:Student) -> bool : 
+def edit_student_semester(student:Student) -> int : 
     while True:
             new:str = input("Enter new semester (Fall/Spring/Summer): ")
             if len(new) > 0:
@@ -111,10 +160,9 @@ def edit_student_semester(student:Student) -> bool :
             except ValueError:
                 print("Error: Semester year cannot be blank")
 
-    student.set_semester(Semester(new, year))
-    return True
+    return student.set_semester(Semester(new, year))
 
-def edit_student_intended_major(student:Student) -> bool :
+def edit_student_intended_major(student:Student) -> int :
     while True:
             new:str = input("Enter new major : ")
             if len(new) > 0:
@@ -122,10 +170,9 @@ def edit_student_intended_major(student:Student) -> bool :
             else:
                 print("Error: Intended major cannot be blank")
 
-    student.set_intended_major(new)
-    return True
+    return student.set_intended_major(new)
 
-def add_email_address(student:Student) -> bool : 
+def add_email_address(student:Student) -> int : 
     while True:
             address:str = input("Enter new email address : ")
             if len(address) > 0:
@@ -145,7 +192,7 @@ def add_email_address(student:Student) -> bool :
     # Attempt to append email and return True or False for Success or Failure
     return student.append_email_address(new_email)
 
-def add_phone_number(student:Student) -> bool : 
+def add_phone_number(student:Student) -> int : 
     while True:
             new_number:str = input("Enter new phone number : ")
             if len(new_number) > 0:
@@ -165,7 +212,7 @@ def add_phone_number(student:Student) -> bool :
     # Attempt to append phone number and return True or False for Success or Failure
     return student.append_phone_number(new_phone_number)
 
-def edit_home_address(student:Student) -> bool : 
+def edit_home_address(student:Student) -> int : 
     new_street_adr:str = str(input("Enter Street Address : "))
     while len(new_street_adr) <= 0 : 
         print("Invalid, address cannot be blank")
@@ -192,41 +239,6 @@ def edit_home_address(student:Student) -> bool :
         new_addr_type:str = str(input("Enter address type : "))
 
     return student.set_address(Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type))
-
-def edit_student(students) -> None : 
-    success:bool = False
-    id_to_edit:int = int(input("Enter id number of student you wish to edit: "))
-    
-    for student in students : 
-        if student.get_id_num() == id_to_edit : 
-            print_edit_menu()
-            sub_menu_choice:int = int(input("Enter submenu choice: "))
-
-            match sub_menu_choice : 
-                case 1 : # Name
-                    success = edit_student_name(student)
-                case 2 : # Birthdate
-                    success = edit_student_birthdate(student)
-                case 3 : #Acceptance Date
-                    success = edit_acceptance_date(student)
-                case 4 : # Semester 
-                    success = edit_student_semester(student)
-                case 5 : # Intended Major
-                    success = edit_student_intended_major(student)
-                case 6 : # Add an email address
-                    success = add_email_address(student)
-                case 7 : # Add a phone number
-                    success = add_phone_number(student)
-                case 8 : # Edit Address
-                    success = edit_home_address(student)
-                case _ : # Default Case
-                    raise Exception("Invalid submenu choice")
-                
-            break # Exit loop as student was found
-
-    # If student wasn't found, raise exception
-    if not success : 
-        raise Exception("Student not found")
 
 def construct_student(students) -> Student.Student : 
     try : 
@@ -371,18 +383,21 @@ def main() -> None :
                     students.append(new_student)
 
             case '2' : # Edit Data
-                try :
-                    edit_student(students) 
+                success:int = 0
 
-                # Catch errors and report to user
-                except Exception as e : 
-                    print(f'Failed to edit student data due to error: {e}')
+                while success != -1 :
+                    try :
+                        success = edit_student(students) 
+
+                    # Catch errors and report to user
+                    except Exception as e : 
+                        print(f'Failed to edit student data due to error: {e}')
+                        success = False
 
             case '3' : # Delete Student
                 success:int = delete_student(students)
 
-                # While the user doesn't want to return to the main menu,
-                # Continue getting ID's to delete   
+                # While the user doesn't want to return to the main menu, Continue getting ID's to delete   
                 while success != 0 : 
                     success:int = delete_student(students)
 
