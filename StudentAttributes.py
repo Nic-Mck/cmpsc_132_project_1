@@ -199,8 +199,28 @@ class EmailAddress:
 class PhoneNumber:
 
     def __init__(self, phone_number='', phone_type=''):
-        self.__phone_number = phone_number
-        self.__phone_type = phone_type
+        try:
+            if phone_number:
+                self.__phone_number = phone_number
+            else:
+                raise ValueError(f'Error: Phone Number Blank')
+        except ValueError as e:
+            print(f'Error: Phone Number Blank')
+            self.__phone_number = "XXX-XXX-XXXX"
+
+        try:
+            if not isinstance(phone_type, str):
+                raise TypeError(f'Error: Please enter a valid phone type (eg. Cell, Home, Work)')
+            if phone_type:
+                self.__phone_type = phone_type
+            else:
+                raise ValueError(f'Error: Phone Type Blank')
+        except ValueError as e:
+            print(f'Error: Phone Type Blank')
+            self.__phone_type = 'Phone Type'
+        except TypeError as e:
+            print(f'Error: Please enter a valid phone type (eg. Cell, Home, Work)')
+            self.__phone_type = 'Phone Type'
 
     def set_phone_number(self, phone_number):
         if phone_number:
@@ -212,6 +232,8 @@ class PhoneNumber:
         return self.__phone_number
 
     def set_phone_type(self, phone_type):
+        if not isinstance(phone_type, str):
+            raise TypeError(f'Error: Please enter a valid phone type (eg. Cell, Home, Work)')
         if phone_type:
             self.__phone_type = phone_type
         else:
