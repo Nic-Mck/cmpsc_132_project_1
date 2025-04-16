@@ -374,12 +374,14 @@ class Semester:
             raise ValueError(f'Error: Invalid Semester Value')
         
         try:
-            self.__year = int(year)
-            raise ValueError("Invalid input, enter an integer")
+            if isinstance(year, int) and 1900<=year<=2100:
+                self.__year = int(year)
+            else:
+                raise ValueError("Invalid input, enter an integer")
         except Exception as e :
-            print(f'#Error: Please enter a valid semester year [1900-2100] ')
+            print(f'Error: Please enter a valid semester year [1900-2100] ')
             #FIXME
-            self.__year = "Invalid Input"
+            self.__year = 1900
 
     def set_semester(self, semester):
         if semester.lower() in self.valid_sems:
@@ -390,8 +392,9 @@ class Semester:
     def get_semester(self):
         return self.__semester
     
+    #FINISHME
     def set_year(self, year):
-        if isinstance(year, int) and 1900<year<2100:
+        if isinstance(year, int) and 1900<=year<=2100:
             self.__year = year
         else:
             raise ValueError(f'Error: Semester Year Invalid')
@@ -510,7 +513,7 @@ if __name__ == '__main__':
     print(date1)
 
     # Semester ADT Test
-    semester1 = Semester('Summer', 2023)
+    semester1 = Semester('Summer', '2023')
     print(semester1)
 
     # Course ADT Test
