@@ -356,7 +356,7 @@ class Course:
 if __name__ == '__main__':
 
     # Name ADT Test
-    name1 = Name(10, 'Emilio', 10)
+    name1 = Name('Pablo', 'Emilio', 'Escobar')
     print(name1)
 
     # Address ADT Test
