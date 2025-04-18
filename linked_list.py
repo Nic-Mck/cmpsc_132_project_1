@@ -26,10 +26,6 @@ class LinkedList :
             new_node.next = curr_node.next
             curr_node.next = new_node
 
-
-
-
-
     def insert_node_sorted(self, data:typing.Any) -> None :
         new_node = node.Node(data)
         curr_node = self.head
@@ -49,10 +45,6 @@ class LinkedList :
                 curr_node = curr_node.next
 
             self.append_node(data)
-
-
-
-
 
     def append_node(self, data:typing.Any) -> None :
         new_node = node.Node(data)
@@ -87,7 +79,6 @@ class LinkedList :
             else :
                 print()
                 break
-
 
     def search(self, key:typing.Any) -> node.Node | None :
         current_node = self.head
