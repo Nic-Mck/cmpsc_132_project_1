@@ -7,7 +7,7 @@ class LinkedList :
         self.tail = None
 
     def insert_node_after(self, after_data:typing.Any, data:typing.Any) -> None :
-        new_node = Node(data)
+        new_node = node.Node(data)
 
         if after_data == "Null" :
             new_node.next = self.head
@@ -31,7 +31,7 @@ class LinkedList :
 
 
     def insert_node_sorted(self, data:typing.Any) -> None :
-        new_node = Node(data)
+        new_node = node.Node(data)
         curr_node = self.head
         if curr_node is None or curr_node.data > new_node.data :
             new_node.next = self.head
@@ -55,7 +55,7 @@ class LinkedList :
 
 
     def append_node(self, data:typing.Any) -> None :
-        new_node = Node(data)
+        new_node = node.Node(data)
 
         if self.head is None :
             self.head = new_node
@@ -66,7 +66,7 @@ class LinkedList :
 
 
     def prepend_node(self, data:typing.Any) -> None :
-        new_node = Node(data)
+        new_node = node.Node(data)
 
         if self.head is None :
             self.head = new_node
