@@ -385,6 +385,7 @@ def main() -> None :
             case '2' : # Edit Data
                 success:int = 0
 
+                # While user doesn't want to go back to the main menu
                 while success != -1 :
                     try :
                         success = edit_student(students) 
