@@ -1,366 +1,18 @@
 import Student
 from StudentAttributes import *
+import advisor
+import linked_list
 
-def print_main_menu() -> None : 
-    print(f'\n1. Add Student\n'
-          '2. Edit Student Data\n'
-          '3. Delete Student\n'
-          '4. Display Student Data\n'
-          '5. Exit\n'
-         )
-    
-def edit_student(students) -> None : 
-    success:int = 0
-    
-    id_to_edit:int = int(input("Enter id number of student you wish to edit or -1 to go back: "))
-    
-    # If user wants to go back, return go back signal
-    if id_to_edit == -1 : 
-         return -1
 
-    for student in students : 
-        if student.get_id_num() == id_to_edit : 
-            student.display_data()
-            correct_student:int = int(input("Is this the correct student? (1 for yes, 0 for no) : "))
-
-            if correct_student : 
-                continue_editing:int = 1
-
-                while continue_editing != -1 : 
-                    print_edit_menu()
-                    sub_menu_choice:int = int(input("Enter submenu choice or -1 to go back: "))
-
-                    match sub_menu_choice : 
-                        case -1 : # Go back
-                              continue_editing = -1
-                              success = -1
-                        case 1 : # Name
-                            success = edit_student_name(student)
-                        case 2 : # Birthdate
-                            success = edit_student_birthdate(student)
-                        case 3 : #Acceptance Date
-                            success = edit_acceptance_date(student)
-                        case 4 : # Semester 
-                            success = edit_student_semester(student)
-                        case 5 : # Intended Major
-                            success = edit_student_intended_major(student)
-                        case 6 : # Add an email address
-                            success = add_email_address(student)
-                        case 7 : # Add a phone number
-                            success = add_phone_number(student)
-                        case 8 : # Edit Address
-                            success = edit_home_address(student)
-                        case _ : # Default Case
-                            raise Exception("Invalid submenu choice")
-                    
-                break # Exit loop as student was found
-            else : 
-                print("Searching for another student with same ID...")
-
-    # If student wasn't found, raise exception
-    if success == 0: 
-        raise Exception("Student not found")
-    
-def print_edit_menu() -> None : 
-    print(f'\nAttributes:\n'
-          '1. Name\n'
-          '2. Birthdate\n'
-          '3. Acceptance Date\n'
-          '4. Semester\n'
-          '5. Intended Major\n'
-          '6. Add Email Address\n'
-          '7. Add Phone Number\n'
-          '8. Edit Home Address\n'
-          )
-    
-def edit_student_name(student:Student) -> int :
-    while True:
-            new_first:str = input("Enter new first name : ")
-            if len(new_first) > 0:
-                break
-            else:
-                print("Error: First Name cannot be blank")
-
-    new_middle:str = input("Enter new middle name : ")
-
-    while True:
-            new_last:str = input("Enter new last name : ")
-            if len(new_last) > 0:
-                break
-            else:
-                print("Error: Last Name cannot be blank")
-
-    return student.set_name(Name(new_first, new_middle, new_last))
-
-def edit_student_birthdate(student:Student) -> int : 
-
-    while True:
-            new_day:str = input("Enter new birthdate day : ")
-            if len(new_day) > 0:
-                break
-            else:
-                print("Error: Day cannot be blank")
-
-    while True:
-            new_month:str = input("Enter new birthdate month : ")
-            if len(new_month) > 0:
-                break
-            else:
-                print("Error: Month cannot be blank")
-
-    while True:
-            new_year:str = input("Enter new birthdate year : ")
-            if len(new_year) > 0:
-                break
-            else:
-                print("Error: Year cannot be blank")
-
-    return student.set_birthdate(Date(new_month, new_day, new_year))
-
-def edit_acceptance_date(student:Student) -> int : 
-    while True:
-            new_day:str = input("Enter new birthdate day : ")
-            if len(new_day) > 0:
-                break
-            else:
-                print("Error: Day cannot be blank")
-
-    while True:
-            new_month:str = input("Enter new birthdate month : ")
-            if len(new_month) > 0:
-                break
-            else:
-                print("Error: Month cannot be blank")
-
-    while True:
-            new_year:str = input("Enter new birthdate year : ")
-            if len(new_year) > 0:
-                break
-            else:
-                print("Error: Year cannot be blank")
-
-    return student.set_acceptance_date(Date(new_month, new_day, new_year))
-
-def edit_student_semester(student:Student) -> int : 
-    while True:
-            new:str = input("Enter new semester (Fall/Spring/Summer): ")
-            if len(new) > 0:
-                break
-            else:
-                print("Error: Semester cannot be blank")
-
-    # Revise for int data type
-    while True:
-            try:
-                year:int = int(input("Enter the year : "))
-                if 1900 < year < 2100:
-                     break
-                else:
-                     print("Error: Semester year must be between 1900 and 2100")
-            except ValueError:
-                print("Error: Semester year cannot be blank")
-
-    return student.set_semester(Semester(new, year))
-
-def edit_student_intended_major(student:Student) -> int :
-    while True:
-            new:str = input("Enter new major : ")
-            if len(new) > 0:
-                break
-            else:
-                print("Error: Intended major cannot be blank")
-
-    return student.set_intended_major(new)
-
-def add_email_address(student:Student) -> int : 
-    while True:
-            address:str = input("Enter new email address : ")
-            if len(address) > 0:
-                break
-            else:
-                print("Error: Email address blank")
-
-    while True:
-            add_type:str = input("Enter email address type : ")
-            if len(add_type) > 0:
-                break
-            else:
-                print("Error: Email type blank")
-    
-    new_email = EmailAddress(address, add_type)
-
-    # Attempt to append email and return True or False for Success or Failure
-    return student.append_email_address(new_email)
-
-def add_phone_number(student:Student) -> int : 
-    while True:
-            new_number:str = input("Enter new phone number : ")
-            if len(new_number) > 0:
-                break
-            else:
-                print("Error: Phone number blank")
-
-    while True:
-            new_number_type:str = input("Enter phone number type (Business, Personal, Etc.) : ")
-            if len(new_number_type) > 0:
-                break
-            else:
-                print("Error: Phone type blank")
-    
-    new_phone_number:PhoneNumber = PhoneNumber(new_number, new_number_type)
-    
-    # Attempt to append phone number and return True or False for Success or Failure
-    return student.append_phone_number(new_phone_number)
-
-def edit_home_address(student:Student) -> int : 
-    new_street_adr:str = str(input("Enter Street Address : "))
-    while len(new_street_adr) <= 0 : 
-        print("Invalid, address cannot be blank")
-        new_street_adr = str(input("Enter Street Address : "))
-
-    new_city:str = str(input("Enter new city : "))
-    while len(new_city) <= 0 :
-         print("Invalid, City Name Cannot be blank")
-         new_city = str(input("Enter new city : "))
-    
-    new_state:str = str(input("Enter new state : "))
-    while len(new_state) <= 0 :
-        print("Invalid, State cannot be blank")
-        new_state:str = str(input("Enter new state : "))
-
-    new_zipcode:str = str(input("Enter new zipcode : "))
-    while len(new_zipcode) <= 0 :
-        print("Invalid, zipcode cannot be blank")
-        new_zipcode:str = str(input("Enter new zipcode : "))
-
-    new_addr_type:str = str(input("Enter address type : "))
-    while len(new_addr_type) <= 0 : 
-        print("Invalid, address type cannot be blank")
-        new_addr_type:str = str(input("Enter address type : "))
-
-    return student.set_address(Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type))
-
-def construct_student(students) -> Student.Student : 
-    try : 
-        while True:
-            name:str = str(input("Enter student's name: "))
-            if len(name) > 0:
-                break
-            else:
-                print("Invalid input. Please enter a valid student Name.")
-
-        # Revise for Int data type
-        unique_id_number = False
-        while not unique_id_number:
-            broken = False
-            try:
-                id_num:int = int(input("Enter student's id number: "))
-                for s in students :
-                    if id_num == s.get_id_num() : 
-                        print("Invalid, id num already in use")
-                        broken = True 
-                        break
-                
-                if not broken : 
-                    unique_id_number = True
-
-            except ValueError:
-                print("Invalid input. Please enter a valid student ID number")
-        
-        while True:
-                birthdate:str = str(input("Enter students birthdate (mm/dd/yyyy): "))
-                if len(birthdate) > 0:
-                    break
-                else:
-                    print("Invalid input. Please enter a valid date.")
-        
-        while True:
-                acceptance_date:str = str(input("Enter student's acceptance date (mm/dd/yyyy): "))
-                if len(acceptance_date) > 0:
-                    break
-                else:
-                    print("Invalid input. Please enter a valid date.")
-
-        while True:
-                semester:str = str(input("Enter current sememster: "))
-                if len(semester) > 0:
-                    break
-                else:
-                    print("Invalid input. Please enter a valid semester.")
-
-        while True:
-                intended_major:str = str(input("Enter student's intended major: "))
-                if len(intended_major) > 0:
-                    break
-                else:
-                    print("Invalid input. Please enter a valid major.")
-
-        test_blank_list = [name, birthdate, acceptance_date, semester, intended_major]
-
-        for case in test_blank_list : 
-            if len(case.strip()) == 0 :
-                print(f'Error, attribute {case} cannot be blank')
-                return None
-
-    # Catch errors and print to user to prevent program crash
-    except Exception as e : 
-        print(e)
-
-    try : 
-        new_student:Student.Student = Student.Student(name, '', id_num, birthdate, acceptance_date, semester, intended_major)
-        return new_student
-    except Exception as e : # No exceptions are setup atm, just returning None
-        return None
-
-def delete_student(students) -> int : 
-    while True:
-        try:
-            id_to_del:int = int(input("Enter id number of student you want to delete or -1 to go back : "))
-            break
-        except ValueError:
-            print("Invalid input. Please enter a valid student ID to delete.")
-
-    if id_to_del == -1 : # Go back a menu indicator
-         return 0
-    
-    # Find student with matching ID and delete from students array
-    for student in students : 
-        if student.get_id_num() == id_to_del : 
-            student.display_data()
-            do_delete:bool = int(input("\nIs this the correct student to delete? (1 for yes, 0 for no) : "))
-
-            if do_delete : 
-                students.remove(student)
-                print("Student successfully deleted\n")
-                success = True
-                return 1
-            else : 
-                print("\nWrong student indicated, searching for another student with same ID...")
-                continue
-
-    print("Failed to delete, student not found")
-    return -1
-
-def display_student(students) -> int : 
-    while True:
-        try:
-            id_to_display:int = int(input("Enter id number of student to display or -1 to go back : "))
-            break
-        except ValueError:
-            print("Invalid input. Please enter a valid student ID to display.")
-
-    # If user wishes to go back, return 0 to indicate this to main loop
-    if id_to_display == -1 : 
-         return 0 
-    
-    for student in students : 
-        if student.get_id_num() == id_to_display : 
-            print(student)
-            return 1
-        
-    print("Student not found.")
+# FIXME
+# Ad an Advisor
+# Edit Advisor Info
+# Display Advisor Info 
+# Add students to advisee list+
+# Delete students from advisee list 
 
 def main() -> None : 
+    adv = advisor.advisor("test Name", "Test Title", "Test Dept")
     exit_application:bool = False # Keeps track of wether or not app should close
     students:list[Student.Student] = [
                                       Student.Student("First Tester", "1234 Test Lane, Media PA", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci"),
@@ -369,13 +21,13 @@ def main() -> None :
                                     ]
 
     while not exit_application : 
-        print_main_menu() 
+        adv.print_main_menu() 
 
         response:str = str(input("Enter your choice: "))
 
         match response : 
             case '1' : # Add student
-                new_student = construct_student(students)
+                new_student = adv.construct_student(students)
 
                 if new_student is None : 
                     print("Failed to create student, try again\n")
@@ -385,9 +37,10 @@ def main() -> None :
             case '2' : # Edit Data
                 success:int = 0
 
+                # While user doesn't want to go back to the main menu
                 while success != -1 :
                     try :
-                        success = edit_student(students) 
+                        success = adv.edit_student(students) 
 
                     # Catch errors and report to user
                     except Exception as e : 
@@ -395,18 +48,18 @@ def main() -> None :
                         success = False
 
             case '3' : # Delete Student
-                success:int = delete_student(students)
+                success:int = adv.delete_student(students)
 
                 # While the user doesn't want to return to the main menu, Continue getting ID's to delete   
                 while success != 0 : 
-                    success:int = delete_student(students)
+                    success:int = adv.delete_student(students)
 
             case '4' : # Display Student
-                success:int = display_student(students)
+                success:int = adv.display_student(students)
                 
                 # While the user doesn't want to go back, keep getting ID's to display
                 while success != 0 : 
-                     success:int = display_student(students)
+                     success:int = adv.display_student(students)
 
             case '5' : # Exit
                 exit_application = True
@@ -419,3 +72,4 @@ def main() -> None :
 
 if __name__ == "__main__" : 
     main() 
+    
