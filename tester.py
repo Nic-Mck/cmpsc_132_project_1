@@ -360,6 +360,13 @@ def display_student(students) -> int :
         
     print("Student not found.")
 
+# FIXME
+# Ad an Advisor
+# Edit Advisor Info
+# Display Advisor Info 
+# Add students to advisee list+
+# Delete students from advisee list 
+
 def main() -> None : 
     exit_application:bool = False # Keeps track of wether or not app should close
     students:list[Student.Student] = [
