@@ -482,10 +482,10 @@ class Course:
     
     # Note: Optimize print & display outputs for this Class
     def display(self):
-        print(f'Course ID: {self.__course_num}\nSemester Taken: {self.__semester}\nInstruction Method: {self.__inst_method}\nStatus: {self.__status}\nGrade: {self.__grade.upper()}')
+        print(f'\n    Course ID: {self.__course_num}\n        Semester Taken: {self.__semester}\n       Instruction Method: {self.__inst_method}\n       Status: {self.__status}\n       Grade: {self.__grade.upper()}')
 
     def __str__(self):
-        return f'Course ID: {self.__course_num}\nSemester Taken: {self.__semester}\nInstruction Method: {self.__inst_method}\nStatus: {self.__status}\nGrade: {self.__grade.upper()}'
+        return f'\n    Course ID: {self.__course_num}\n       Semester Taken: {self.__semester}\n       Instruction Method: {self.__inst_method}\n       Status: {self.__status}\n       Grade: {self.__grade.upper()}'
 
 
 if __name__ == '__main__':

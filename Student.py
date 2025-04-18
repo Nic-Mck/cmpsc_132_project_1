@@ -4,7 +4,7 @@
 
 # This module defines students in an advisor system as specified
 
-from StudentAttributes import Name, Address, EmailAddress, PhoneNumber, Date, Semester
+from StudentAttributes import Name, Address, EmailAddress, PhoneNumber, Date, Semester, Course
 
 
 class Student:
@@ -19,6 +19,7 @@ class Student:
         self.__birthdate = birthdate #or Date()
         self.__acceptance_date = acceptance_date #or Date()
         self.__semester = start_semester #or Semester()
+        self.__course_list = [] #or Course()
         self.__intended_major = intended_major
 
     def set_name(self, name) -> int :
@@ -52,6 +53,7 @@ class Student:
     def get_id_num(self):
         return self.__id_num
 
+    # NOTE: Change to linked list ADT
     def set_email_addresses(self, email_addresses) -> int:
         if isinstance(email_addresses, (EmailAddress, str)):
             self.__email_addresses = [email_addresses] # Edge case of a single email instead of a list of emails
@@ -137,6 +139,31 @@ class Student:
 
     def get_semester(self):
         return self.__semester
+    
+    def set_course_list(self, courses):
+        if isinstance(courses, (Course, str)):
+            self.__course_list = [courses]
+        
+        if isinstance(courses, list):
+            self.__course_list = []
+            for i in courses:
+                if isinstance(i, (Course, str)):
+                    self.__course_list.append(i)
+                else:
+                    print(f'Error: {i} is not a valid Course')
+        else:
+            print(f'Error: Invalid Course')
+
+    def get_course_list(self):
+        return self.__course_list
+    
+    def append_course_list(self, new_course:Course) -> int:
+        if not isinstance(new_course, (Course, str)):
+            raise Exception('New Course is not a Course object')
+            return 0
+        
+        self.__course_list.append(new_course)
+        return 1
 
     def set_intended_major(self, intended_major) -> int :
         if intended_major:
@@ -152,20 +179,22 @@ class Student:
     def display_data(self):
         email_list = "\n".join(str(e) for e in self.__email_addresses) if self.__email_addresses else "[]"
         phone_list = "\n".join(str(e) for e in self.__phone_numbers) if self.__phone_numbers else "[]"
+        course_list = "\n".join(str(e) for e in self.__course_list) if self.__course_list else "[]"
 
         print(f'\nStudent Name: {self.get_name()}\nStudent Address: {self.get_address()}\nStudent ID: {self.get_id_num()}\n'
               f'Email Addresses:\n{email_list}\nPhone Numbers: {phone_list}\n'
               f'Birth Date: {self.get_birthdate()}\nAcceptance Date: {self.get_acceptance_date()}\n'
-              f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}')
+              f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{course_list}')
 
     def __str__(self):
         email_list = "\n".join(str(e) for e in self.__email_addresses) if self.__email_addresses else "[]"
         phone_list = "\n".join(str(e) for e in self.__phone_numbers) if self.__phone_numbers else "[]"
+        course_list = "\n".join(str(e) for e in self.__course_list) if self.__course_list else "[]"
         
         return f'\nStudent Name: {self.get_name()}\nStudent Address: {self.get_address()}\nStudent ID: {self.get_id_num()}\n'\
                f'Email Addresses:\n{email_list}\nPhone Numbers: \n{phone_list}\n'\
-               f'Birth Date: {self.get_birthdate()}\nAcceptance Date: {self.get_acceptance_date()}\n'\
-               f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}\n'
+               f'{"Birth Date: ":<20}' + f'{self.get_birthdate()}'f'\n{"Acceptance Date:":<20}{self.get_acceptance_date()}\n'\
+               f'{"Semester: ":<20}' + f'{self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{course_list}'
 
 if __name__ == '__main__':
 
@@ -218,4 +247,12 @@ if __name__ == '__main__':
 
     s2_name = Name('Pablo', 'Emilio', 'Escobar')
     s2.set_name(s2_name)
+    print(s2)
+
+    #Course ADT Test
+
+    course1 = Course('CMPSC132',s2_semester, 'Classroom', 'Current', 'A')
+    course2 = Course('MATH141', s2_semester, 'Classroom', 'Current', 'B')
+    s2_courselist = [course1, course2]
+    s2.set_course_list(s2_courselist)
     print(s2)
