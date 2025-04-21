@@ -69,6 +69,7 @@ class LinkedList :
 
 
     def display(self) -> None :
+        print("AH")
         if not self.head : return None
         
         node = self.head
@@ -81,6 +82,19 @@ class LinkedList :
             else :
                 print()
                 break
+
+    def __str__(self) -> str : 
+        if not self.head : return ""
+
+        ret_str:str = ''
+
+        node = self.head 
+        while node : 
+            ret_str += str(node.data)
+            node = node.next 
+            ret_str += "\n"
+
+        return ret_str
 
     def search(self, key:typing.Any) -> node.Node | None :
         current_node = self.head
