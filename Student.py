@@ -194,7 +194,7 @@ class Student:
         return f'\nStudent Name: {self.get_name()}\nStudent Address: {self.get_address()}\nStudent ID: {self.get_id_num()}\n'\
                f'Email Addresses:\n{email_list}\nPhone Numbers: \n{phone_list}\n'\
                f'{"Birth Date: ":<20}' + f'{self.get_birthdate()}'f'\n{"Acceptance Date:":<20}{self.get_acceptance_date()}\n'\
-               f'{"Semester: ":<20}' + f'{self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{self.__course_list}'
+               f'{"Semester: ":<20}' + f'{self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:{self.__course_list}'
 
 if __name__ == '__main__':
 
