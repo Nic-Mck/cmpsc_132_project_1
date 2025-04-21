@@ -47,10 +47,11 @@ class advisor :
             '2. Edit Student Data\n'
             '3. Delete Student\n'
             '4. Display Student Data\n'
-            '5. Back\n'
+            '5. Display Advisees\n'
+            '6. Back\n'
             )
     
-    def edit_student(self, students) -> None : 
+    def edit_student(self) -> None : 
         success:int = 0
         
         print("\n---Edit Student---")
@@ -59,45 +60,47 @@ class advisor :
         # If user wants to go back, return go back signal
         if id_to_edit == -1 : 
             return -1
+        
+        student = self.__advisees.search(id_to_edit)
 
-        for student in students : 
-            if student.get_id_num() == id_to_edit : 
-                student.display_data()
-                correct_student:int = int(input("Is this the correct student? (1 for yes, 0 for no) : "))
+        if student is None : 
+            print("Student not found, try again")
+        else : 
+            print(student)
+            correct_student:bool = int(input(f'This student was found, is this correct? (1 for yes 0 for no) '))
 
-                if correct_student : 
-                    continue_editing:int = 1
+            if correct_student : 
+                continue_editing:int = 1
 
-                    while continue_editing != -1 : 
-                        self.print_edit_menu()
-                        sub_menu_choice:int = int(input("Enter submenu choice or -1 to go back: "))
+                while continue_editing != -1 : 
+                    self.print_edit_menu()
+                    sub_menu_choice:int = int(input("Enter submenu choice or -1 to go back: "))
 
-                        match sub_menu_choice : 
-                            case -1 : # Go back
-                                continue_editing = -1
-                                success = -1
-                            case 1 : # Name
-                                success = self.edit_student_name(student)
-                            case 2 : # Birthdate
-                                success = self.edit_student_birthdate(student)
-                            case 3 : #Acceptance Date
-                                success = self.edit_acceptance_date(student)
-                            case 4 : # Semester 
-                                success = self.edit_student_semester(student)
-                            case 5 : # Intended Major
-                                success = self.edit_student_intended_major(student)
-                            case 6 : # Add an email address
-                                success = self.add_email_address(student)
-                            case 7 : # Add a phone number
-                                success = self.add_phone_number(student)
-                            case 8 : # Edit Address
-                                success = self.edit_home_address(student)
-                            case _ : # Default Case
-                                raise Exception("Invalid submenu choice")
-                        
-                    break # Exit loop as student was found
-                else : 
-                    print("Searching for another student with same ID...")
+                    match sub_menu_choice : 
+                        case -1 : # Go back
+                            continue_editing = -1
+                            success = -1
+                        case 1 : # Name
+                            success = self.edit_student_name(student)
+                        case 2 : # Birthdate
+                            success = self.edit_student_birthdate(student)
+                        case 3 : #Acceptance Date
+                            success = self.edit_acceptance_date(student)
+                        case 4 : # Semester 
+                            success = self.edit_student_semester(student)
+                        case 5 : # Intended Major
+                            success = self.edit_student_intended_major(student)
+                        case 6 : # Add an email address
+                            success = self.add_email_address(student)
+                        case 7 : # Add a phone number
+                            success = self.add_phone_number(student)
+                        case 8 : # Edit Address
+                            success = self.edit_home_address(student)
+                        case _ : # Default Case
+                            raise Exception("Invalid submenu choice")
+                    
+            else : 
+                print("Searching for another student with same ID...")
 
         # If student wasn't found, raise exception
         if success == 0: 
@@ -289,7 +292,7 @@ class advisor :
 
         return student.set_address(Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type))
 
-    def construct_student(self, students) -> Student.Student : 
+    def construct_student(self) -> Student.Student : 
         print('\n---Add Student---')
         try : 
             while True:
@@ -302,17 +305,12 @@ class advisor :
             # Revise for Int data type
             unique_id_number = False
             while not unique_id_number:
-                broken = False
                 try:
                     id_num:int = int(input("Enter student's id number: "))
-                    for s in students :
-                        if id_num == s.get_id_num() : 
-                            print("Invalid, id num already in use")
-                            broken = True 
-                            break
-                    
-                    if not broken : 
-                        unique_id_number = True
+                    if not self.__advisees.search(id_num) : 
+                        unique_id_number = True 
+                    else : 
+                        print("ID Number already in use, try again")
 
                 except ValueError:
                     print("Invalid input. Please enter a valid student ID number")
@@ -357,14 +355,12 @@ class advisor :
             print(e)
 
         try : 
-            # FIXME
-            # Call add_student on advisor class here
             new_student:Student.Student = Student.Student(name, '', id_num, birthdate, acceptance_date, semester, intended_major)
             return new_student
         except Exception as e : # No exceptions are setup atm, just returning None
             return None
 
-    def delete_student(self, students) -> int : 
+    def delete_student(self) -> int : 
         while True:
             try:
                 print('\n---Delete Student---')
@@ -376,27 +372,25 @@ class advisor :
         if id_to_del == -1 : # Go back a menu indicator
             return 0
         
-        # Find student with matching ID and delete from students array
-        for student in students : 
-            if student.get_id_num() == id_to_del : 
+        student = self.__advisees.search(id_to_del)
+        if student is not None : 
                 student.display_data()
                 do_delete:bool = int(input("\nIs this the correct student to delete? (1 for yes, 0 for no) : "))
 
                 if do_delete : 
                     #FIXME
                     # Call delete student(student) on advisor class here
-                    students.remove(student) 
+                    self.__advisees.remove_data(student)
                     print("Student successfully deleted\n")
                     success = True
                     return 1
                 else : 
                     print("\nWrong student indicated, searching for another student with same ID...")
-                    continue
 
         print("Failed to delete, student not found")
         return -1
 
-    def display_student(self, students) -> int : 
+    def display_student(self) -> int : 
         print('\n---Display Student---')
         while True:
             try:
@@ -409,9 +403,15 @@ class advisor :
         if id_to_display == -1 : 
             return 0 
         
-        for student in students : 
-            if student.get_id_num() == id_to_display : 
-                print(student)
-                return 1
-            
-        print("Student not found.")
+        student = self.__advisees.search(id_to_display)
+        if student is None : 
+            return -1
+        else : 
+             print(student)
+             return 1
+
+    def display_advisees(self) -> None : 
+        self.__advisees.display()
+
+    def append_student(self, stud:Student.Student) -> None : 
+         self.__advisees.append_node(stud)

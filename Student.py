@@ -177,7 +177,7 @@ class Student:
     def get_intended_major(self):
         return self.__intended_major
 
-    """def display_data(self):
+    def display_data(self):
         email_list = "\n".join(str(e) for e in self.__email_addresses) if self.__email_addresses else "[]"
         phone_list = "\n".join(str(e) for e in self.__phone_numbers) if self.__phone_numbers else "[]"
         #course_list = "\n".join(str(e) for e in self.__course_list) if self.__course_list else "[]"
@@ -185,7 +185,7 @@ class Student:
         print(f'\nStudent Name: {self.get_name()}\nStudent Address: {self.get_address()}\nStudent ID: {self.get_id_num()}\n'
               f'Email Addresses:\n{email_list}\nPhone Numbers: {phone_list}\n'
               f'Birth Date: {self.get_birthdate()}\nAcceptance Date: {self.get_acceptance_date()}\n'
-              f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{self.__course_list.display()}')"""
+              f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{self.__course_list}')
 
     def __str__(self):
         email_list = "\n".join(str(e) for e in self.__email_addresses) if self.__email_addresses else "[]"

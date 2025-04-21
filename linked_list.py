@@ -69,8 +69,9 @@ class LinkedList :
 
 
     def display(self) -> None :
-        print("AH")
-        if not self.head : return None
+        if not self.head : 
+            print("No Nodes")
+            return 
         
         node = self.head
         while True :
@@ -78,7 +79,8 @@ class LinkedList :
             node = node.next
 
             if node is not None :
-                print(" -> ", end="")
+                print()
+                #print(" -> ", end="")
             else :
                 print()
                 break
@@ -99,9 +101,9 @@ class LinkedList :
     def search(self, key:typing.Any) -> node.Node | None :
         current_node = self.head
         while current_node is not None :
-            if current_node.data == key :
-                print(f'Key: {key} found.')
-                return current_node
+            if current_node.data.get_id_num() == key :
+                #print(f'Key: {key} found.')
+                return current_node.data
 
             current_node = current_node.next
 
