@@ -20,6 +20,12 @@ class advisor :
     def add_student(self, new_student:Student.Student) -> None :
         self.__advisees.append_node(new_student)
 
+    def display_advisor(self) -> None : 
+         print(
+              f'Name: {self.__name}\n'
+              f'Title: {self.__title}\n'
+              f'Department {self.__department}\n' 
+            )
 
     def set_name(self, new_name:str) -> None : 
         pass
@@ -36,16 +42,18 @@ class advisor :
         return self.__department
     
     def print_main_menu(self) -> None : 
-        print(f'\n1. Add Student\n'
+        print(f'\n---{self.__name}---\n'
+            '1. Add Student\n'
             '2. Edit Student Data\n'
             '3. Delete Student\n'
             '4. Display Student Data\n'
-            '5. Exit\n'
+            '5. Back\n'
             )
     
     def edit_student(self, students) -> None : 
         success:int = 0
         
+        print("\n---Edit Student---")
         id_to_edit:int = int(input("Enter id number of student you wish to edit or -1 to go back: "))
         
         # If user wants to go back, return go back signal
@@ -96,7 +104,7 @@ class advisor :
             raise Exception("Student not found")
         
     def print_edit_menu(self) -> None : 
-        print(f'\nAttributes:\n'
+        print(f'\n---Attributes---\n'
             '1. Name\n'
             '2. Birthdate\n'
             '3. Acceptance Date\n'
@@ -108,6 +116,7 @@ class advisor :
             )
         
     def edit_student_name(self, student:Student) -> int :
+        print('\n---Edit Name---')
         while True:
                 new_first:str = input("Enter new first name : ")
                 if len(new_first) > 0:
@@ -127,7 +136,7 @@ class advisor :
         return student.set_name(Name(new_first, new_middle, new_last))
 
     def edit_student_birthdate(self, student:Student) -> int : 
-
+        print('\n---Edit Birthdate---')
         while True:
                 new_day:str = input("Enter new birthdate day : ")
                 if len(new_day) > 0:
@@ -152,6 +161,7 @@ class advisor :
         return student.set_birthdate(Date(new_month, new_day, new_year))
 
     def edit_acceptance_date(self, student:Student) -> int : 
+        print('\n---Edit Acceptance Date---')
         while True:
                 new_day:str = input("Enter new birthdate day : ")
                 if len(new_day) > 0:
@@ -176,6 +186,7 @@ class advisor :
         return student.set_acceptance_date(Date(new_month, new_day, new_year))
 
     def edit_student_semester(self, student:Student) -> int : 
+        print('\n---Edit Semester---')
         while True:
                 new:str = input("Enter new semester (Fall/Spring/Summer): ")
                 if len(new) > 0:
@@ -198,6 +209,7 @@ class advisor :
 
     def edit_student_intended_major(self, student:Student) -> int :
         while True:
+                print("\n---Edit Intended Major---")
                 new:str = input("Enter new major : ")
                 if len(new) > 0:
                     break
@@ -207,6 +219,7 @@ class advisor :
         return student.set_intended_major(new)
 
     def add_email_address(self, student:Student) -> int : 
+        print('\n---Add Email Address---')
         while True:
                 address:str = input("Enter new email address : ")
                 if len(address) > 0:
@@ -227,6 +240,7 @@ class advisor :
         return student.append_email_address(new_email)
 
     def add_phone_number(self, student:Student) -> int : 
+        print('\n---Add Phone Number---')
         while True:
                 new_number:str = input("Enter new phone number : ")
                 if len(new_number) > 0:
@@ -247,6 +261,7 @@ class advisor :
         return student.append_phone_number(new_phone_number)
 
     def edit_home_address(self, student:Student) -> int : 
+        print("\n---Edit Home Address---")
         new_street_adr:str = str(input("Enter Street Address : "))
         while len(new_street_adr) <= 0 : 
             print("Invalid, address cannot be blank")
@@ -275,6 +290,7 @@ class advisor :
         return student.set_address(Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type))
 
     def construct_student(self, students) -> Student.Student : 
+        print('\n---Add Student---')
         try : 
             while True:
                 name:str = str(input("Enter student's name: "))
@@ -351,6 +367,7 @@ class advisor :
     def delete_student(self, students) -> int : 
         while True:
             try:
+                print('\n---Delete Student---')
                 id_to_del:int = int(input("Enter id number of student you want to delete or -1 to go back : "))
                 break
             except ValueError:
@@ -380,6 +397,7 @@ class advisor :
         return -1
 
     def display_student(self, students) -> int : 
+        print('\n---Display Student---')
         while True:
             try:
                 id_to_display:int = int(input("Enter id number of student to display or -1 to go back : "))
