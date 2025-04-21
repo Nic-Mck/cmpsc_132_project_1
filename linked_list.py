@@ -69,6 +69,8 @@ class LinkedList :
 
 
     def display(self) -> None :
+        if not self.head : return None
+        
         node = self.head
         while True :
             print(node.data, end="")

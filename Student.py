@@ -6,6 +6,8 @@
 
 from StudentAttributes import Name, Address, EmailAddress, PhoneNumber, Date, Semester, Course
 
+from linked_list import LinkedList
+
 
 class Student:
 
@@ -19,7 +21,7 @@ class Student:
         self.__birthdate = birthdate #or Date()
         self.__acceptance_date = acceptance_date #or Date()
         self.__semester = start_semester #or Semester()
-        self.__course_list = [] #or Course()
+        self.__course_list = LinkedList() 
         self.__intended_major = intended_major
 
     def set_name(self, name) -> int :
@@ -53,7 +55,6 @@ class Student:
     def get_id_num(self):
         return self.__id_num
 
-    # NOTE: Change to linked list ADT
     def set_email_addresses(self, email_addresses) -> int:
         if isinstance(email_addresses, (EmailAddress, str)):
             self.__email_addresses = [email_addresses] # Edge case of a single email instead of a list of emails
@@ -142,13 +143,13 @@ class Student:
     
     def set_course_list(self, courses):
         if isinstance(courses, (Course, str)):
-            self.__course_list = [courses]
+            self.__course_list.append_node(courses)
         
         if isinstance(courses, list):
-            self.__course_list = []
+            self.__course_list = LinkedList()
             for i in courses:
                 if isinstance(i, (Course, str)):
-                    self.__course_list.append(i)
+                    self.__course_list.append_node(i)
                 else:
                     print(f'Error: {i} is not a valid Course')
         else:
@@ -162,7 +163,7 @@ class Student:
             raise Exception('New Course is not a Course object')
             return 0
         
-        self.__course_list.append(new_course)
+        self.__course_list.append_node(new_course)
         return 1
 
     def set_intended_major(self, intended_major) -> int :
@@ -176,25 +177,25 @@ class Student:
     def get_intended_major(self):
         return self.__intended_major
 
-    def display_data(self):
+    """def display_data(self):
         email_list = "\n".join(str(e) for e in self.__email_addresses) if self.__email_addresses else "[]"
         phone_list = "\n".join(str(e) for e in self.__phone_numbers) if self.__phone_numbers else "[]"
-        course_list = "\n".join(str(e) for e in self.__course_list) if self.__course_list else "[]"
+        #course_list = "\n".join(str(e) for e in self.__course_list) if self.__course_list else "[]"
 
         print(f'\nStudent Name: {self.get_name()}\nStudent Address: {self.get_address()}\nStudent ID: {self.get_id_num()}\n'
               f'Email Addresses:\n{email_list}\nPhone Numbers: {phone_list}\n'
               f'Birth Date: {self.get_birthdate()}\nAcceptance Date: {self.get_acceptance_date()}\n'
-              f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{course_list}')
+              f'Semester: {self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{self.__course_list.display()}')"""
 
     def __str__(self):
         email_list = "\n".join(str(e) for e in self.__email_addresses) if self.__email_addresses else "[]"
         phone_list = "\n".join(str(e) for e in self.__phone_numbers) if self.__phone_numbers else "[]"
-        course_list = "\n".join(str(e) for e in self.__course_list) if self.__course_list else "[]"
+        #course_list = "\n".join(str(e) for e in self.__course_list) if self.__course_list else "[]"
         
         return f'\nStudent Name: {self.get_name()}\nStudent Address: {self.get_address()}\nStudent ID: {self.get_id_num()}\n'\
                f'Email Addresses:\n{email_list}\nPhone Numbers: \n{phone_list}\n'\
                f'{"Birth Date: ":<20}' + f'{self.get_birthdate()}'f'\n{"Acceptance Date:":<20}{self.get_acceptance_date()}\n'\
-               f'{"Semester: ":<20}' + f'{self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{course_list}'
+               f'{"Semester: ":<20}' + f'{self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:\n{self.get_course_list().display()}'
 
 if __name__ == '__main__':
 
@@ -221,13 +222,13 @@ if __name__ == '__main__':
     s2_phones = [phone1, phone2]
 
     s2.set_phone_numbers(s2_phones)
-    print(s2)
+    #print(s2)
 
     #Address ADT Test
 
     s2_address = Address('5176 Whispymound Dr', 'Los Santos', 'CA', '97707', 'Residential')
     s2.set_address(s2_address)
-    print(s2)
+    #print(s2)
 
     #Date ADT Test
 
@@ -235,24 +236,27 @@ if __name__ == '__main__':
     b_date1 = Date('12','24','2004')
     s2.set_acceptance_date(a_date1)
     s2.set_birthdate(b_date1)
-    print(s2)
+    #print(s2)
 
     #Semester ADT Test
 
-    s2_semester = Semester('Summer', '2023')
+    s2_semester = Semester('Summer', 2023)
     s2.set_semester(s2_semester)
-    print(s2)
+    #print(s2)
 
     #Name ADT Test
 
     s2_name = Name('Pablo', 'Emilio', 'Escobar')
     s2.set_name(s2_name)
-    print(s2)
+    #print(s2)
 
     #Course ADT Test
 
     course1 = Course('CMPSC132',s2_semester, 'Classroom', 'Current', 'A')
     course2 = Course('MATH141', s2_semester, 'Classroom', 'Current', 'B')
-    s2_courselist = [course1, course2]
+    s2_courselist = []
+    s2_courselist.append(course1)
+    s2_courselist.append(course2)
     s2.set_course_list(s2_courselist)
+
     print(s2)
