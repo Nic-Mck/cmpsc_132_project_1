@@ -1,2 +1,17 @@
-Final Project Part II Revisions Left To Do:
+Final Project Part II Revisions & Bug Fixes Left To Do:
 
+1. Implement prompt to add phone number, address, and email in student menu option 1; like the rest. 
+    1a. Change add to edit for these in menu option 2 (phone number and email)
+
+2. For add student, there is no way to go back when user selects. Possibly add another enter -1 to go back for first prompt for Name
+
+(DONE) 3. Program takes negative ID numbers
+
+(DONE for construct_student) 4. Tester does not yet enforce date/ADT implementations
+            4a. Finish these & adding try/except blocks for edit student to valid inputs
+
+5. Add adding courses to course list for option 1 in student menu & editing course list for option 2 (including removal and adding, maybe search)
+
+6. Bug when User enters number other than [1-3] in Advisor menu, prompts user Error to enter -1 or advisor name, but when valid advisor name is entered prompts twice. On second prompt enters student submenu successfully
+
+7. Implement an add advisor option to the start menu, or whichever layer makes most sense
