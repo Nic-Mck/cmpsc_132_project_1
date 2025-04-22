@@ -2,6 +2,8 @@ import Student
 import linked_list
 import node 
 from StudentAttributes import *
+import datetime
+import calendar
 
 # FIXME
 # Ad an Advisor
@@ -55,7 +57,14 @@ class advisor :
         success:int = 0
         
         print("\n---Edit Student---")
-        id_to_edit:int = int(input("Enter id number of student you wish to edit or -1 to go back: "))
+        try:
+            id_to_edit:int = int(input("Enter id number of student you wish to edit or -1 to go back: "))
+            if id_to_edit < -1:
+                 raise ValueError(f'Error: Please enter a valid student ID (must be a positive number)')
+
+        except ValueError:
+             print(f'Error: Please enter a valid student ID (must be a positive number)')
+             return
         
         # If user wants to go back, return go back signal
         if id_to_edit == -1 : 
@@ -64,7 +73,7 @@ class advisor :
         student = self.__advisees.search(id_to_edit)
 
         if student is None : 
-            print("Student not found, try again")
+            print("\nStudent not found, try again")
         else : 
             print(student)
             correct_student:bool = int(input(f'This student was found, is this correct? (1 for yes 0 for no) '))
@@ -294,54 +303,179 @@ class advisor :
 
     def construct_student(self) -> Student.Student : 
         print('\n---Add Student---')
-        try : 
+        """try : 
             while True:
                 name:str = str(input("Enter student's name: "))
                 if len(name) > 0:
                     break
                 else:
-                    print("Invalid input. Please enter a valid student Name.")
+                    print("Invalid input. Please enter a valid student Name.")"""
+        
+        try : 
+            while True:
+                try:
+                    first_name:str = str(input("Enter student's first name: "))
+                    if not first_name.isalpha():
+                         raise TypeError("Error: Please enter a valid student Name.")
+                    if len(first_name) > 0:
+                        break
+                    else:
+                        raise ValueError("Error: Please enter a valid student Name.")
+                except ValueError:
+                     print("Error: Please enter a valid student Name.")
+                except TypeError:
+                     print("Error: Please enter a valid student Name.")
+            
+            while True:
+                try:
+                    middle_name:str = str(input("Enter student's middle name: "))
+                    if middle_name.isalpha() or len(middle_name) == 0:
+                         break
+                    else:
+                         raise TypeError(f"Error: Please enter a valid middle name")
+                #REVISEME Does not take middle names such as van de pol or Barrett-Saxon
+                except TypeError:
+                     print(f"Error: Please enter a valid middle name (if multiple, enter as one with each capitalized)")
+            
+            while True:
+                try:
+                    last_name:str = str(input("Enter student's last name: "))
+                    if not last_name.isalpha():
+                         raise TypeError("Error: Please enter a valid last Name.")
+                    if len(last_name) > 0:
+                        break
+                    else:
+                        raise ValueError("Error: Please enter a valid last Name.")
+                except ValueError:
+                     print("Error: Please enter a valid last Name.")
+                except TypeError:
+                     print("Error: Please enter a valid last Name.")
+
+            name = str(Name(first_name, middle_name, last_name))
 
             # Revise for Int data type
             unique_id_number = False
             while not unique_id_number:
                 try:
                     id_num:int = int(input("Enter student's id number: "))
+                    if id_num < 0:
+                         raise ValueError("Error: Please enter a valid student ID number (must be positive number)")
+
                     if not self.__advisees.search(id_num) : 
                         unique_id_number = True 
                     else : 
                         print("ID Number already in use, try again")
 
                 except ValueError:
-                    print("Invalid input. Please enter a valid student ID number")
+                    print("Error: Please enter a valid student ID number (must be positive number)")
             
+            print("Enter student's birthdate: ")
             while True:
-                    birthdate:str = str(input("Enter students birthdate (mm/dd/yyyy): "))
-                    if len(birthdate) > 0:
-                        break
+                try:
+                    year:int = int(input("Year: "))
+                    if year < 1000 or year > datetime.datetime.now().year:
+                        raise ValueError(f"Error: Please enter a valid year")
                     else:
-                        print("Invalid input. Please enter a valid date.")
-            
-            while True:
-                    acceptance_date:str = str(input("Enter student's acceptance date (mm/dd/yyyy): "))
-                    if len(acceptance_date) > 0:
                         break
-                    else:
-                        print("Invalid input. Please enter a valid date.")
+                except ValueError:
+                     print(f"Error: Please enter a valid year")
 
             while True:
-                    semester:str = str(input("Enter current sememster: "))
-                    if len(semester) > 0:
-                        break
+                try:
+                    month:int = int(input("Month: "))
+                    if month < 1 or month > 12:
+                        raise ValueError(f"Error: Please enter a valid month")
                     else:
-                        print("Invalid input. Please enter a valid semester.")
+                        break
+                except ValueError:
+                    print(f'Error: Please enter a valid month for {year}')
 
             while True:
+                try:
+                    day:int = int(input("Day: "))
+                    last_day_of_month = calendar.monthrange(year, month)[1]
+                    month_to_str = calendar.month_name[month]
+                    if day < 1 or day > last_day_of_month:
+                        raise ValueError(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {year}")
+                    else:
+                        break
+                except ValueError:
+                    print(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {year}")
+            
+            birthdate = str(Date(month, day, year))
+            
+            print("Enter student's acceptance date: ")
+            while True:
+                try:
+                    year2:int = int(input("Year: "))
+                    if year2 < 1900 or year2 > datetime.datetime.now().year:
+                        raise ValueError(f"Error: Please enter a valid year")
+                    else:
+                        break
+                except ValueError:
+                     print(f"Error: Please enter a valid year")
+            
+            while True:
+                try:
+                    month2:int = int(input("Month: "))
+                    if month2 < 1 or month2 > 12:
+                        raise ValueError(f"Error: Please enter a valid month")
+                    else:
+                        break
+                except ValueError:
+                    print(f'Error: Please enter a valid month for {year2}')
+
+            while True:
+                try:
+                    day2:int = int(input("Day: "))
+                    last_day_of_month = calendar.monthrange(year2, month2)[1]
+                    month_to_str = calendar.month_name[month2]
+                    if day2 < 1 or day2 > last_day_of_month:
+                        raise ValueError(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {year2}")
+                    else:
+                        break
+                except ValueError:
+                    print(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {year}")
+
+            acceptance_date = str(Date(month2,day2,year2))
+
+            print("Enter student's start semester (semester, year): ")
+            while True:
+                valid_sems = ['summer', 'fall', 'spring']
+                try:
+                    semester:str = str(input("Semester: "))
+                    if semester.lower() in valid_sems:
+                        break
+                    else:
+                        raise ValueError(f'Error: Please enter a valid start semester (summer/fall/spring)')
+                except ValueError:
+                    print(f'Error: Please enter a valid start semester (summer/fall/spring)')
+
+            while True:
+                try:
+                    semester_year:int = int(input("Year: "))
+                    if 1900 <= semester_year <= datetime.datetime.now().year:
+                        break
+                    else:
+                        raise ValueError(f"Error: Please enter a valid year for {semester} Semester")
+                except ValueError:
+                    print(f"Error: Please enter a valid year for {semester} Semester")
+
+            start_semester = str(Semester(semester, semester_year))
+
+            while True:
+                try:
                     intended_major:str = str(input("Enter student's intended major: "))
+                    if not isinstance(intended_major, str):
+                        raise TypeError(f"Error: Please enter a valid major.")
                     if len(intended_major) > 0:
                         break
                     else:
-                        print("Invalid input. Please enter a valid major.")
+                        raise ValueError(f"Error: Please enter a valid major.")
+                except ValueError:
+                    print(f"Error: Please enter a valid major.")
+                except TypeError:
+                    print(f"Error: Please enter a valid major.")
 
             test_blank_list = [name, birthdate, acceptance_date, semester, intended_major]
 
@@ -353,9 +487,9 @@ class advisor :
         # Catch errors and print to user to prevent program crash
         except Exception as e : 
             print(e)
-
         try : 
-            new_student:Student.Student = Student.Student(name, '', id_num, birthdate, acceptance_date, semester, intended_major)
+            new_student:Student.Student = Student.Student(name, '', id_num, birthdate, acceptance_date, start_semester, intended_major)
+            print(f'\n New Student ({new_student.get_name()}) Added Successfully!')
             return new_student
         except Exception as e : # No exceptions are setup atm, just returning None
             return None
@@ -395,9 +529,11 @@ class advisor :
         while True:
             try:
                 id_to_display:int = int(input("Enter id number of student to display or -1 to go back : "))
+                if id_to_display < -1:
+                     raise ValueError("Error: Please enter a valid student ID to display (must be positive number).")
                 break
             except ValueError:
-                print("Invalid input. Please enter a valid student ID to display.")
+                print("Error: Please enter a valid student ID to display (must be positive number).")
 
         # If user wishes to go back, return 0 to indicate this to main loop
         if id_to_display == -1 : 
@@ -405,6 +541,7 @@ class advisor :
         
         student = self.__advisees.search(id_to_display)
         if student is None : 
+            print(f'Error: Student ID not found in system')
             return -1
         else : 
              print(student)

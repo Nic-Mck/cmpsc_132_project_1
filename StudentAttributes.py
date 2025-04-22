@@ -381,7 +381,7 @@ class Semester:
         except Exception as e :
             print(f'Error: Please enter a valid semester year [1900-2100] ')
             #FIXME
-            self.__year = 1900
+            #self.__year = 1900
 
     def set_semester(self, semester):
         if semester.lower() in self.valid_sems:
