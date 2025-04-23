@@ -15,3 +15,5 @@ Final Project Part II Revisions & Bug Fixes Left To Do:
 6. Bug when User enters number other than [1-3] in Advisor menu, prompts user Error to enter -1 or advisor name, but when valid advisor name is entered prompts twice. On second prompt enters student submenu successfully
 
 7. Implement an add advisor option to the start menu, or whichever layer makes most sense
+
+8. In Node Class & all it's applications data should be a private attribute
