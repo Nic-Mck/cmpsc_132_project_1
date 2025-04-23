@@ -288,18 +288,24 @@ class advisor :
     def add_email_address(self, student:Student) -> int : 
         print('\n---Add Email Address---')
         while True:
+            try:
                 address:str = input("Enter new email address : ")
                 if len(address) > 0:
                     break
                 else:
-                    print("Error: Email address blank")
+                    raise ValueError(f"Error: Email Address Blank")
+            except ValueError:
+                print(f"Error: Email Address Blank")
 
         while True:
+            try:
                 add_type:str = input("Enter email address type : ")
                 if len(add_type) > 0:
                     break
                 else:
-                    print("Error: Email type blank")
+                    raise ValueError(f"Error: Email type blank")
+            except ValueError:
+                print (f"Error: Email type blank")
         
         new_email = EmailAddress(address, add_type)
 
@@ -309,18 +315,24 @@ class advisor :
     def add_phone_number(self, student:Student) -> int : 
         print('\n---Add Phone Number---')
         while True:
+            try:
                 new_number:str = input("Enter new phone number : ")
                 if len(new_number) > 0:
                     break
                 else:
-                    print("Error: Phone number blank")
+                    raise ValueError("Error: Phone number blank")
+            except ValueError:
+                print("Error: Phone number blank")
 
         while True:
+            try:
                 new_number_type:str = input("Enter phone number type (Business, Personal, Etc.) : ")
                 if len(new_number_type) > 0:
                     break
                 else:
-                    print("Error: Phone type blank")
+                    raise ValueError("Error: Phone type blank")
+            except ValueError:
+                print("Error: Phone type blank")
         
         new_phone_number:PhoneNumber = PhoneNumber(new_number, new_number_type)
         
