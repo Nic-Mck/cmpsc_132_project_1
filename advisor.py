@@ -130,70 +130,114 @@ class advisor :
     def edit_student_name(self, student:Student) -> int :
         print('\n---Edit Name---')
         while True:
-                new_first:str = input("Enter new first name : ")
-                if len(new_first) > 0:
-                    break
-                else:
-                    print("Error: First Name cannot be blank")
-
-        new_middle:str = input("Enter new middle name : ")
+                try:
+                    new_first:str = input("Enter new first name : ")
+                    if not new_first.isalpha():
+                        raise TypeError(f"Error: Please enter a valid first name")
+                    if len(new_first) > 0:
+                        break
+                    else:
+                        raise ValueError(f"Error: First Name cannot be blank")
+                except ValueError:
+                    print(f"Error: First Name cannot be blank")
+                except TypeError:
+                    print(f"Error: Please enter a valid first name")
 
         while True:
-                new_last:str = input("Enter new last name : ")
-                if len(new_last) > 0:
+            try:    
+                new_middle:str = input("Enter new middle name : ")
+                if new_middle.isalpha() or len(new_middle) == 0:
                     break
                 else:
-                    print("Error: Last Name cannot be blank")
+                    raise ValueError(f"Error: Please enter a valid middle name, or press [Enter] to continue if None")
+            except ValueError:
+                print(f"Error: Please enter a valid middle name, or press [Enter] to continue if None")
+
+        while True:
+                try:
+                    new_last:str = input("Enter new last name : ")
+                    if not new_last.isalpha():
+                        raise TypeError(f"Error: Please enter a valid last name")
+                    if len(new_last) > 0:
+                        break
+                    else:
+                        raise ValueError(f"Error: Last Name cannot be blank")
+                except ValueError:
+                    print(f"Error: Last Name cannot be blank")
+                except TypeError:
+                    print(f"Error: Please enter a valid last name")
 
         return student.set_name(Name(new_first, new_middle, new_last))
 
     def edit_student_birthdate(self, student:Student) -> int : 
         print('\n---Edit Birthdate---')
         while True:
-                new_day:str = input("Enter new birthdate day : ")
-                if len(new_day) > 0:
-                    break
+            try:
+                new_year:int = int(input("Enter new birthdate year : "))
+                if new_year < 1000 or new_year > datetime.datetime.now().year:
+                    raise ValueError(f'Error: Please enter a valid year')
                 else:
-                    print("Error: Day cannot be blank")
+                    break
+            except ValueError:
+                print(f'Error: Please enter a valid year')
+        
+        while True:
+            try:
+                new_month:int = int(input("Enter new birthdate month : "))
+                if new_month < 1 or new_month > 12:
+                    raise ValueError(f"Error: Please enter a valid month [1-12] for {new_year}")
+                else:
+                    break
+            except ValueError:
+                print(f"Error: Please enter a valid month [1-12] for {new_year}")
 
         while True:
-                new_month:str = input("Enter new birthdate month : ")
-                if len(new_month) > 0:
-                    break
+            try:
+                new_day:int = int(input("Enter new birthdate day : "))
+                last_day_of_month = calendar.monthrange(new_year, new_month)[1]
+                month_to_str = calendar.month_name[new_month]
+                if new_day < 1 or new_day > last_day_of_month:
+                    raise ValueError(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {new_year}")
                 else:
-                    print("Error: Month cannot be blank")
-
-        while True:
-                new_year:str = input("Enter new birthdate year : ")
-                if len(new_year) > 0:
                     break
-                else:
-                    print("Error: Year cannot be blank")
+            except ValueError:
+                print(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {new_year}")
 
         return student.set_birthdate(Date(new_month, new_day, new_year))
 
     def edit_acceptance_date(self, student:Student) -> int : 
         print('\n---Edit Acceptance Date---')
         while True:
-                new_day:str = input("Enter new birthdate day : ")
-                if len(new_day) > 0:
-                    break
+            try:
+                new_year:int = int(input("Enter new birthdate year : "))
+                if new_year < 1000 or new_year > datetime.datetime.now().year:
+                    raise ValueError(f'Error: Please enter a valid year')
                 else:
-                    print("Error: Day cannot be blank")
+                    break
+            except ValueError:
+                print(f'Error: Please enter a valid year')
+        
+        while True:
+            try:
+                new_month:int = int(input("Enter new birthdate month : "))
+                if new_month < 1 or new_month > 12:
+                    raise ValueError(f"Error: Please enter a valid month [1-12] for {new_year}")
+                else:
+                    break
+            except ValueError:
+                print(f"Error: Please enter a valid month [1-12] for {new_year}")
 
         while True:
-                new_month:str = input("Enter new birthdate month : ")
-                if len(new_month) > 0:
-                    break
+            try:
+                new_day:int = int(input("Enter new birthdate day : "))
+                last_day_of_month = calendar.monthrange(new_year, new_month)[1]
+                month_to_str = calendar.month_name[new_month]
+                if new_day < 1 or new_day > last_day_of_month:
+                    raise ValueError(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {new_year}")
                 else:
-                    print("Error: Month cannot be blank")
-
-        while True:
-                new_year:str = input("Enter new birthdate year : ")
-                if len(new_year) > 0:
                     break
-                else:
-                    print("Error: Year cannot be blank")
+            except ValueError:
+                print(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {new_year}")
 
         return student.set_acceptance_date(Date(new_month, new_day, new_year))
 
