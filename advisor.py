@@ -254,7 +254,6 @@ class advisor :
             except ValueError:
                 print(f'Error: Please enter a valid start semester (summer/fall/spring)')
 
-        # Revise for int data type
         while True:
                 try:
                     year:int = int(input("Enter the year : "))
