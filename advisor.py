@@ -358,18 +358,15 @@ class advisor :
 
     def construct_student(self) -> Student.Student : 
         print('\n---Add Student---')
-        """try : 
-            while True:
-                name:str = str(input("Enter student's name: "))
-                if len(name) > 0:
-                    break
-                else:
-                    print("Invalid input. Please enter a valid student Name.")"""
+        print("Enter -1 at any time to cancel\n")
         
         try : 
             while True:
                 try:
-                    first_name:str = str(input("Enter student's first name: "))
+                    first_name:str = str(input("Enter student's first name : "))
+                    if first_name == '-1' : 
+                        return -1
+                    
                     if not first_name.isalpha():
                          raise TypeError("Error: Please enter a valid student Name.")
                     if len(first_name) > 0:
@@ -384,6 +381,9 @@ class advisor :
             while True:
                 try:
                     middle_name:str = str(input("Enter student's middle name: "))
+
+                    if middle_name == '-1' : 
+                        return -1
                     if middle_name.isalpha() or len(middle_name) == 0:
                          break
                     else:
@@ -395,6 +395,9 @@ class advisor :
             while True:
                 try:
                     last_name:str = str(input("Enter student's last name: "))
+                    
+                    if last_name == '-1' : 
+                        return -1
                     if not last_name.isalpha():
                          raise TypeError("Error: Please enter a valid last Name.")
                     if len(last_name) > 0:
@@ -413,6 +416,9 @@ class advisor :
             while not unique_id_number:
                 try:
                     id_num:int = int(input("Enter student's id number: "))
+
+                    if id_num == -1 : 
+                        return -1
                     if id_num < 0:
                          raise ValueError("Error: Please enter a valid student ID number (must be positive number)")
 
@@ -428,6 +434,9 @@ class advisor :
             while True:
                 try:
                     year:int = int(input("Year: "))
+                   
+                    if year == -1 : 
+                        return -1
                     if year < 1000 or year > datetime.datetime.now().year:
                         raise ValueError(f"Error: Please enter a valid year")
                     else:
@@ -438,6 +447,9 @@ class advisor :
             while True:
                 try:
                     month:int = int(input("Month: "))
+                    
+                    if month == -1 : 
+                        return -1
                     if month < 1 or month > 12:
                         raise ValueError(f"Error: Please enter a valid month")
                     else:
@@ -448,6 +460,9 @@ class advisor :
             while True:
                 try:
                     day:int = int(input("Day: "))
+
+                    if day == -1 : 
+                        return -1
                     last_day_of_month = calendar.monthrange(year, month)[1]
                     month_to_str = calendar.month_name[month]
                     if day < 1 or day > last_day_of_month:
@@ -463,6 +478,9 @@ class advisor :
             while True:
                 try:
                     year2:int = int(input("Year: "))
+
+                    if year2 == -1 : 
+                        return -1
                     if year2 < 1900 or year2 > datetime.datetime.now().year:
                         raise ValueError(f"Error: Please enter a valid year")
                     else:
@@ -473,6 +491,9 @@ class advisor :
             while True:
                 try:
                     month2:int = int(input("Month: "))
+
+                    if month2 == -1 : 
+                        return -1
                     if month2 < 1 or month2 > 12:
                         raise ValueError(f"Error: Please enter a valid month")
                     else:
@@ -483,6 +504,9 @@ class advisor :
             while True:
                 try:
                     day2:int = int(input("Day: "))
+
+                    if day2 == -1 : 
+                        return -1
                     last_day_of_month = calendar.monthrange(year2, month2)[1]
                     month_to_str = calendar.month_name[month2]
                     if day2 < 1 or day2 > last_day_of_month:
@@ -499,6 +523,9 @@ class advisor :
                 valid_sems = ['summer', 'fall', 'spring']
                 try:
                     semester:str = str(input("Semester: "))
+
+                    if semester == '-1' : 
+                        return -1
                     if semester.lower() in valid_sems:
                         break
                     else:
@@ -509,6 +536,9 @@ class advisor :
             while True:
                 try:
                     semester_year:int = int(input("Year: "))
+
+                    if semester_year == -1 : 
+                        return -1
                     if 1900 <= semester_year <= datetime.datetime.now().year:
                         break
                     else:
@@ -521,6 +551,9 @@ class advisor :
             while True:
                 try:
                     intended_major:str = str(input("Enter student's intended major: "))
+
+                    if intended_major == '-1' : 
+                        return -1
                     if not isinstance(intended_major, str):
                         raise TypeError(f"Error: Please enter a valid major.")
                     if len(intended_major) > 0:

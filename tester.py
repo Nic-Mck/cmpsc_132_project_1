@@ -5,11 +5,12 @@ import linked_list
 
 
 # FIXME
-# Ad an Advisor
+# Add an Advisor
+# DONE Delete an Advisor
 # Edit Advisor Info
-# Display Advisor Info 
-# Add students to advisee list+
-# Delete students from advisee list 
+# DONE Display Advisor Info 
+# DONE Add students to advisee list+
+# DONE Delete students from advisee list 
 
 #students:list[Student.Student] = [
 #                                Student.Student("First Tester", "1234 Test Lane, Media PA", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci"),
@@ -27,7 +28,10 @@ def print_advisor_options() -> None :
         f"\n---Main Menu---\n"
         "1. Choose Advisor\n"
         "2. Display Advisors\n"
-        "3. Exit\n"
+        "3. Add Advisor\n"
+        "4. Edit Advisor\n"
+        "5. Delete Advisor\n"
+        "6. Exit\n"
         )
     
 def print_advisor_sub_options() -> None : 
@@ -60,24 +64,48 @@ def choose_advisor() -> None :
             chosen_adv.print_main_menu() 
             response:str = str(input("Enter your choice: "))
             found = student_manipulation(adv, response)
-            
 
         if found != -2 : 
-            print("\nAdvisor not found, try again")
-            adv_to_choose:str = input("Enter name of advisor or -1 to go back : ")
-            print()
+            print("\nAdvisor not found, try again\n")
+
+def delete_advisor() -> None : 
+    adv_to_delete:str = ""
+
+    while adv_to_delete != '-1' :
+        print("\n---Advisor Deletion---\n")
+        adv_to_delete = input("Enter the name of advisor to delete or -1 to go back : ")
+        chosen_adv:Advisor.advisor = None 
+
+        if adv_to_delete == "-1" : break
+
+        for adv in advisors : 
+            if adv.get_name() == adv_to_delete : 
+                chosen_adv = adv 
+                print(adv.display_advisor())
+                is_correct:bool = str(input(f'This advisor was found, is this correct? (1 for yes 0 for no) : '))
+
+                if is_correct == '1' : 
+                    advisors.remove(chosen_adv)
+                    print("Advisor successfully deleted")
+                    return 1
+                else : 
+                    print("Continuing search...")
+                    continue
+        
+        print(f"Advisor {adv_to_delete} not found.")
+    
 
 def student_manipulation(adv:Advisor.advisor, response:str) -> int : 
     found = 0
     match response : 
         case '1' : # Add student
             new_student = adv.construct_student()
-            adv.append_student(new_student)
 
-            #if new_student is None : 
-                #print("Failed to create student, try again\n")
-            #else : 
-                #students.append(new_student)
+            # If user indicated to go back a menu
+            if new_student == -1 : 
+                return -1
+        
+            adv.append_student(new_student)
 
             found = -1
 
@@ -124,6 +152,7 @@ def student_manipulation(adv:Advisor.advisor, response:str) -> int :
 
         case _ : # Default Case
             print("Invalid input")
+            found = -1
 
     return found
 
@@ -143,8 +172,14 @@ def main() -> None :
                 print()
                 for advisor in advisors : 
                     advisor.display_advisor()
+            case '3' : # Add Advisor
+                pass
+            case '4' : # Edit Advisor 
+                pass
+            case '5' : # Delete Advisor
+                delete_advisor()
 
-            case '3' : # Exit Application 
+            case '6' : # Exit Application 
                 exit_application = True
                 break
 
