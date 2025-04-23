@@ -244,33 +244,44 @@ class advisor :
     def edit_student_semester(self, student:Student) -> int : 
         print('\n---Edit Semester---')
         while True:
+            valid_sems = ['summer', 'fall', 'spring']
+            try:
                 new:str = input("Enter new semester (Fall/Spring/Summer): ")
-                if len(new) > 0:
+                if new.lower() in valid_sems:
                     break
                 else:
-                    print("Error: Semester cannot be blank")
+                    raise ValueError(f'Error: Please enter a valid start semester (summer/fall/spring)')
+            except ValueError:
+                print(f'Error: Please enter a valid start semester (summer/fall/spring)')
 
         # Revise for int data type
         while True:
                 try:
                     year:int = int(input("Enter the year : "))
-                    if 1900 < year < 2100:
+                    if 1900 <= year <= datetime.datetime.now().year:
                         break
                     else:
-                        print("Error: Semester year must be between 1900 and 2100")
+                        raise ValueError(f"Error: Please enter a valid year for {new} Semester")
                 except ValueError:
-                    print("Error: Semester year cannot be blank")
+                    print(f"Error: Please enter a valid year for {new} Semester")
 
         return student.set_semester(Semester(new, year))
 
     def edit_student_intended_major(self, student:Student) -> int :
+        print("\n---Edit Intended Major---")
         while True:
-                print("\n---Edit Intended Major---")
+            try:
                 new:str = input("Enter new major : ")
+                if not isinstance(new, str):
+                    raise TypeError(f"Error: Please enter a valid intended major (e.g. Computer Science, Biology etc.)")
                 if len(new) > 0:
                     break
                 else:
-                    print("Error: Intended major cannot be blank")
+                    raise ValueError(f"Error: Please enter a valid intended major (e.g. Computer Science, Biology etc.)")
+            except ValueError:
+                print(f"Error: Please enter a valid intended major (e.g. Computer Science, Biology etc.)")
+            except TypeError:
+                print(f"Error: Please enter a valid intended major (e.g. Computer Science, Biology etc.)")
 
         return student.set_intended_major(new)
 
