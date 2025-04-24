@@ -24,9 +24,9 @@ class advisor :
 
     def display_advisor(self) -> None : 
          print(
-              f'Name: {self.__name}\n'
-              f'Title: {self.__title}\n'
-              f'Department {self.__department}\n' 
+              f'    Name: {self.__name}\n'
+              f'    Title: {self.__title}\n'
+              f'    Department {self.__department}\n' 
             )
 
     def set_name(self, new_name:str) -> None : 
@@ -58,7 +58,7 @@ class advisor :
         
         print("\n---Edit Student---")
         try:
-            id_to_edit:int = int(input("Enter id number of student you wish to edit or -1 to go back: "))
+            id_to_edit:int = int(input("Enter ID number of student you wish to edit or -1 to go back: "))
             if id_to_edit < -1:
                  raise ValueError(f'Error: Please enter a valid student ID (must be a positive number)')
 
@@ -76,7 +76,7 @@ class advisor :
             print("\nStudent not found, try again")
         else : 
             print(student)
-            correct_student:bool = int(input(f'This student was found, is this correct? (1 for yes 0 for no) '))
+            correct_student:bool = int(input(f'\nThis student was found, is this correct? [1-Yes, 0-No]: '))
 
             if correct_student : 
                 continue_editing:int = 1
@@ -105,6 +105,8 @@ class advisor :
                             success = self.add_phone_number(student)
                         case 8 : # Edit Address
                             success = self.edit_home_address(student)
+                        case 9 : # Edit Course List
+                            success = self.edit_course_list(student)
                         case _ : # Default Case
                             raise Exception("Invalid submenu choice")
                     
@@ -125,6 +127,7 @@ class advisor :
             '6. Add Email Address\n'
             '7. Add Phone Number\n'
             '8. Edit Home Address\n'
+            '9. Edit Course List\n'
             )
         
     def edit_student_name(self, student:Student) -> int :
@@ -366,6 +369,122 @@ class advisor :
             new_addr_type:str = str(input("Enter address type : "))
 
         return student.set_address(Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type))
+    
+    def edit_course_list(self, student:Student) -> int:
+            while True:
+                print("\n---Edit Course List---")
+                print(f"1. Add Course\n"
+                    "2. Remove Course\n"
+                    "3. Go back\n")
+                
+                try:
+                    user_choice = int(input("Enter your choice or -1 to go back: "))
+                except ValueError:
+                    print(f'\nError: Please enter a valid choice')
+                
+                if user_choice == -1:
+                    return -1
+                
+                elif user_choice == 1:
+                    while True:
+                        while True:
+                            try:
+                                course_num = input("Enter course name/number to add [e.g. CMPSC132]: ")
+                                if len(course_num) > 0:
+                                    break
+                                else:
+                                    raise ValueError(f"\nError: Please enter a valid course identifier [e.g. MATH360]")
+                            except ValueError:
+                                print(f"\nError: Please enter a valid course identifier [e.g. MATH360]")
+
+                        while True:
+                            try:
+                                valid_sems = ['summer', 'fall', 'spring']
+                                semester = input(f"Enter Semester of Completion for {course_num} [Fall/Spring/Summer]: ")
+                                if semester.lower() in valid_sems:
+                                    break
+                                else:
+                                    raise ValueError(f'\nError: Invalid Semester Value')
+                            except ValueError:
+                                print(f'\nError: Invalid Semester Value')
+                        
+                        while True:
+                            try:
+                                year = int(input(f"Enter Year of Completion for {semester}: "))
+                                if 1900 <= year <= datetime.datetime.now().year:
+                                    break
+                                else:
+                                    raise ValueError(f"\nError: Please enter a valid year for {semester}")
+                            except ValueError:
+                                print(f"\nError: Please enter a valid year for {semester}")
+
+                        c_semester = Semester(semester,year)
+
+                        while True:
+                            try:
+                                valid_inst_methods = ['classroom', 'hybrid', 'remote']
+                                inst_method = input(f"Enter method of instruction [Classroom/Remote/Hybrid]: ")
+                                if inst_method.lower() in valid_inst_methods:
+                                    break
+                                else:
+                                    raise ValueError(f"\nError: Please enter a valid method of instruction for {course_num}")
+                            except ValueError:
+                                print(f"\nError: Please enter a valid method of instruction for {course_num}")
+                        
+                        while True:
+                            try:
+                                valid_status = ['completed', 'dropped', 'current']
+                                status = input(f"Enter current status of course [Current/Completed/Dropped]: ")
+                                if status.lower() in valid_status:
+                                    break
+                                else:
+                                    raise ValueError(f"\nError: Please enter a valid status for {course_num}")
+                            except ValueError:
+                                print(f"\nError: Please enter a valid status for {course_num}")
+                        
+                        while True:
+                            try:
+                                valid_grades = ['a','b','c','d','f','n/a']
+                                grade = input(f"Enter Course Grade [A-D,F, or n/a]: ")
+                                if grade.lower() in valid_grades:
+                                    break
+                                else:
+                                    raise ValueError(f"\nError: Please enter a valid grade for {course_num}")
+                            except ValueError:
+                                print(f"\nError: Please enter a valid grade for {course_num}")
+
+                        new_Course = Course(course_num, c_semester, inst_method, status, grade)
+                        student.append_course_list(new_Course)
+                        print(f"\nThe following course has been added succesfully: \n{new_Course}")
+                
+                        add_another = int(input(f"\nAdd another course to list? [1-Yes, 0-No]: "))
+                        if add_another != 1:
+                            break
+                
+                elif user_choice == 2:
+                    while True:
+                        while True:
+                            try:
+                                removed_course_num = input(f"Enter Course Identifier to be removed (e.g. CMPSC132): ").lower().strip()
+                                if len(removed_course_num) > 0:
+                                    break
+                                else:
+                                    raise ValueError(f"\nError: User input blank")
+                            except ValueError:
+                                print(f"\nError: User input blank")
+                                
+                        result = student.remove_course_list(removed_course_num)
+                        print(f"{removed_course_num} has been removed successfully" if result else '')
+
+                        remove_another = int(input(f"Remove another course from list? [1-Yes, 0-No]: "))
+                        if remove_another != 1:
+                            break
+
+                elif user_choice == 3:
+                    break
+
+                else:
+                    print(f"\nError: Please enter a valid menu option [1-3]")
 
     def construct_student(self) -> Student.Student : 
         print('\n---Add Student---')
@@ -470,12 +589,12 @@ class advisor :
 
             while True:
                 try:
+                    last_day_of_month = calendar.monthrange(year, month)[1]
+                    month_to_str = calendar.month_name[month]
                     day:int = int(input("Day: "))
 
                     if day == -1 : 
                         return -1
-                    last_day_of_month = calendar.monthrange(year, month)[1]
-                    month_to_str = calendar.month_name[month]
                     if day < 1 or day > last_day_of_month:
                         raise ValueError(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {year}")
                     else:

@@ -165,6 +165,19 @@ class Student:
         
         self.__course_list.append_node(new_course)
         return 1
+    
+    def remove_course_list(self, new_course:Course) -> int:
+        if not isinstance(new_course, (Course, str)):
+            raise Exception('New Course is not a Course object')
+            return 0
+        try:
+            result = self.__course_list.remove_data(new_course)
+            if result == 1:
+                print(f"({new_course}) has been removed successfully")
+            else:
+                raise ValueError(f"Notice: ({new_course}) not found in student's course list")
+        except ValueError as e:
+            print(e)
 
     def set_intended_major(self, intended_major) -> int :
         if intended_major:

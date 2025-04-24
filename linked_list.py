@@ -118,7 +118,7 @@ class LinkedList :
 
         # Find and skip requested element
         current_node = self.head
-        while current_node is not None :
+        while current_node.next is not None :
 
             if current_node.next.data == key :
                 current_node.next = current_node.next.next

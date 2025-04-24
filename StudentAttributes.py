@@ -487,6 +487,12 @@ class Course:
     def __str__(self):
         return f'\n    Course ID: {self.__course_num}\n       Semester Taken: {self.__semester}\n       Instruction Method: {self.__inst_method}\n       Status: {self.__status}\n       Grade: {self.__grade.upper()}'
 
+    def __eq__(self, other):
+        if isinstance(other, Course):
+            return self.__course_num == other.__course_num and self.__semester == other.__semester
+        if isinstance(other, str):
+            return self.__course_num == other
+        return False
 
 if __name__ == '__main__':
 

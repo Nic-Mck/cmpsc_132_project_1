@@ -81,8 +81,8 @@ def delete_advisor() -> None :
         for adv in advisors : 
             if adv.get_name() == adv_to_delete : 
                 chosen_adv = adv 
-                print(adv.display_advisor())
-                is_correct:bool = str(input(f'This advisor was found, is this correct? (1 for yes 0 for no) : '))
+                adv.display_advisor()
+                is_correct:bool = str(input(f'This advisor was found, is this correct? Confirm deletion [1-Yes, 0-No] : '))
 
                 if is_correct == '1' : 
                     advisors.remove(chosen_adv)
@@ -92,7 +92,7 @@ def delete_advisor() -> None :
                     print("Continuing search...")
                     continue
         
-        print(f"Advisor {adv_to_delete} not found.")
+        print(f"Error: Advisor ({adv_to_delete}) not found.")
     
 
 def student_manipulation(adv:Advisor.advisor, response:str) -> int : 
@@ -151,7 +151,7 @@ def student_manipulation(adv:Advisor.advisor, response:str) -> int :
             found = -2
 
         case _ : # Default Case
-            print("Invalid input")
+            print("Error: Please enter a valid menu choice [1-6]")
             found = -1
 
     return found
@@ -170,6 +170,8 @@ def main() -> None :
                 choose_advisor()
             case '2' : # Display Advisors : 
                 print()
+                print(f"Current Advisors in System:")
+                print()
                 for advisor in advisors : 
                     advisor.display_advisor()
             case '3' : # Add Advisor
@@ -182,6 +184,9 @@ def main() -> None :
             case '6' : # Exit Application 
                 exit_application = True
                 break
+
+            case _ : # Default Case
+                print(f"\nError: Please enter a valid menu choice [1-6]")
 
 if __name__ == "__main__" : 
     main() 
