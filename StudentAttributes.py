@@ -336,6 +336,13 @@ class PhoneNumber:
     def __str__(self):
         return f'    {self.__phone_number}, ({self.__phone_type})'
     
+    def __eq__(self, other):
+        if isinstance(other, str):
+            return self.__phone_number == other.lower().strip()
+        elif isinstance(other, PhoneNumber):
+            return self.__phone_number == other.__phone_number 
+        return False
+    
 class Date:
 
     def __init__(self, month:str, day:str, year:str) -> None :

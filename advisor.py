@@ -125,7 +125,7 @@ class advisor :
             '4. Edit Semester\n'
             '5. Edit Intended Major\n'
             '6. Edit Email Address\n'
-            '7. Add Phone Number\n'
+            '7. Edit Phone Number\n'
             '8. Edit Home Address\n'
             '9. Edit Course List\n'
             )
@@ -289,7 +289,7 @@ class advisor :
 
     def add_email_address(self, student:Student) -> int : 
         while True:
-            print('\n---Edit Email Address---')
+            print('\n---Edit Email Addresses---')
             print(f"1. Add Email\n"
                    "2. Remove Email\n"
                    "3. Go Back\n")
@@ -359,31 +359,76 @@ class advisor :
                 print(f"\nError: Please enter a valid menu option [1-3]")
 
     def add_phone_number(self, student:Student) -> int : 
-        print('\n---Add Phone Number---')
         while True:
-            try:
-                new_number:str = input("Enter new phone number : ")
-                if len(new_number) > 0:
-                    break
-                else:
-                    raise ValueError("Error: Phone number blank")
-            except ValueError:
-                print("Error: Phone number blank")
+            print('\n---Edit Phone Numbers---')
+            print(f"1. Add Phone Number\n"
+                   "2. Remove Phone Number\n"
+                   "3. Go Back\n")
 
-        while True:
             try:
-                new_number_type:str = input("Enter phone number type (Business, Personal, Etc.) : ")
-                if len(new_number_type) > 0:
-                    break
-                else:
-                    raise ValueError("Error: Phone type blank")
+                user_choice = int(input("Enter your choice or -1 to go back: "))
             except ValueError:
-                print("Error: Phone type blank")
-        
-        new_phone_number:PhoneNumber = PhoneNumber(new_number, new_number_type)
-        
-        # Attempt to append phone number and return True or False for Success or Failure
-        return student.append_phone_number(new_phone_number)
+                print(f'\nError: Please enter a valid choice')
+
+            if user_choice == -1:
+                return -1
+            
+            elif user_choice == 1:
+                while True:
+                    while True:
+                        try:
+                            new_number:str = input("Enter new phone number : ")
+                            if len(new_number) > 0:
+                                break
+                            else:
+                                raise ValueError("Error: Phone number blank")
+                        except ValueError:
+                            print("Error: Phone number blank")
+
+                    while True:
+                        try:
+                            new_number_type:str = input("Enter phone number type (Business, Personal, Etc.) : ")
+                            if len(new_number_type) > 0:
+                                break
+                            else:
+                                raise ValueError("Error: Phone type blank")
+                        except ValueError:
+                            print("Error: Phone type blank")
+                    
+                    new_phone_number:PhoneNumber = PhoneNumber(new_number, new_number_type)
+                    
+                    # Attempt to append phone number and return True or False for Success or Failure
+                    student.append_phone_number(new_phone_number)
+                    print(f"\nThe following phone number has been added successfully: {new_phone_number}")
+
+                    add_another = int(input(f"\nAdd another phone number to list? [1-Yes, 0-No]: "))
+                    if add_another != 1:
+                        break
+
+            elif user_choice == 2:
+                 while True:
+                        while True:
+                            try:
+                                removed_number = input(f"Please enter phone number to be removed: ").lower().strip()
+                                if len(removed_number) > 0:
+                                    break
+                                else:
+                                    raise ValueError(f"\nError: User input blank")
+                            except ValueError:
+                                print(f"\nError: User input blank")
+                                
+                        result = student.remove_phone_number(removed_number)
+                        print(f"{removed_number} has been removed successfully" if result else '')
+
+                        remove_another = int(input(f"Remove another phone number from list? [1-Yes, 0-No]: "))
+                        if remove_another != 1:
+                            break
+            
+            elif user_choice == 3:
+                break
+
+            else:
+                print(f"\nError: Please enter a valid menu choice [1-3]")
 
     def edit_home_address(self, student:Student) -> int : 
         print("\n---Edit Home Address---")
