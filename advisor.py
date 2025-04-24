@@ -491,26 +491,27 @@ class advisor :
         print("Enter -1 at any time to cancel\n")
         
         try : 
+            print(f"Enter student's name : ")
             while True:
                 try:
-                    first_name:str = str(input("Enter student's first name : "))
+                    first_name:str = str(input("First : "))
                     if first_name == '-1' : 
                         return -1
                     
                     if not first_name.isalpha():
-                         raise TypeError("Error: Please enter a valid student Name.")
+                         raise TypeError("Error: Please enter a valid first name.")
                     if len(first_name) > 0:
                         break
                     else:
-                        raise ValueError("Error: Please enter a valid student Name.")
+                        raise ValueError("Error: Please enter a valid first name.")
                 except ValueError:
-                     print("Error: Please enter a valid student Name.")
+                     print("Error: Please enter a valid first name.")
                 except TypeError:
-                     print("Error: Please enter a valid student Name.")
+                     print("Error: Please enter a valid first name.")
             
             while True:
                 try:
-                    middle_name:str = str(input("Enter student's middle name: "))
+                    middle_name:str = str(input("Middle : "))
 
                     if middle_name == '-1' : 
                         return -1
@@ -524,22 +525,50 @@ class advisor :
             
             while True:
                 try:
-                    last_name:str = str(input("Enter student's last name: "))
+                    last_name:str = str(input("Last : "))
                     
                     if last_name == '-1' : 
                         return -1
                     if not last_name.isalpha():
-                         raise TypeError("Error: Please enter a valid last Name.")
+                         raise TypeError("Error: Please enter a valid last name.")
                     if len(last_name) > 0:
                         break
                     else:
-                        raise ValueError("Error: Please enter a valid last Name.")
+                        raise ValueError("Error: Please enter a valid last name.")
                 except ValueError:
-                     print("Error: Please enter a valid last Name.")
+                     print("Error: Please enter a valid last name.")
                 except TypeError:
-                     print("Error: Please enter a valid last Name.")
+                     print("Error: Please enter a valid last name.")
 
             name = str(Name(first_name, middle_name, last_name))
+ 
+            print("Enter student's home address : ")
+            new_street_adr:str = str(input("Street Address : "))
+            while len(new_street_adr) <= 0 : 
+                print("Invalid, address cannot be blank")
+                new_street_adr = str(input("Street Address : "))
+
+            new_city:str = str(input("City : "))
+            while len(new_city) <= 0 :
+                print("Invalid, City Name Cannot be blank")
+                new_city = str(input("City : "))
+            
+            new_state:str = str(input("State : "))
+            while len(new_state) <= 0 :
+                print("Invalid, State cannot be blank")
+                new_state:str = str(input("State : "))
+
+            new_zipcode:str = str(input("Zipcode : "))
+            while len(new_zipcode) <= 0 :
+                print("Invalid, zipcode cannot be blank")
+                new_zipcode:str = str(input("Zipcode : "))
+
+            new_addr_type:str = str(input("Address Type : "))
+            while len(new_addr_type) <= 0 : 
+                print("Invalid, address type cannot be blank")
+                new_addr_type:str = str(input("Address Type : "))
+
+            new_Address = Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type)
 
             # Revise for Int data type
             unique_id_number = False
@@ -706,7 +735,7 @@ class advisor :
         except Exception as e : 
             print(e)
         try : 
-            new_student:Student.Student = Student.Student(name, '', id_num, birthdate, acceptance_date, start_semester, intended_major)
+            new_student:Student.Student = Student.Student(name, new_Address, id_num, birthdate, acceptance_date, start_semester, intended_major)
             print(f'\n New Student ({new_student.get_name()}) Added Successfully!')
             return new_student
         except Exception as e : # No exceptions are setup atm, just returning None
