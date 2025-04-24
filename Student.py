@@ -82,6 +82,17 @@ class Student:
 
         self.__email_addresses.append(new_email) 
         return 1
+    
+    def remove_email_address(self, new_email:EmailAddress) -> int:
+        if not isinstance(new_email, (EmailAddress, str)):
+            raise Exception('New Course is not a Course object')
+            return 0
+        try:
+            self.__email_addresses.remove(new_email)
+            return True
+        except ValueError:
+            print(f"Notice: ({new_email}) not found in student's course list")
+            return False
 
     def set_phone_numbers(self, phone_numbers):
         if isinstance(phone_numbers, (PhoneNumber,str)):

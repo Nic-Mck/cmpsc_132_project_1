@@ -119,12 +119,12 @@ class advisor :
         
     def print_edit_menu(self) -> None : 
         print(f'\n---Attributes---\n'
-            '1. Name\n'
-            '2. Birthdate\n'
-            '3. Acceptance Date\n'
-            '4. Semester\n'
-            '5. Intended Major\n'
-            '6. Add Email Address\n'
+            '1. Edit Name\n'
+            '2. Edit Birthdate\n'
+            '3. Edit Acceptance Date\n'
+            '4. Edit Semester\n'
+            '5. Edit Intended Major\n'
+            '6. Edit Email Address\n'
             '7. Add Phone Number\n'
             '8. Edit Home Address\n'
             '9. Edit Course List\n'
@@ -288,31 +288,75 @@ class advisor :
         return student.set_intended_major(new)
 
     def add_email_address(self, student:Student) -> int : 
-        print('\n---Add Email Address---')
         while True:
+            print('\n---Edit Email Address---')
+            print(f"1. Add Email\n"
+                   "2. Remove Email\n"
+                   "3. Go Back\n")
             try:
-                address:str = input("Enter new email address : ")
-                if len(address) > 0:
-                    break
-                else:
-                    raise ValueError(f"Error: Email Address Blank")
+                user_choice = int(input("Enter your choice or -1 to go back: "))
             except ValueError:
-                print(f"Error: Email Address Blank")
+                print(f'\nError: Please enter a valid choice')
+                
+            if user_choice == -1:
+                return -1
+            
+            elif user_choice == 1:
+                while True:
+                    while True:
+                        try:
+                            address:str = input("Enter new email address : ")
+                            if len(address) > 0:
+                                break
+                            else:
+                                raise ValueError(f"Error: Email Address Blank")
+                        except ValueError:
+                            print(f"Error: Email Address Blank")
 
-        while True:
-            try:
-                add_type:str = input("Enter email address type : ")
-                if len(add_type) > 0:
-                    break
-                else:
-                    raise ValueError(f"Error: Email type blank")
-            except ValueError:
-                print (f"Error: Email type blank")
-        
-        new_email = EmailAddress(address, add_type)
+                    while True:
+                        try:
+                            add_type:str = input("Enter email address type : ")
+                            if len(add_type) > 0:
+                                break
+                            else:
+                                raise ValueError(f"Error: Email type blank")
+                        except ValueError:
+                            print (f"Error: Email type blank")
+                    
+                    new_email = EmailAddress(address, add_type)
 
-        # Attempt to append email and return True or False for Success or Failure
-        return student.append_email_address(new_email)
+                    # Attempt to append email and return True or False for Success or Failure
+                    student.append_email_address(new_email)
+                    print(f"\nThe following email has been added successfully: {new_email}")
+
+                    add_another = int(input(f"\nAdd another email to list? [1-Yes, 0-No]: "))
+                    if add_another != 1:
+                        break
+            
+            elif user_choice == 2:
+                while True:
+                        while True:
+                            try:
+                                removed_email = input(f"Please enter email to be removed: ").lower().strip()
+                                if len(removed_email) > 0:
+                                    break
+                                else:
+                                    raise ValueError(f"\nError: User input blank")
+                            except ValueError:
+                                print(f"\nError: User input blank")
+                                
+                        result = student.remove_email_address(removed_email)
+                        print(f"{removed_email} has been removed successfully" if result else '')
+
+                        remove_another = int(input(f"Remove another email from list? [1-Yes, 0-No]: "))
+                        if remove_another != 1:
+                            break
+            
+            elif user_choice == 3:
+                break
+
+            else:
+                print(f"\nError: Please enter a valid menu option [1-3]")
 
     def add_phone_number(self, student:Student) -> int : 
         print('\n---Add Phone Number---')

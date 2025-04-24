@@ -270,6 +270,13 @@ class EmailAddress:
     def append(self, i):
         pass
 
+    def __eq__(self, other):
+        if isinstance(other, str):
+            return self.__address == other.lower().strip()
+        elif isinstance(other, EmailAddress):
+            return self.__address == other.__address
+        return False
+
 class PhoneNumber:
 
     def __init__(self, phone_number='', phone_type=''):
