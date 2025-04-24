@@ -589,6 +589,54 @@ class advisor :
                 except ValueError:
                     print("Error: Please enter a valid student ID number (must be positive number)")
             
+            print(f"Enter Student's Email Address : ")
+            while True:
+                try:
+                    address:str = input("Email : ")
+                    if len(address) > 0:
+                        break
+                    else:
+                        raise ValueError(f"Error: Email Address Blank")
+                except ValueError:
+                    print(f"Error: Email Address Blank")
+
+            while True:
+                try:
+                    add_type:str = input("Email Address Type (e.g. Work, Personal, Business etc.) : ")
+                    if len(add_type) > 0:
+                        break
+                    else:
+                        raise ValueError(f"Error: Email type blank")
+                except ValueError:
+                    print (f"Error: Email type blank")
+            
+            new_email = EmailAddress(address, add_type)
+
+            print(f"Enter Student's Phone Number : ")
+            while True:
+                try:
+                    new_number:str = input("Phone Number : ")
+                    if len(new_number) > 0:
+                        break
+                    else:
+                        raise ValueError("Error: Phone number blank")
+                except ValueError:
+                    print("Error: Phone number blank")
+
+            while True:
+                try:
+                    new_number_type:str = input("Phone Type (e.g. Business, Personal, Cell) : ")
+                    if len(new_number_type) > 0:
+                        break
+                    else:
+                        raise ValueError("Error: Phone type blank")
+                except ValueError:
+                    print("Error: Phone type blank")
+            
+            new_phone_number:PhoneNumber = PhoneNumber(new_number, new_number_type)
+            
+            # Attempt to append phone number and return True or False for Success or Failure
+
             print("Enter student's birthdate: ")
             while True:
                 try:
@@ -736,6 +784,8 @@ class advisor :
             print(e)
         try : 
             new_student:Student.Student = Student.Student(name, new_Address, id_num, birthdate, acceptance_date, start_semester, intended_major)
+            new_student.append_email_address(new_email)
+            new_student.append_phone_number(new_phone_number)
             print(f'\n New Student ({new_student.get_name()}) Added Successfully!')
             return new_student
         except Exception as e : # No exceptions are setup atm, just returning None
