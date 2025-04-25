@@ -10,39 +10,39 @@ class LinkedList :
         new_node = node.Node(data)
 
         if after_data == "Null" :
-            new_node.next = self.head
+            new_node.set_next(self.head)
             self.head = new_node
             return
-        if self.head.data == after_data :
-            temp = self.head.next
-            new_node.next = temp
-            self.head.next = new_node
+        if self.head.get_data() == after_data :
+            temp = self.head.get_next()
+            new_node.set_next(temp)
+            self.head.set_next(new_node)
         else :
             curr_node = self.head
-            while curr_node.data != after_data and curr_node.next is not None :
-                curr_node = curr_node.next
+            while curr_node.get_data() != after_data and curr_node.get_next() is not None :
+                curr_node = curr_node.get_next()
 
             # Once element to insert after is found, or we reach the end of the list, insert new node
-            new_node.next = curr_node.next
-            curr_node.next = new_node
+            new_node.set_next(curr_node.get_next())
+            curr_node.set_next(new_node)
 
     def insert_node_sorted(self, data:typing.Any) -> None :
         new_node = node.Node(data)
         curr_node = self.head
-        if curr_node is None or curr_node.data > new_node.data :
-            new_node.next = self.head
+        if curr_node is None or curr_node.get_data() > new_node.get_data() :
+            new_node.set_next(self.head)
             self.head = new_node
         else :
-            while curr_node.next is not None :
-                if curr_node.next.data > new_node.data :
-                    new_node.next = curr_node.next
-                    curr_node.next = new_node
+            while curr_node.get_next() is not None :
+                if curr_node.get_next().get_data() > new_node.get_data() :
+                    new_node.set_next(curr_node.get_next())
+                    curr_node.set_next(new_node)
 
-                    if new_node.next is None :
+                    if new_node.get_next() is None :
                         self.tail = new_node
 
                     return
-                curr_node = curr_node.next
+                curr_node = curr_node.get_next()
 
             self.append_node(data)
 
@@ -53,7 +53,7 @@ class LinkedList :
             self.head = new_node
             self.tail = new_node
         else :
-            self.tail.next = new_node
+            self.tail.set_next(new_node)
             self.tail = new_node
 
 
@@ -64,7 +64,7 @@ class LinkedList :
             self.head = new_node
             self.tail = new_node
         else :
-            new_node.next = self.head
+            new_node.set_next(self.head)
             self.head = new_node
 
 
@@ -76,8 +76,8 @@ class LinkedList :
         
         node = self.head
         while True :
-            print(node.data, end="")
-            node = node.next
+            print(node.get_data(), end="")
+            node = node.get_next()
 
             if node is not None :
                 print()
@@ -93,8 +93,8 @@ class LinkedList :
 
         node = self.head 
         while node : 
-            ret_str += str(node.data)
-            node = node.next 
+            ret_str += str(node.get_data())
+            node = node.get_next()
             ret_str += "\n"
 
         return ret_str
@@ -102,31 +102,31 @@ class LinkedList :
     def search(self, key:typing.Any) -> node.Node | None :
         current_node = self.head
         while current_node is not None :
-            if current_node.data.get_id_num() == key :
+            if current_node.get_data().get_id_num() == key :
                 #print(f'Key: {key} found.')
-                return current_node.data
+                return current_node.get_data()
 
-            current_node = current_node.next
+            current_node = current_node.get_next()
 
         return None
 
     def remove_data(self, key=typing.Any) -> int :
         # If first element is the one to be deleted
-        if self.head.data == key :
-            self.head = self.head.next
+        if self.head.get_data() == key :
+            self.head = self.head.get_next()
             return 1
 
         # Find and skip requested element
         current_node = self.head
-        while current_node.next is not None :
+        while current_node.get_next() is not None :
 
-            if current_node.next.data == key :
-                current_node.next = current_node.next.next
+            if current_node.get_next().get_data() == key :
+                current_node.set_next(current_node.get_next().get_next())
 
-                if current_node.next is None :
+                if current_node.get_next() is None :
                     self.tail = current_node
                 return 1
 
-            current_node = current_node.next
+            current_node = current_node.get_next()
 
         return -1

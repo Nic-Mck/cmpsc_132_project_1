@@ -19,9 +19,15 @@ import linked_list
 #                            ]
     
 advisors:list[Advisor.advisor] = [
-    Advisor.advisor("Mr. First Advisor", "Big Guy", "Big Guy Department"),
-    Advisor.advisor("Mrs. Second Advisor", "Advisory Advisor", "Advisory Department")
+    Advisor.advisor("Bill Nye", "Science Guy", "Science Department"),
+    Advisor.advisor("Mrs. Frizzle", "Advisory Advisor", "Advisory Department")
 ]
+
+advisors[0].add_student(Student.Student("First Tester", "1234 Test Lane, Media PA", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci"))
+advisors[0].add_student(Student.Student("Second Tester", "5678 Campus DR, Media PA", 1, "1/1/1111", "2/2/2222", "Spring", "Engineering"))
+advisors[0].add_student(Student.Student("Third Tester", "9101112 Road Road, Phil PA", 2, "2/2/2222", "3/3/3333", "Summer", "Finance"))
+
+advisors[0].display_advisees()
 
 def print_advisor_options() -> None : 
     print(
