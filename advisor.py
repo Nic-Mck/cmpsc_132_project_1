@@ -421,8 +421,17 @@ class advisor :
                             except ValueError:
                                 print(f"\nError: User input blank")
 
-                        confirm_remove = int(input(f"\nConfirm deletion of {removed_number} [1-Yes, 0-No]"))  
-                        if confirm_remove == 1:      
+                        confirm_remove = ''
+
+                        while len(confirm_remove) <= 0 and confirm_remove != '-1' : 
+                            confirm_remove = str(input(f"\nConfirm deletion of {removed_number} [1-Yes, 0-No]"))  
+
+                            if len(removed_number) <= 0 :
+                                print("Invalid input")
+                            elif confirm_remove == '-1' : 
+                                return -1
+                            
+                        if confirm_remove == '1' :      
                             result = student.remove_phone_number(removed_number)
                             print(f"{removed_number} has been removed successfully" if result else f"{removed_number} not found in list")
                         else:
