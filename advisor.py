@@ -950,3 +950,6 @@ class advisor :
 
     def append_student(self, stud:Student.Student) -> None : 
          self.__advisees.append_node(stud)
+
+    def get_advisees(self) -> linked_list : 
+        return self.__advisees
