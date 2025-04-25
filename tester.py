@@ -12,12 +12,6 @@ import linked_list
 # DONE Add students to advisee list+
 # DONE Delete students from advisee list 
 
-#students:list[Student.Student] = [
-#                                Student.Student("First Tester", "1234 Test Lane, Media PA", 0, "0/0/0000", "1/1/1111", "Fall", "Compsci"),
-#                                Student.Student("Second Tester", "5678 Campus DR, Media PA", 1, "1/1/1111", "2/2/2222", "Spring", "Engineering"),
-#                                Student.Student("Third Tester", "9101112 Road Road, Phil PA", 2, "2/2/2222", "3/3/3333", "Summer", "Finance")
-#                            ]
-    
 advisors:list[Advisor.advisor] = [
     Advisor.advisor("Bill Nye", "Science Guy", "Science Department"),
     Advisor.advisor("Mrs. Frizzle", "Advisory Advisor", "Advisory Department")
@@ -27,7 +21,16 @@ advisors[0].add_student(Student.Student("First Tester", "1234 Test Lane, Media P
 advisors[0].add_student(Student.Student("Second Tester", "5678 Campus DR, Media PA", 1, "1/1/1111", "2/2/2222", "Spring", "Engineering"))
 advisors[0].add_student(Student.Student("Third Tester", "9101112 Road Road, Phil PA", 2, "2/2/2222", "3/3/3333", "Summer", "Finance"))
 
-advisors[0].display_advisees()
+advisees = advisors[0].get_advisees()
+advisees.head.get_data().set_course_list([Course('001', 'Fall', 'Classroom', 'Completed', 'A'),
+                               Course('002', 'Spring', 'Hybrid', 'Dropped', 'N/A'),
+                               Course('003', 'Winter', 'Remote', 'Current', 'A')])
+advisees.head.get_next().get_data().set_course_list([Course('101', 'Summer', 'Classroom', "Current", 'C'),
+                                                     Course('250', 'Fall', 'Remote', "Completed", 'B'),
+                                                     Course('141', 'Winter', 'Hybrid', 'Dropped', 'N/A')])
+advisees.head.get_next().get_next().get_data().set_course_list([Course('1201', 'Winter', 'Classroom', "Current", 'D'),
+                                                                Course('50', 'Fall', 'Remote', "Completed", 'B'),
+                                                                Course('14', 'Winter', 'Hybrid', 'Completed', 'F')])
 
 def print_advisor_options() -> None : 
     print(
