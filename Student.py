@@ -204,16 +204,7 @@ class Student:
         except ValueError as e:
             print(f"Notice: ({new_course}) not found in student's course list")
             return False
-        
-    def find_course(self, course_name:str) -> bool:
-        c_pointer = self.__course_list.head
-        t_pointer = Course(course_name)
-        while c_pointer:
-            if c_pointer.get_data() == t_pointer:
-                return True
-            c_pointer = c_pointer.get_next()
-        return False
-
+    
     def set_intended_major(self, intended_major) -> int :
         if intended_major:
             self.__intended_major = intended_major
