@@ -84,13 +84,18 @@ class Student:
         return 1
     
     def remove_email_address(self, new_email:EmailAddress) -> int:
+        if not self.get_email_addresses(): return False
+
         if not isinstance(new_email, (EmailAddress, str)):
             raise Exception('New Email is not an Email Object')
             return 0
         try:
-            self.__email_addresses.remove(new_email)
-            return True
-        except ValueError:
+            result = self.__email_addresses.remove(new_email)
+            if result == 1:
+                return True
+            else:
+                return False
+        except ValueError as e:
             print(f"Notice: ({new_email}) not found in student's email list")
             return False
 
@@ -120,12 +125,17 @@ class Student:
         return 1
     
     def remove_phone_number(self, new_phone_number:PhoneNumber) -> int:
+        if not self.get_phone_numbers() : return False
+
         if not isinstance(new_phone_number, (PhoneNumber, str)):
             raise Exception('New Phone Number is not a PhoneNumber Object')
             return 0
         try:
-            self.__phone_numbers.remove(new_phone_number)
-            return True
+            result = self.__phone_numbers.remove(new_phone_number)
+            if result == 1:
+                return True
+            else:
+                return False
         except ValueError:
             print(f"Notice: ({new_phone_number}) not found in student's phone number list")
             return False

@@ -578,7 +578,7 @@ class advisor :
                                     raise ValueError(f"\nError: User input blank")
                             except ValueError:
                                 print(f"\nError: User input blank")
-
+                
                         confirm_remove = ''
 
                         while len(confirm_remove) <= 0 and confirm_remove != '-1' : 

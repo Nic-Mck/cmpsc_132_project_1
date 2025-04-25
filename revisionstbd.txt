@@ -20,6 +20,9 @@ Final Project Part II Revisions & Bug Fixes Left To Do:
 
 (DONE) 9. Add functionality for Editing Advisor
 
-10. Change confirmation logic for add_phone_number() & add_email_address() to reflect Nick's in add_course_list()
+(DONE) 10. Change confirmation logic for remove_phone_number() & remove_email_address() to reflect Nick's in remove_course_list()
+            (DONE)*Note* - AKA fix duplicate print error, DONE
 
 11. Optimize spacing for EVERYTHING
+
+12. Check for any bugs and try to optimize
