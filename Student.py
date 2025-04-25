@@ -189,6 +189,8 @@ class Student:
         return 1
     
     def remove_course_list(self, new_course:Course) -> int:
+        if not self.get_course_list().head : return False
+
         if not isinstance(new_course, (Course, str)):
             raise Exception('New Course is not a Course object')
             return 0

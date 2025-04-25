@@ -562,7 +562,7 @@ class advisor :
                     while True:
                         while True:
                             try:
-                                removed_course_num = input(f"Enter Course Identifier to be removed (e.g. CMPSC132): ").lower().strip()
+                                removed_course_num = str(input(f"Enter Course Identifier to be removed (e.g. CMPSC132): ")).lower().strip()
                                 if len(removed_course_num) > 0:
                                     break
                                 else:
@@ -570,15 +570,24 @@ class advisor :
                             except ValueError:
                                 print(f"\nError: User input blank")
 
-                        confirm_remove = int(input(f"\nConfirm deletion of {removed_course_num} [1-Yes, 0-No]"))  
-                        if confirm_remove == 1:      
+                        confirm_remove = ''
+
+                        while len(confirm_remove) <= 0 and confirm_remove != '-1' : 
+                            confirm_remove = str(input(f"\nConfirm deletion of {removed_course_num} [1-Yes, 0-No]"))  
+
+                            if len(confirm_remove) <= 0 :
+                                print("Invalid input")
+                            elif confirm_remove == '-1' : 
+                                return -1
+                            
+                        if confirm_remove == '1' :      
                             result = student.remove_course_list(removed_course_num)
                             print(f"{removed_course_num} has been removed successfully" if result else f"{removed_course_num} not found in list")
                         else:
                             print("\nDeletion cancelled")
 
-                        remove_another = int(input(f"\nRemove another course from list? [1-Yes, 0-No]: "))
-                        if remove_another != 1:
+                        remove_another = str(input(f"\nRemove another course from list? [1-Yes, 0-No]: "))
+                        if remove_another != '1' :
                             break
 
                 elif user_choice == 3:
