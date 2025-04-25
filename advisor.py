@@ -344,11 +344,15 @@ class advisor :
                                     raise ValueError(f"\nError: User input blank")
                             except ValueError:
                                 print(f"\nError: User input blank")
-                                
-                        result = student.remove_email_address(removed_email)
-                        print(f"{removed_email} has been removed successfully" if result else '')
 
-                        remove_another = int(input(f"Remove another email from list? [1-Yes, 0-No]: "))
+                        confirm_remove = int(input(f"\nConfirm deletion of {removed_email} [1-Yes, 0-No]"))  
+                        if confirm_remove == 1:      
+                            result = student.remove_email_address(removed_email)
+                            print(f"{removed_email} has been removed successfully" if result else f"{removed_email} not found in list")
+                        else:
+                            print("\nDeletion cancelled")
+
+                        remove_another = int(input(f"\nRemove another email from list? [1-Yes, 0-No]: "))
                         if remove_another != 1:
                             break
             
@@ -416,11 +420,15 @@ class advisor :
                                     raise ValueError(f"\nError: User input blank")
                             except ValueError:
                                 print(f"\nError: User input blank")
-                                
-                        result = student.remove_phone_number(removed_number)
-                        print(f"{removed_number} has been removed successfully" if result else '')
 
-                        remove_another = int(input(f"Remove another phone number from list? [1-Yes, 0-No]: "))
+                        confirm_remove = int(input(f"\nConfirm deletion of {removed_number} [1-Yes, 0-No]"))  
+                        if confirm_remove == 1:      
+                            result = student.remove_phone_number(removed_number)
+                            print(f"{removed_number} has been removed successfully" if result else f"{removed_number} not found in list")
+                        else:
+                            print("\nDeletion cancelled")
+
+                        remove_another = int(input(f"\nRemove another phone number from list? [1-Yes, 0-No]: "))
                         if remove_another != 1:
                             break
             
@@ -561,11 +569,15 @@ class advisor :
                                     raise ValueError(f"\nError: User input blank")
                             except ValueError:
                                 print(f"\nError: User input blank")
-                                
-                        result = student.remove_course_list(removed_course_num)
-                        print(f"{removed_course_num} has been removed successfully" if result else '')
 
-                        remove_another = int(input(f"Remove another course from list? [1-Yes, 0-No]: "))
+                        confirm_remove = int(input(f"\nConfirm deletion of {removed_course_num} [1-Yes, 0-No]"))  
+                        if confirm_remove == 1:      
+                            result = student.remove_course_list(removed_course_num)
+                            print(f"{removed_course_num} has been removed successfully" if result else f"{removed_course_num} not found in list")
+                        else:
+                            print("\nDeletion cancelled")
+
+                        remove_another = int(input(f"\nRemove another course from list? [1-Yes, 0-No]: "))
                         if remove_another != 1:
                             break
 

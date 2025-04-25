@@ -195,11 +195,13 @@ class Student:
         try:
             result = self.__course_list.remove_data(new_course)
             if result == 1:
-                print(f"({new_course}) has been removed successfully")
+                #print(f"({new_course}) has been removed successfully")
+                return True
             else:
-                raise ValueError(f"Notice: ({new_course}) not found in student's course list")
+                return False
         except ValueError as e:
-            print(e)
+            #print(f"Notice: ({new_course}) not found in student's course list")
+            return False
 
     def set_intended_major(self, intended_major) -> int :
         if intended_major:
