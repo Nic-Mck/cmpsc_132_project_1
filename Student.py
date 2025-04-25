@@ -200,7 +200,7 @@ class Student:
             else:
                 return False
         except ValueError as e:
-            #print(f"Notice: ({new_course}) not found in student's course list")
+            print(f"Notice: ({new_course}) not found in student's course list")
             return False
 
     def set_intended_major(self, intended_major) -> int :
