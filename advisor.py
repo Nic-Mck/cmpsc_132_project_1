@@ -124,8 +124,8 @@ class advisor :
             '3. Edit Acceptance Date\n'
             '4. Edit Semester\n'
             '5. Edit Intended Major\n'
-            '6. Edit Email Address\n'
-            '7. Edit Phone Number\n'
+            '6. Edit Email Address(s)\n'
+            '7. Edit Phone Number(s)\n'
             '8. Edit Home Address\n'
             '9. Edit Course List\n'
             )
