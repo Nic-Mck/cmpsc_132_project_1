@@ -26,15 +26,15 @@ class advisor :
          print(
               f'    Name: {self.__name}\n'
               f'    Title: {self.__title}\n'
-              f'    Department {self.__department}\n' 
+              f'    Department: {self.__department}\n' 
             )
 
     def set_name(self, new_name:str) -> None : 
-        pass
+        self.__name = new_name
     def set_title(self, new_title:str) -> None : 
-        pass
+        self.__title = new_title
     def set_department(self, new_department:str) -> None :
-        pass
+        self.__department = new_department
     
     def get_name(self) -> str : 
         return self.__name 

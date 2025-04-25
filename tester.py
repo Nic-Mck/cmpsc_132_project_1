@@ -94,7 +94,150 @@ def delete_advisor() -> None :
         
         print(f"Error: Advisor ({adv_to_delete}) not found.")
     
+def add_advisor() -> None : 
+    user_input = None 
+    while user_input != '-1' :
+        print('\n---Add Advisor---')
+        print('Enter -1 at any time to go back')
 
+        temp_name:str = ''
+        while len(temp_name) <= 0 and temp_name != '-1' :
+            temp_name = str(input("Enter the new advisors name : "))
+            if len(temp_name) <= 0 : 
+                print("Invalid name \n")
+
+        if temp_name == '-1' : break 
+
+
+        temp_title:str = ''
+        while len(temp_title) <= 0 and temp_title != '-1' :
+            temp_title = str(input("Enter the new advisors title : "))
+            if len(temp_title) <= 0 : 
+                print("Invalid title \n")
+
+        if temp_title == '-1' : break 
+
+
+        temp_department:str = ''
+        while len(temp_department) <= 0 and temp_department != '-1' :
+            temp_department = str(input("Enter the new advisors department : "))
+            if len(temp_department) <= 0 : 
+                print("Invalid department \n")
+
+        if temp_department == -1 : break
+
+        advisors.append(Advisor.advisor(temp_name, temp_title, temp_department))
+        print("Advisor successfully added.\n")
+
+def edit_advisor_search() -> None : 
+    print('\n---Advisor Editing---')
+    print('Enter -1 at any time to go back\n')
+
+    name_to_search = ''
+    adv_to_edit = None
+
+    while len(name_to_search) <= 0 and name_to_search != '-1' :  
+        name_to_search:str = str(input("Enter name of advisor to edit: "))
+        
+        if len(name_to_search) <= 0 : 
+            print("Invalid advisor name\n")
+            continue
+    
+    if name_to_search == '-1' : return
+
+    for adv in advisors : 
+        if adv.get_name() == name_to_search : 
+            adv.display_advisor()
+            is_correct:str = str(input(f'Advisor {name_to_search} found, is this correct? [1-Yes, 0-No] '))
+            if is_correct == '-1' : return 
+            if is_correct == '1' : 
+                adv_to_edit = adv 
+                break
+            else : 
+                print(f'Searching for another advisor by the name of {name_to_search}...')
+
+    if adv_to_edit == None : 
+        print("\nAdvisor not found")
+        edit_advisor_search()
+        return
+    
+    edit_advisor(adv)
+
+def edit_advisor(advisor_to_edit:Advisor.advisor) -> None : 
+    def print_edit_advisor_submenu() -> None : 
+        print('1. Edit Name\n'
+              '2. Edit Title\n'
+              '3. Edit Department\n')
+    
+    
+    print(f'\n---{advisor_to_edit.get_name()} Edit Menu---')
+    print('Enter -1 at any time to go back\n')
+    print_edit_advisor_submenu()
+
+    valid_choices:list[str] = ['1','2','3']
+    choice:str = ''
+
+    while choice not in valid_choices : 
+        choice:str = str(input("Enter your choice: "))
+        
+        match choice : 
+            case '1' : 
+                temp_name:str = ''
+                while len(temp_name) <= 0 and temp_name != '-1' : 
+                    temp_name = str(input("Enter the advisors new name: "))
+
+                    if len(temp_name) <= 0 : 
+                        print("Invalid name\n")
+                    
+                if temp_name == '-1' : 
+                    edit_advisor(advisor_to_edit)
+                    return
+                
+                advisor_to_edit.set_name(temp_name)
+                print('Advisor name updated\n')
+
+            case '2' : 
+                temp_title:str = ''
+                while len(temp_title) <= 0 and temp_title != '-1' : 
+                    temp_title = str(input("Enter the advisors new title: "))
+                    
+                    if len(temp_title) <= 0 : 
+                        print("Invalid title\n")
+
+                if temp_title == '-1' : 
+                    edit_advisor(advisor_to_edit)
+                    return 
+                
+                advisor_to_edit.set_title(temp_title)
+                print('Advisor title updated\n')
+
+            case '3' : 
+                temp_department:str = ''
+
+                while len(temp_department) <= 0 and temp_department != '-1' : 
+                    temp_department = str(input("Enter the advisors new department: "))
+
+                    if len(temp_department) <= 0 : 
+                        print("Invalid department\n")
+
+                if temp_department == '=1' : 
+                    edit_advisor(advisor_to_edit)
+                    return
+                
+                advisor_to_edit.set_department(temp_department)
+                print('Advisor department updated\n')
+
+            case '-1' : 
+                edit_advisor_search()
+                return
+            case _ : 
+                print("Invalid option")
+
+    if choice == '-1' : return 
+
+    edit_advisor(advisor_to_edit)
+            
+             
 def student_manipulation(adv:Advisor.advisor, response:str) -> int : 
     found = 0
     match response : 
@@ -175,12 +318,11 @@ def main() -> None :
                 for advisor in advisors : 
                     advisor.display_advisor()
             case '3' : # Add Advisor
-                pass
+                add_advisor()
             case '4' : # Edit Advisor 
-                pass
+                edit_advisor_search()
             case '5' : # Delete Advisor
                 delete_advisor()
-
             case '6' : # Exit Application 
                 exit_application = True
                 break
