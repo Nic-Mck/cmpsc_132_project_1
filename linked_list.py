@@ -71,7 +71,7 @@ class LinkedList :
     def display(self) -> None :
         if not self.head : 
             #print("No Nodes")
-            print("\nNotice: No Advisees In System yet")
+            print("\nNotice: No Advisees in your Student List currently")
             return 
         
         node = self.head

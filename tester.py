@@ -292,7 +292,7 @@ def student_manipulation(adv:Advisor.advisor, response:str) -> int :
 
                 # Catch errors and report to user
                 except Exception as e : 
-                    print(f'Failed to edit student data due to error: {e}')
+                    print(f'\nFailed to edit student data due to error: {e}')
                     success = False
 
             found = -1

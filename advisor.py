@@ -44,7 +44,7 @@ class advisor :
         return self.__department
     
     def print_main_menu(self) -> None : 
-        print(f'\n---{self.__name}---\n'
+        print(f'\n-----Advisee Menu: {self.__name}-----\n'
             '1. Add Student\n'
             '2. Edit Student Data\n'
             '3. Delete Student\n'
@@ -137,7 +137,7 @@ class advisor :
 
         # If student wasn't found, raise exception
         if success == 0: 
-            raise Exception("Student not found")
+            raise Exception("Student not found in your Advisee List")
         
     def print_edit_menu(self) -> None : 
         print(f'\n---Attributes---\n'
@@ -1023,7 +1023,7 @@ class advisor :
                 else : 
                     print("\nWrong student indicated, searching for another student with same ID...")
 
-        print("Failed to delete, student not found")
+        print("\nError: Failed to delete, student not found in your Advisee List")
         return -1
 
     def display_student(self) -> int : 
@@ -1032,10 +1032,10 @@ class advisor :
             try:
                 id_to_display:int = int(input("Enter id number of student to display or -1 to go back : "))
                 if id_to_display < -1:
-                     raise ValueError("Error: Please enter a valid student ID to display (must be positive number).")
+                     raise ValueError("\nError: Please enter a valid student ID to display (must be positive number).\n")
                 break
             except ValueError:
-                print("Error: Please enter a valid student ID to display (must be positive number).")
+                print("\nError: Please enter a valid student ID to display (must be positive number).\n")
 
         # If user wishes to go back, return 0 to indicate this to main loop
         if id_to_display == -1 : 
@@ -1043,7 +1043,7 @@ class advisor :
         
         student = self.__advisees.search(id_to_display)
         if student is None : 
-            print(f'Error: Student ID not found in system')
+            print(f'\nError: Student ID Not Found in your Advisor Student List')
             return -1
         else : 
              print(student)
