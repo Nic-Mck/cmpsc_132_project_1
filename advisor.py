@@ -5,8 +5,7 @@ from StudentAttributes import *
 import datetime
 import calendar
 
-# FIXME
-# Ad an Advisor
+# Add an Advisor
 # Edit Advisor Info
 # Display Advisor Info 
 # Add students to advisee list+
