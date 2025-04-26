@@ -13,6 +13,11 @@ import calendar
 # Delete students from advisee list 
 
 class advisor : 
+
+    valid_titles = ['admin', 'advisor', 'professor', 'associate professor', 'assistant professor', 'dr.',
+                    'teaching assistant', 'learning assistant', 'doctor', 'researcher', 'lecturer', 'instructor',
+                    'ta','la']
+
     def __init__(self, name:str, title:str, department:str):
         self.__name:str = name
         self.__title:str = title
@@ -39,7 +44,11 @@ class advisor :
     def set_name(self, new_name:str) -> None : 
         self.__name = new_name
     def set_title(self, new_title:str) -> None : 
-        self.__title = new_title
+        new_title = new_title.strip().lower()
+        if new_title in advisor.valid_titles:
+            self.__title = new_title
+        else:
+            print(f"Error: Invalid Title for Advisor")
     def set_department(self, new_department:str) -> None :
         self.__department = new_department
     

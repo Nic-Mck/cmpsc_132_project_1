@@ -149,16 +149,22 @@ def add_advisor() -> None :
 
         if last_temp_name == '-1' : break 
 
-        temp_name = (Name(first_temp_name, middle_temp_name, last_temp_name))
+        temp_name = str(Name(first_temp_name, middle_temp_name, last_temp_name))
+
+        valid_titles = ['admin', 'advisor', 'professor', 'associate professor', 'assistant professor', 'dr.',
+                    'teaching assistant', 'learning assistant', 'doctor', 'researcher', 'lecturer', 'instructor',
+                    'ta', 'la']
 
         temp_title:str = ''
-        while len(temp_title) <= 0 and temp_title != '-1' :
-            temp_title = str(input("Enter the new advisors title : "))
+        while True:#len(temp_title) <= 0 and temp_title != '-1' :
+            temp_title = str(input("Enter the new advisors title [Advisor/Professor/Admin] : "))
+            if temp_title == '-1' : break 
             if len(temp_title) <= 0 : 
                 print("\nError: Advisor Title Blank")
-
-        if temp_title == '-1' : break 
-
+            elif temp_title.strip().lower() not in valid_titles:
+                print("\nError: Advisor Title Invalid")
+            else:
+                break
 
         temp_department:str = ''
         while len(temp_department) <= 0 and temp_department != '-1' :
@@ -274,17 +280,24 @@ def edit_advisor(advisor_to_edit:Advisor.advisor) -> None :
                 print('\nAdvisor name updated!\n')
 
             case '2' : 
+
+                valid_titles = ['admin', 'advisor', 'professor', 'associate professor', 'assistant professor', 'dr.',
+                    'teaching assistant', 'learning assistant', 'doctor', 'researcher', 'lecturer', 'instructor',
+                    'ta', 'la']
+
                 temp_title:str = ''
-                while len(temp_title) <= 0 and temp_title != '-1' : 
-                    temp_title = str(input("Enter the advisors new title: "))
-                    
+                while True:#len(temp_title) <= 0 and temp_title != '-1' :
+                    temp_title = str(input("Enter the new advisors title [Advisor/Professor/Admin] : "))
+                    if temp_title == '-1' : 
+                        edit_advisor(advisor_to_edit)
+                        return
                     if len(temp_title) <= 0 : 
                         print("\nError: Advisor Title Blank")
+                    elif temp_title.strip().lower() not in valid_titles:
+                        print("\nError: Advisor Title Invalid")
+                    else:
+                        break
 
-                if temp_title == '-1' : 
-                    edit_advisor(advisor_to_edit)
-                    return 
-                
                 advisor_to_edit.set_title(temp_title)
                 print('Advisor title updated\n')
 
