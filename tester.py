@@ -35,7 +35,7 @@ advisees.head.get_next().get_next().get_data().set_course_list([Course('1201', '
 def print_advisor_options() -> None : 
     print(
         f"\n---Main Menu---\n"
-        "1. Choose Advisor\n"
+        "1. Choose Advisor [Login]\n"
         "2. Display Advisors\n"
         "3. Add Advisor\n"
         "4. Edit Advisor\n"
@@ -56,7 +56,7 @@ def choose_advisor() -> None :
 
     while adv_to_choose != '-1' : 
         print('\n---Advisor Selection---')
-        adv_to_choose:str = input("Enter name of advisor or -1 to go back : ").strip().lower()
+        adv_to_choose:str = input("Please enter name of advisor to log in or -1 to go back : ").strip().lower()
         chosen_adv:Advisor.advisor = None
         found:int = 0 # 0 for not found, -1 if going back from next menu, 1 if found, -2 to go back from this menu
 
@@ -78,6 +78,11 @@ def choose_advisor() -> None :
             print("\nError: Advisor not found, please try again")
 
 def delete_advisor() -> None : 
+
+    # Admin password takes anything for scope of our assignment, but we put it in to show we were considering it
+
+    admin_password = input(f"\nNotice: Admin access required [if you are administrator, please enter your password]: ")
+
     adv_to_delete:str = ""
 
     while adv_to_delete != '-1' :
@@ -114,6 +119,9 @@ def delete_advisor() -> None :
         print(f"Error: Advisor ({adv_to_delete}) not found.")
     
 def add_advisor() -> None : 
+
+    admin_password = input(f"\nNotice: Admin access required [if you are administrator, please enter your password]: ")
+
     user_input = None 
     while user_input != '-1' :
         print('\n---Add Advisor---')
@@ -149,6 +157,9 @@ def add_advisor() -> None :
         print(f"\nAdvisor {temp_name} has been successfully added!")
 
 def edit_advisor_search() -> None : 
+
+    admin_password = input(f"\nNotice: Admin access required [if you are administrator, please enter your password]: ")
+
     print('\n---Advisor Editing---')
     print('Enter -1 at any time to go back\n')
 
@@ -342,6 +353,7 @@ def main() -> None :
             case "1" : # Choose Advisor
                 choose_advisor()
             case '2' : # Display Advisors : 
+                admin_password = input(f"\nNotice: Admin access required [if you are administrator, please enter your password]: ")
                 print()
                 print(f"Current Advisors in System:")
                 print()
