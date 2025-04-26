@@ -1003,7 +1003,7 @@ class advisor :
 
                 while True:
                     try:
-                        do_delete = input("\nIs this the correct student to delete? (1 for yes, 0 for no) : ")
+                        do_delete = input("\nIs this the correct student to delete? [1-Yes, 0-No] : ")
                         if do_delete == "":
                             raise ValueError("User Input Blank")
                         if do_delete not in ["0","1"]:

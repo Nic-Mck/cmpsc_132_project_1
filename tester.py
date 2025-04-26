@@ -56,17 +56,17 @@ def choose_advisor() -> None :
 
     while adv_to_choose != '-1' : 
         print('\n---Advisor Selection---')
-        adv_to_choose:str = input("Enter name of advisor or -1 to go back : ")
+        adv_to_choose:str = input("Enter name of advisor or -1 to go back : ").strip().lower()
         chosen_adv:Advisor.advisor = None
         found:int = 0 # 0 for not found, -1 if going back from next menu, 1 if found, -2 to go back from this menu
 
         if adv_to_choose == '-1' : break 
 
         for adv in advisors : 
-            if adv.get_name() == adv_to_choose :
+            if adv.get_name().strip().lower() == adv_to_choose :
                 chosen_adv = adv
                 found = 1
-                print("Advisor Found")
+                print("\nAdvisor Found!")
                 break
         
         while found != 0 and found != -2:                         
@@ -75,27 +75,37 @@ def choose_advisor() -> None :
             found = student_manipulation(adv, response)
 
         if found != -2 : 
-            print("\nAdvisor not found, try again")
+            print("\nError: Advisor not found, please try again")
 
 def delete_advisor() -> None : 
     adv_to_delete:str = ""
 
     while adv_to_delete != '-1' :
         print("\n---Advisor Deletion---\n")
-        adv_to_delete = input("Enter the name of advisor to delete or -1 to go back : ")
+        adv_to_delete = input("Enter the name of advisor to delete or -1 to go back : ").strip().lower()
         chosen_adv:Advisor.advisor = None 
 
         if adv_to_delete == "-1" : break
 
         for adv in advisors : 
-            if adv.get_name() == adv_to_delete : 
+            if adv.get_name().strip().lower() == adv_to_delete : 
                 chosen_adv = adv 
                 adv.display_advisor()
-                is_correct:bool = str(input(f'This advisor was found, is this correct? Confirm deletion [1-Yes, 0-No] : '))
+
+                while True:
+                    try:
+                        is_correct:bool = str(input(f'This advisor was found, is this correct? Confirm deletion [1-Yes, 0-No] : '))
+                        if is_correct == "":
+                            raise ValueError("User Input Blank")
+                        if is_correct not in ["0","1"]:
+                            raise ValueError("User Input Invalid")
+                        break
+                    except ValueError as e:
+                        print(f"\nError: {e}")
 
                 if is_correct == '1' : 
                     advisors.remove(chosen_adv)
-                    print("Advisor successfully deleted")
+                    print(f"\nAdvisor {adv_to_delete} has been successfully deleted!")
                     return 1
                 else : 
                     print("Continuing search...")
@@ -113,7 +123,7 @@ def add_advisor() -> None :
         while len(temp_name) <= 0 and temp_name != '-1' :
             temp_name = str(input("Enter the new advisors name : "))
             if len(temp_name) <= 0 : 
-                print("Invalid name \n")
+                print("\nError: Advisor Name Blank")
 
         if temp_name == '-1' : break 
 
@@ -122,7 +132,7 @@ def add_advisor() -> None :
         while len(temp_title) <= 0 and temp_title != '-1' :
             temp_title = str(input("Enter the new advisors title : "))
             if len(temp_title) <= 0 : 
-                print("Invalid title \n")
+                print("\nError: Advisor Title Blank")
 
         if temp_title == '-1' : break 
 
@@ -131,12 +141,12 @@ def add_advisor() -> None :
         while len(temp_department) <= 0 and temp_department != '-1' :
             temp_department = str(input("Enter the new advisors department : "))
             if len(temp_department) <= 0 : 
-                print("Invalid department \n")
+                print("\nError: Advisor Department Blank")
 
         if temp_department == -1 : break
 
         advisors.append(Advisor.advisor(temp_name, temp_title, temp_department))
-        print("Advisor successfully added.\n")
+        print(f"\nAdvisor {temp_name} has been successfully added!")
 
 def edit_advisor_search() -> None : 
     print('\n---Advisor Editing---')
@@ -146,19 +156,30 @@ def edit_advisor_search() -> None :
     adv_to_edit = None
 
     while len(name_to_search) <= 0 and name_to_search != '-1' :  
-        name_to_search:str = str(input("Enter name of advisor to edit: "))
+        name_to_search:str = str(input("Enter name of advisor to edit : ")).strip().lower()
         
         if len(name_to_search) <= 0 : 
-            print("Invalid advisor name\n")
+            print("Error: Advisor not found in system\n")
             continue
     
     if name_to_search == '-1' : return
 
     for adv in advisors : 
-        if adv.get_name() == name_to_search : 
+        if adv.get_name().strip().lower() == name_to_search : 
             adv.display_advisor()
-            is_correct:str = str(input(f'Advisor {name_to_search} found, is this correct? [1-Yes, 0-No] '))
-            if is_correct == '-1' : return 
+
+            while True:
+                try:
+                    is_correct:str = str(input(f'Advisor {name_to_search} found, is this correct? [1-Yes, 0-No] : '))
+                    if is_correct == '-1' : return 
+                    if is_correct == "":
+                        raise ValueError("User Input Blank\n")
+                    if is_correct not in ["0","1"]:
+                        raise ValueError("User Input Invalid\n")
+                    break
+                except ValueError as e:
+                    print(f"\nError: {e}")
+
             if is_correct == '1' : 
                 adv_to_edit = adv 
                 break
@@ -166,7 +187,7 @@ def edit_advisor_search() -> None :
                 print(f'Searching for another advisor by the name of {name_to_search}...')
 
     if adv_to_edit == None : 
-        print("\nAdvisor not found")
+        print("\nError: Advisor not found in system")
         edit_advisor_search()
         return
     
@@ -196,7 +217,7 @@ def edit_advisor(advisor_to_edit:Advisor.advisor) -> None :
                     temp_name = str(input("Enter the advisors new name: "))
 
                     if len(temp_name) <= 0 : 
-                        print("Invalid name\n")
+                        print("\nError: Advisor Name Blank")
                     
                 if temp_name == '-1' : 
                     edit_advisor(advisor_to_edit)
@@ -211,7 +232,7 @@ def edit_advisor(advisor_to_edit:Advisor.advisor) -> None :
                     temp_title = str(input("Enter the advisors new title: "))
                     
                     if len(temp_title) <= 0 : 
-                        print("Invalid title\n")
+                        print("\nError: Advisor Title Blank")
 
                 if temp_title == '-1' : 
                     edit_advisor(advisor_to_edit)
@@ -227,7 +248,7 @@ def edit_advisor(advisor_to_edit:Advisor.advisor) -> None :
                     temp_department = str(input("Enter the advisors new department: "))
 
                     if len(temp_department) <= 0 : 
-                        print("Invalid department\n")
+                        print("\nError: Advisor Department Blank")
 
                 if temp_department == '=1' : 
                     edit_advisor(advisor_to_edit)
@@ -240,7 +261,7 @@ def edit_advisor(advisor_to_edit:Advisor.advisor) -> None :
                 edit_advisor_search()
                 return
             case _ : 
-                print("Invalid option")
+                print("Error: Please select a valid menu option [1-3]")
 
     if choice == '-1' : return 
 
@@ -334,6 +355,7 @@ def main() -> None :
                 delete_advisor()
             case '6' : # Exit Application 
                 exit_application = True
+                print("\nExiting the Program.....\n")
                 break
 
             case _ : # Default Case
