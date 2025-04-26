@@ -75,7 +75,7 @@ def choose_advisor() -> None :
             found = student_manipulation(adv, response)
 
         if found != -2 : 
-            print("\nAdvisor not found, try again\n")
+            print("\nAdvisor not found, try again")
 
 def delete_advisor() -> None : 
     adv_to_delete:str = ""

@@ -23,6 +23,10 @@ Final Project Part II Revisions & Bug Fixes Left To Do:
 (DONE) 10. Change confirmation logic for remove_phone_number() & remove_email_address() to reflect Nick's in remove_course_list()
             (DONE)*Note* - AKA fix duplicate print error, DONE
 
+(DONE) Fixed a bug in delete_student where blank confirmation input crashes Program
+
+(DONE) Fixed Error for user choice on list submenus where default int error message was printed (invalid literal for base 10 int())
+
 11. Optimize spacing for EVERYTHING
 
 12. Check for any bugs and try to optimize

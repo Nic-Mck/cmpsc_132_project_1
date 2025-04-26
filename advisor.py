@@ -76,14 +76,36 @@ class advisor :
             print("\nStudent not found, try again")
         else : 
             print(student)
-            correct_student:bool = int(input(f'\nThis student was found, is this correct? [1-Yes, 0-No]: '))
+            
+            while True:
+                try:
+                    user_input = input(f'\nThis student was found, is this correct? [1-Yes, 0-No]: ').strip()
+                    if user_input == "":
+                        raise ValueError("User Input Blank")
+                    if user_input not in ['0','1']:
+                        raise ValueError("User Input Invalid")
+                    correct_student: bool = bool(int(user_input))
+                    break
+                except ValueError as e:
+                    print(f"\nError: {e}")
 
             if correct_student : 
                 continue_editing:int = 1
 
                 while continue_editing != -1 : 
                     self.print_edit_menu()
-                    sub_menu_choice:int = int(input("Enter submenu choice or -1 to go back: "))
+                    #sub_menu_choice:int = int(input("Enter submenu choice or -1 to go back: "))
+
+                    try:
+                        sub_menu_choice = input("Enter submenu choice or -1 to go back: ").strip()
+                        if sub_menu_choice == "":
+                            raise ValueError("Input cannot be blank")
+                        if not sub_menu_choice.lstrip("-").isdigit():
+                            raise ValueError("Please enter a valid menu option [1-9]")
+                        sub_menu_choice = int(sub_menu_choice)
+                    except ValueError as e:
+                        print(f'\nError: {e}')
+                        continue
 
                     match sub_menu_choice : 
                         case -1 : # Go back
@@ -108,7 +130,7 @@ class advisor :
                         case 9 : # Edit Course List
                             success = self.edit_course_list(student)
                         case _ : # Default Case
-                            raise Exception("Invalid submenu choice")
+                            raise Exception("Invalid Submenu Choice")
                     
             else : 
                 print("Searching for another student with same ID...")
@@ -293,10 +315,21 @@ class advisor :
             print(f"1. Add Email\n"
                    "2. Remove Email\n"
                    "3. Go Back\n")
-            try:
+            """try:
                 user_choice = int(input("Enter your choice or -1 to go back: "))
             except ValueError:
-                print(f'\nError: Please enter a valid choice')
+                print(f'\nError: Please enter a valid choice')"""
+            
+            try:
+                user_choice = input("Enter your choice or -1 to go back: ").strip()
+                if user_choice == "":
+                    raise ValueError("Input cannot be blank")
+                if not user_choice.lstrip("-").isdigit():
+                            raise ValueError("Please enter a valid menu option [1-3]")
+                user_choice = int(user_choice)
+            except ValueError as e:
+                print(f'\nError: {e}')
+                continue
                 
             if user_choice == -1:
                 return -1
@@ -329,8 +362,12 @@ class advisor :
                     student.append_email_address(new_email)
                     print(f"\nThe following email has been added successfully: {new_email}")
 
-                    add_another = int(input(f"\nAdd another email to list? [1-Yes, 0-No]: "))
-                    if add_another != 1:
+                    try:
+                        add_another = int(input(f"\nAdd another email to list? [1-Yes, 0-No]: "))
+                        if add_another != 1:
+                            break
+                    except Exception:
+                        print(f"\nError: Invalid Input, returning to menu")
                         break
             
             elif user_choice == 2:
@@ -352,10 +389,14 @@ class advisor :
                         else:
                             print("\nDeletion cancelled")
 
-                        remove_another = int(input(f"\nRemove another email from list? [1-Yes, 0-No]: "))
-                        if remove_another != 1:
+                        try:
+                            remove_another = int(input(f"\nRemove another email from list? [1-Yes, 0-No]: "))
+                            if remove_another != 1:
+                                break
+                        except Exception:
+                            print(f"\nError: Invalid Input, returning to menu")
                             break
-            
+                        
             elif user_choice == 3:
                 break
 
@@ -370,9 +411,15 @@ class advisor :
                    "3. Go Back\n")
 
             try:
-                user_choice = int(input("Enter your choice or -1 to go back: "))
-            except ValueError:
-                print(f'\nError: Please enter a valid choice')
+                user_choice = input("Enter your choice or -1 to go back: ").strip()
+                if user_choice == "":
+                    raise ValueError("Input cannot be blank")
+                if not user_choice.lstrip("-").isdigit():
+                            raise ValueError("Please enter a valid menu option [1-3]")
+                user_choice = int(user_choice)
+            except ValueError as e:
+                print(f'\nError: {e}')
+                continue
 
             if user_choice == -1:
                 return -1
@@ -405,8 +452,12 @@ class advisor :
                     student.append_phone_number(new_phone_number)
                     print(f"\nThe following phone number has been added successfully: {new_phone_number}")
 
-                    add_another = int(input(f"\nAdd another phone number to list? [1-Yes, 0-No]: "))
-                    if add_another != 1:
+                    try:
+                        add_another = int(input(f"\nAdd another phone number to list? [1-Yes, 0-No]: "))
+                        if add_another != 1:
+                            break
+                    except Exception:
+                        print(f"\nError: Invalid input, returning to menu")
                         break
 
             elif user_choice == 2:
@@ -437,8 +488,12 @@ class advisor :
                         else:
                             print("\nDeletion cancelled")
 
-                        remove_another = int(input(f"\nRemove another phone number from list? [1-Yes, 0-No]: "))
-                        if remove_another != 1:
+                        try:
+                            remove_another = int(input(f"\nRemove another phone number from list? [1-Yes, 0-No]: "))
+                            if remove_another != 1:
+                                break
+                        except Exception:
+                            print(f"\nError: Invalid Input, returning to menu")
                             break
             
             elif user_choice == 3:
@@ -484,9 +539,15 @@ class advisor :
                     "3. Go back\n")
                 
                 try:
-                    user_choice = int(input("Enter your choice or -1 to go back: "))
-                except ValueError:
-                    print(f'\nError: Please enter a valid choice')
+                    user_choice = input("Enter your choice or -1 to go back: ").strip()
+                    if user_choice == "":
+                        raise ValueError("Input cannot be blank")
+                    if not user_choice.lstrip("-").isdigit():
+                        raise ValueError("Please enter a valid menu option [1-3]")
+                    user_choice = int(user_choice)
+                except ValueError as e:
+                    print(f'\nError: {e}')
+                    continue
                 
                 if user_choice == -1:
                     return -1
@@ -563,8 +624,12 @@ class advisor :
                         student.append_course_list(new_Course)
                         print(f"\nThe following course has been added succesfully: \n{new_Course}")
                 
-                        add_another = int(input(f"\nAdd another course to list? [1-Yes, 0-No]: "))
-                        if add_another != 1:
+                        try:    
+                            add_another = int(input(f"\nAdd another course to list? [1-Yes, 0-No]: "))
+                            if add_another != 1:
+                                break
+                        except Exception:
+                            print(f"\nError: Invalid Input, returning to menu")
                             break
                 
                 elif user_choice == 2:
@@ -595,8 +660,12 @@ class advisor :
                         else:
                             print("\nDeletion cancelled")
 
-                        remove_another = str(input(f"\nRemove another course from list? [1-Yes, 0-No]: "))
-                        if remove_another != '1' :
+                        try:
+                            remove_another = int(input(f"\nRemove another course from list? [1-Yes, 0-No]: "))
+                            if remove_another != '1' :
+                                break
+                        except Exception:
+                            print(f"\nError: Invalid input, returning to menu")
                             break
 
                 elif user_choice == 3:
@@ -914,18 +983,35 @@ class advisor :
         while True:
             try:
                 print('\n---Delete Student---')
-                id_to_del:int = int(input("Enter id number of student you want to delete or -1 to go back : "))
-                break
-            except ValueError:
-                print("Invalid input. Please enter a valid student ID to delete.")
+                id_to_del = input("Enter id number of student you want to delete or -1 to go back : ")
+                if id_to_del == "":
+                    raise ValueError("User Input Blank")
+                if not id_to_del.lstrip("-").isdigit():
+                    raise ValueError("User Input Invalid")
+                id_to_del = int(id_to_del)
 
-        if id_to_del == -1 : # Go back a menu indicator
-            return 0
+                if id_to_del == -1 : # Go back a menu indicator
+                    return 0
+                break
+
+            except ValueError as e:
+                print(f"Error: {e}")
         
         student = self.__advisees.search(id_to_del)
         if student is not None : 
                 student.display_data()
-                do_delete:bool = int(input("\nIs this the correct student to delete? (1 for yes, 0 for no) : "))
+
+                while True:
+                    try:
+                        do_delete = input("\nIs this the correct student to delete? (1 for yes, 0 for no) : ")
+                        if do_delete == "":
+                            raise ValueError("User Input Blank")
+                        if do_delete not in ["0","1"]:
+                            raise ValueError("User Input Invalid")
+                        do_delete: bool = bool(int(do_delete))
+                        break
+                    except ValueError as e:
+                        print(f"\nError: {e}")               
 
                 if do_delete : 
                     #FIXME
