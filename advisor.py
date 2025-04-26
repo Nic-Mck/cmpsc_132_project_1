@@ -28,6 +28,13 @@ class advisor :
               f'    Title: {self.__title}\n'
               f'    Department: {self.__department}\n' 
             )
+         
+    def __str__(self) -> str:
+        return(
+              f'    Name: {self.__name}\n'
+              f'    Title: {self.__title}\n'
+              f'    Department: {self.__department}\n' 
+            )
 
     def set_name(self, new_name:str) -> None : 
         self.__name = new_name
