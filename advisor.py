@@ -714,7 +714,7 @@ class advisor :
                          break
                     else:
                          raise TypeError(f"Error: Please enter a valid middle name")
-                #REVISEME Does not take middle names such as van de pol or Barrett-Saxon
+                #Note - Does not take middle names such as van de pol or Barrett-Saxon
                 except TypeError:
                      print(f"Error: Please enter a valid middle name (if multiple, enter as one with each capitalized)")
             
@@ -765,7 +765,7 @@ class advisor :
 
             new_Address = Address(new_street_adr, new_city, new_state, new_zipcode, new_addr_type)
 
-            # Revise for Int data type
+            # (DONE)Revise for Int data type
             unique_id_number = False
             while not unique_id_number:
                 try:

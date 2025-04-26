@@ -406,7 +406,6 @@ class Semester:
     def get_semester(self):
         return self.__semester
     
-    #FINISHME
     def set_year(self, year):
         if isinstance(year, int) and 1900<=year<=2100:
             self.__year = year
@@ -448,7 +447,6 @@ class Course:
         else:
             raise ValueError(f'Error: Please enter a valid course grade')
 
-    # Note: Optimize this setter to take proper input and format it (eg. CMPSC 132)
     def set_course_num(self, course_num):
         if course_num:
             self.__course_num = course_num
@@ -494,7 +492,6 @@ class Course:
     def get_grade(self):
         return self.__grade
     
-    # Note: Optimize print & display outputs for this Class
     def display(self):
         print(f'\n    Course ID: {self.__course_num}\n        Semester Taken: {self.__semester}\n       Instruction Method: {self.__inst_method}\n       Status: {self.__status}\n       Grade: {self.__grade.upper()}')
 
