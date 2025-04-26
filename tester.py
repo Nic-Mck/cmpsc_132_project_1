@@ -34,11 +34,11 @@ advisees.head.get_next().get_next().get_data().set_course_list([Course('1201', '
 
 def print_advisor_options() -> None : 
     print(
-        f"\n---Main Menu---\n"
+        f"\n---Admin/Main Menu---\n"
         "1. Choose Advisor [Login]\n"
         "2. Display Advisors\n"
         "3. Add Advisor\n"
-        "4. Edit Advisor\n"
+        "4. Edit an Advisor\n"
         "5. Delete Advisor\n"
         "6. Exit\n"
         )
@@ -56,7 +56,7 @@ def choose_advisor() -> None :
 
     while adv_to_choose != '-1' : 
         print('\n---Advisor Selection---')
-        adv_to_choose:str = input("Please enter name of advisor to log in or -1 to go back : ").strip().lower()
+        adv_to_choose:str = input("Please Enter Name of Advisor to Log In or -1 to go back : ").strip().lower()
         chosen_adv:Advisor.advisor = None
         found:int = 0 # 0 for not found, -1 if going back from next menu, 1 if found, -2 to go back from this menu
 
@@ -81,12 +81,13 @@ def delete_advisor() -> None :
 
     # Admin password takes anything for scope of our assignment, but we put it in to show we were considering it
 
-    admin_password = input(f"\nNotice: Admin access required [if you are administrator, please enter your password]: ")
+    admin_password = input(f"\nNotice: Admin access required [if you are administrator enter your password, or -1 to go back] : ")
+    if admin_password == "-1" : return 
 
     adv_to_delete:str = ""
 
     while adv_to_delete != '-1' :
-        print("\n---Advisor Deletion---\n")
+        print("\n---Delete Advisor(s)---\n")
         adv_to_delete = input("Enter the name of advisor to delete or -1 to go back : ").strip().lower()
         chosen_adv:Advisor.advisor = None 
 
@@ -116,25 +117,39 @@ def delete_advisor() -> None :
                     print("Continuing search...")
                     continue
         
-        print(f"Error: Advisor ({adv_to_delete}) not found.")
+        print(f"\nError: Advisor ({adv_to_delete}) not found.")
     
 def add_advisor() -> None : 
 
-    admin_password = input(f"\nNotice: Admin access required [if you are administrator, please enter your password]: ")
-
     user_input = None 
     while user_input != '-1' :
-        print('\n---Add Advisor---')
+        print('\n---Add Advisor(s)---')
         print('Enter -1 at any time to go back')
 
-        temp_name:str = ''
-        while len(temp_name) <= 0 and temp_name != '-1' :
-            temp_name = str(input("Enter the new advisors name : "))
-            if len(temp_name) <= 0 : 
-                print("\nError: Advisor Name Blank")
+        print("\nEnter the new advisors name : ")
 
-        if temp_name == '-1' : break 
+        first_temp_name:str = ''
+        while len(first_temp_name) <= 0 and first_temp_name != '-1' :
+            first_temp_name = str(input("First Name : "))
+            if len(first_temp_name) <= 0 : 
+                print("\nError: Advisor First Name Blank")
 
+        if first_temp_name == '-1' : break 
+
+        middle_temp_name:str = ''
+        middle_temp_name = str(input("Middle Name (if none, press enter to continue) : "))
+
+        if middle_temp_name == '-1' : break 
+
+        last_temp_name:str = ''
+        while len(last_temp_name) <= 0 and last_temp_name != '-1' :
+            last_temp_name = str(input("Last Name : "))
+            if len(last_temp_name) <= 0 : 
+                print("\nError: Advisor Last Name Blank")
+
+        if last_temp_name == '-1' : break 
+
+        temp_name = (Name(first_temp_name, middle_temp_name, last_temp_name))
 
         temp_title:str = ''
         while len(temp_title) <= 0 and temp_title != '-1' :
@@ -151,14 +166,15 @@ def add_advisor() -> None :
             if len(temp_department) <= 0 : 
                 print("\nError: Advisor Department Blank")
 
-        if temp_department == -1 : break
+        if temp_department == "-1" : break
+
+        admin_password = input(f"\nNotice: Admin access required [if you are administrator enter your password, or -1 to go back] : ")
+        if admin_password == "-1" : break
 
         advisors.append(Advisor.advisor(temp_name, temp_title, temp_department))
         print(f"\nAdvisor {temp_name} has been successfully added!")
 
 def edit_advisor_search() -> None : 
-
-    admin_password = input(f"\nNotice: Admin access required [if you are administrator, please enter your password]: ")
 
     print('\n---Advisor Editing---')
     print('Enter -1 at any time to go back\n')
@@ -167,6 +183,7 @@ def edit_advisor_search() -> None :
     adv_to_edit = None
 
     while len(name_to_search) <= 0 and name_to_search != '-1' :  
+
         name_to_search:str = str(input("Enter name of advisor to edit : ")).strip().lower()
         
         if len(name_to_search) <= 0 : 
@@ -174,6 +191,9 @@ def edit_advisor_search() -> None :
             continue
     
     if name_to_search == '-1' : return
+
+    admin_password = input(f"\nNotice: Admin access required [if you are administrator enter your password, or -1 to go back] : ")
+    if admin_password == "-1" : return
 
     for adv in advisors : 
         if adv.get_name().strip().lower() == name_to_search : 
@@ -223,19 +243,35 @@ def edit_advisor(advisor_to_edit:Advisor.advisor) -> None :
         
         match choice : 
             case '1' : 
-                temp_name:str = ''
-                while len(temp_name) <= 0 and temp_name != '-1' : 
-                    temp_name = str(input("Enter the advisors new name: "))
+                first_temp_name:str = ''
+                while len(first_temp_name) <= 0 and first_temp_name != '-1' :
+                    first_temp_name = str(input("First Name : "))
+                    if len(first_temp_name) <= 0 : 
+                        print("\nError: Advisor First Name Blank")
 
-                    if len(temp_name) <= 0 : 
-                        print("\nError: Advisor Name Blank")
+                if first_temp_name == '-1' : break 
+
+                middle_temp_name:str = ''
+                middle_temp_name = str(input("Middle Name (if none, press enter to continue) : "))
+
+                if middle_temp_name == '-1' : break 
+
+                last_temp_name:str = ''
+                while len(last_temp_name) <= 0 and last_temp_name != '-1' :
+                    last_temp_name = str(input("Last Name : "))
+                    if len(last_temp_name) <= 0 : 
+                        print("\nError: Advisor Last Name Blank")
+
+                if last_temp_name == '-1' : break 
+
+                temp_name = str(Name(first_temp_name, middle_temp_name, last_temp_name))
                     
                 if temp_name == '-1' : 
                     edit_advisor(advisor_to_edit)
                     return
                 
                 advisor_to_edit.set_name(temp_name)
-                print('Advisor name updated\n')
+                print('\nAdvisor name updated!\n')
 
             case '2' : 
                 temp_title:str = ''
@@ -353,7 +389,8 @@ def main() -> None :
             case "1" : # Choose Advisor
                 choose_advisor()
             case '2' : # Display Advisors : 
-                admin_password = input(f"\nNotice: Admin access required [if you are administrator, please enter your password]: ")
+                admin_password = input(f"\nNotice: Admin access required [if you are administrator enter your password, or -1 to go back] : ")
+                if admin_password == "-1" : continue
                 print()
                 print(f"Current Advisors in System:")
                 print()

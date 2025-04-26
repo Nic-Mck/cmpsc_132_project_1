@@ -51,7 +51,7 @@ class advisor :
         return self.__department
     
     def print_main_menu(self) -> None : 
-        print(f'\n-----Advisee Menu: {self.__name}-----\n'
+        print(f'\n-----Advisors Student Menu: {self.__name}-----\n'
             '1. Add Student\n'
             '2. Edit Student Data\n'
             '3. Delete Student\n'
