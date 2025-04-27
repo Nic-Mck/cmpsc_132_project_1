@@ -72,7 +72,7 @@ def choose_advisor() -> None :
             if adv.get_name().strip().lower() == adv_to_choose :
                 chosen_adv = adv
                 found = 1
-                print("\nAdvisor Found!")
+                print(f"\nAdvisor Found! Welcome to your portal, {adv.get_name()}")
                 break
         
         while found != 0 and found != -2:                         

@@ -109,7 +109,7 @@ class advisor :
                 continue_editing:int = 1
 
                 while continue_editing != -1 : 
-                    self.print_edit_menu()
+                    self.print_edit_menu(student)
                     #sub_menu_choice:int = int(input("Enter submenu choice or -1 to go back: "))
 
                     try:
@@ -155,8 +155,8 @@ class advisor :
         if success == 0: 
             raise Exception("Student not found in your Advisee List")
         
-    def print_edit_menu(self) -> None : 
-        print(f'\n---Attributes---\n'
+    def print_edit_menu(self, student:Student) -> None : 
+        print(f'\n---Update Attributes for {student.get_name()}---\n'
             '1. Edit Name\n'
             '2. Edit Birthdate\n'
             '3. Edit Acceptance Date\n'
@@ -327,7 +327,7 @@ class advisor :
 
     def add_email_address(self, student:Student) -> int : 
         while True:
-            print('\n---Edit Email Addresses---')
+            print(f'\n---Edit Email Addresses for {student.get_name()}---')
             print(f"1. Add Email\n"
                    "2. Remove Email\n"
                    "3. Go Back\n")
@@ -421,7 +421,7 @@ class advisor :
 
     def add_phone_number(self, student:Student) -> int : 
         while True:
-            print('\n---Edit Phone Numbers---')
+            print(f'\n---Edit Phone Numbers for {student.get_name()}---')
             print(f"1. Add Phone Number\n"
                    "2. Remove Phone Number\n"
                    "3. Go Back\n")
@@ -549,7 +549,7 @@ class advisor :
     
     def edit_course_list(self, student:Student) -> int:
             while True:
-                print("\n---Edit Course List---")
+                print(f"\n---Edit Course List for {student.get_name()}---")
                 print(f"1. Add Course\n"
                     "2. Remove Course\n"
                     "3. Update Existing Course\n"
@@ -580,6 +580,8 @@ class advisor :
                                     raise ValueError(f"\nError: Please enter a valid course identifier [e.g. MATH360]")
                             except ValueError:
                                 print(f"\nError: Please enter a valid course identifier [e.g. MATH360]")
+                            
+                        if course_num == "-1" : break
 
                         while True:
                             try:
@@ -601,6 +603,8 @@ class advisor :
                                     raise ValueError(f"\nError: Please enter a valid year for {semester}")
                             except ValueError:
                                 print(f"\nError: Please enter a valid year for {semester}")
+                        
+                            if year == "-1" : break
 
                         c_semester = Semester(semester,year)
 
@@ -700,7 +704,8 @@ class advisor :
                                     print("\nNotice: Wrong course indicated.")
                                     break
                                 elif is_correct == '-1' : 
-                                    return -1
+                                    #return -1
+                                    break
                                 else:
                                     print("\nError: User Input Invalid")
                             if is_correct == "1" : break
@@ -1164,7 +1169,7 @@ class advisor :
                     #FIXME
                     # Call delete student(student) on advisor class here
                     self.__advisees.remove_data(student)
-                    print("Student successfully deleted\n")
+                    print("\nStudent successfully deleted!")
                     success = True
                     return 1
                 else : 
