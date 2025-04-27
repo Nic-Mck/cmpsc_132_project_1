@@ -7,6 +7,7 @@
 import datetime
 import calendar
 
+# Name ADT
 class Name:
 
     def __init__(self, first='', middle='', last=''):
@@ -80,6 +81,7 @@ class Name:
         else:
             return f'{self.__first} {self.__last}'
 
+# Address ADT
 class Address:
 
     def __init__(self, street_address='', city='', state='', zip_code='', address_type=''):
@@ -211,6 +213,7 @@ class Address:
     def __str__(self):
         return f'{self.__street_address}, {self.__city}, {self.__state} {self.__zip_code} ({self.__address_type})'
 
+# Email Address ADT
 class EmailAddress:
 
     def  __init__(self, address='', email_type=''):
@@ -280,6 +283,7 @@ class EmailAddress:
             return self.__address == other.__address
         return False
 
+# Phone Number ADT
 class PhoneNumber:
 
     def __init__(self, phone_number='', phone_type=''):
@@ -345,7 +349,8 @@ class PhoneNumber:
         elif isinstance(other, PhoneNumber):
             return self.__phone_number == other.__phone_number 
         return False
-    
+
+# Date ADT
 class Date:
 
     def __init__(self, month:str, day:str, year:str) -> None :
@@ -379,6 +384,7 @@ class Date:
     def set_year(self, new_year:str) -> str : 
         self.__year = new_year
 
+# Semester ADT
 class Semester:
 
     valid_sems = ['summer', 'fall', 'spring']
@@ -391,7 +397,7 @@ class Semester:
             raise ValueError(f'Error: Invalid Semester Value')
         
         try:
-            if isinstance(year, int) and 1900<=year<=2100:
+            if isinstance(year, int) and 1900<=year<=datetime.datetime.now().year:
                 self.__year = int(year)
             else:
                 raise ValueError("Invalid input, enter an integer")
@@ -409,7 +415,7 @@ class Semester:
         return self.__semester
     
     def set_year(self, year):
-        if isinstance(year, int) and 1900<=year<=2100:
+        if isinstance(year, int) and 1900<=year<=datetime.datetime.now().year00:
             self.__year = year
         else:
             raise ValueError(f'Error: Semester Year Invalid')
@@ -431,7 +437,8 @@ class Semester:
             return True 
         else : 
             return False
-    
+
+# Course ADT
 class Course:
 
     valid_inst_methods = ['classroom', 'hybrid', 'remote']
@@ -520,6 +527,7 @@ class Course:
             return self.__course_num == other
         return False
 
+# Verifications of Functionality 
 if __name__ == '__main__':
 
     # Name ADT Test
@@ -545,7 +553,7 @@ if __name__ == '__main__':
     print(date1)
 
     # Semester ADT Test
-    semester1 = Semester('Summer', '2023')
+    semester1 = Semester('Summer', 2023)
     print(semester1)
 
     # Course ADT Test
