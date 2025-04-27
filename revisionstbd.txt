@@ -27,6 +27,6 @@ Final Project Part II Revisions & Bug Fixes Left To Do:
 
 (DONE) Fixed Error for user choice on list submenus where default int error message was printed (invalid literal for base 10 int())
 
-11. Optimize spacing for EVERYTHING
+(DONE for all ones found, continue trying to optimize this) 11. Optimize spacing for EVERYTHING
 
-12. Check for any bugs and try to optimize
+(DONE for all found, try to find as many as possible & continue fixing as applicable) 12. Check for any bugs and try to optimize
