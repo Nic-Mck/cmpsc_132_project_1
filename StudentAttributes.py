@@ -4,6 +4,9 @@
 
 # This module defines attribute ADTs for the Student class
 
+import datetime
+import calendar
+
 class Name:
 
     def __init__(self, first='', middle='', last=''):
@@ -424,7 +427,7 @@ class Semester:
        # return super().valid_sems
     
     def validate_year(year_to_validate:int) -> bool : 
-        if isinstance(year_to_validate, int) and 1900<=year_to_validate<=2100:
+        if isinstance(year_to_validate, int) and 1900<=year_to_validate<=datetime.datetime.now().year:
             return True 
         else : 
             return False

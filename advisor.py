@@ -165,7 +165,7 @@ class advisor :
         print('\n---Edit Name---')
         while True:
                 try:
-                    new_first:str = input("Enter new first name : ")
+                    new_first:str = input("Enter new first name : ").strip()
                     if not new_first.isalpha():
                         raise TypeError(f"Error: Please enter a valid first name")
                     if len(new_first) > 0:
@@ -179,7 +179,7 @@ class advisor :
 
         while True:
             try:    
-                new_middle:str = input("Enter new middle name : ")
+                new_middle:str = input("Enter new middle name : ").strip()
                 if new_middle.isalpha() or len(new_middle) == 0:
                     break
                 else:
@@ -189,7 +189,7 @@ class advisor :
 
         while True:
                 try:
-                    new_last:str = input("Enter new last name : ")
+                    new_last:str = input("Enter new last name : ").strip()
                     if not new_last.isalpha():
                         raise TypeError(f"Error: Please enter a valid last name")
                     if len(new_last) > 0:
@@ -213,7 +213,7 @@ class advisor :
                 else:
                     break
             except ValueError:
-                print(f'Error: Please enter a valid year')
+                print(f'Error: Please enter a valid year [1900-{datetime.datetime.now().year}]')
         
         while True:
             try:
@@ -228,14 +228,14 @@ class advisor :
         while True:
             try:
                 new_day:int = int(input("Enter new birthdate day : "))
-                last_day_of_month = calendar.monthrange(new_year, new_month)[1]
-                month_to_str = calendar.month_name[new_month]
-                if new_day < 1 or new_day > last_day_of_month:
-                    raise ValueError(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {new_year}")
+                #last_day_of_month = calendar.monthrange(new_year, new_month)[1]
+                #month_to_str = calendar.month_name[new_month]
+                if new_day < 1 or new_day > calendar.monthrange(new_year, new_month)[1]:
+                    raise ValueError(f"Error: Please enter a valid day [1-{calendar.monthrange(new_year, new_month)[1]}] for {calendar.month_name[new_month]}, {new_year}")
                 else:
                     break
             except ValueError:
-                print(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {new_year}")
+                print(f"Error: Please enter a valid day [1-{calendar.monthrange(new_year, new_month)[1]}] for {calendar.month_name[new_month]}, {new_year}")
 
         return student.set_birthdate(Date(new_month, new_day, new_year))
 
@@ -249,7 +249,7 @@ class advisor :
                 else:
                     break
             except ValueError:
-                print(f'Error: Please enter a valid year')
+                print(f'Error: Please enter a valid year [1900-{datetime.datetime.now().year}]')
         
         while True:
             try:
@@ -264,14 +264,14 @@ class advisor :
         while True:
             try:
                 new_day:int = int(input("Enter new birthdate day : "))
-                last_day_of_month = calendar.monthrange(new_year, new_month)[1]
-                month_to_str = calendar.month_name[new_month]
-                if new_day < 1 or new_day > last_day_of_month:
-                    raise ValueError(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {new_year}")
+                #last_day_of_month = calendar.monthrange(new_year, new_month)[1]
+                #month_to_str = calendar.month_name[new_month]
+                if new_day < 1 or new_day > calendar.monthrange(new_year, new_month)[1]:
+                    raise ValueError(f"Error: Please enter a valid day [1-{calendar.monthrange(new_year, new_month)[1]}] for {calendar.month_name[new_month]}, {new_year}")
                 else:
                     break
             except ValueError:
-                print(f"Error: Please enter a valid day [1-{last_day_of_month}] for {month_to_str}, {new_year}")
+                print(f"Error: Please enter a valid day [1-{calendar.monthrange(new_year, new_month)[1]}] for {calendar.month_name[new_month]}, {new_year}")
 
         return student.set_acceptance_date(Date(new_month, new_day, new_year))
 
@@ -280,8 +280,8 @@ class advisor :
         while True:
             valid_sems = ['summer', 'fall', 'spring']
             try:
-                new:str = input("Enter new semester (Fall/Spring/Summer): ")
-                if new.lower() in valid_sems:
+                new:str = input("Enter new semester (Fall/Spring/Summer): ").strip()
+                if new.strip().lower() in valid_sems:
                     break
                 else:
                     raise ValueError(f'Error: Please enter a valid start semester (summer/fall/spring)')
@@ -545,7 +545,7 @@ class advisor :
                 print("\n---Edit Course List---")
                 print(f"1. Add Course\n"
                     "2. Remove Course\n"
-                    "3. Edit Course\n"
+                    "3. Update Existing Course\n"
                 )
 
                 try:
@@ -681,18 +681,25 @@ class advisor :
                 elif user_choice == 3:
                     course = None
                     while True : 
-                        course_to_edit:str = str(input("Enter the name of the course you wish to edit: "))
+                        course_to_edit:str = str(input("\nEnter the name of the course you wish to edit: "))
                         course = student.get_course_list().search(course_to_edit)
                         if course : 
                             course.display()
-                            is_correct:str = input(f'This course was found, is this correct? [1-Yes, 0-No] ')
-                            if is_correct == '1' : break
-                            elif is_correct == '0' : 
-                                print("Wrong course indicated.")
-                            elif is_correct == '-1' : 
-                                return -1
+
+                            while True:
+                                is_correct:str = input(f'\nThis course was found for {student.get_name()}, is this correct? [1-Yes, 0-No] ')
+                                if is_correct == '1' : break
+                                elif is_correct == '0' : 
+                                    print("\nNotice: Wrong course indicated.")
+                                    break
+                                elif is_correct == '-1' : 
+                                    return -1
+                                else:
+                                    print("\nError: User Input Invalid")
+                            if is_correct == "1" : break
+
                         else : 
-                            print(f'Course {course_to_edit} not found, try again.\n')
+                            print(f'\nError: Course {course_to_edit} not found, try again.')
 
                     # Course was found
                     if course : 
@@ -708,7 +715,7 @@ class advisor :
 
                             match choice : 
                                 case '1' : # Edit Semester
-                                    while True : 
+                                    """while True : 
                                         print(f'Valid semesters: {Semester.valid_sems}')
                                         new_semester:str = input("Enter new semester: ")
                                         new_year:int = int(input("Enter new year: "))
@@ -723,56 +730,87 @@ class advisor :
                                             new_sem:Semester = Semester(new_semester, new_year)
                                             course.set_semester(new_sem)
                                             print('Semester successfully edited\n')
-                                            break
+                                            break"""
+                                    
+                                    while True:
+                                        print(f'Valid Semesters: {Semester.valid_sems}')
+                                        
+                                        while True:
+                                            new_semester: str = input("\nEnter new semester: ").strip().lower()
+                                            if new_semester == "":
+                                                print("\nError: Semester Blank")
+                                                continue
+                                            if new_semester.lower().strip() not in Semester.valid_sems:
+                                                print(f"\nError: Invalid Semester Value\nValid Semesters: {Semester.valid_sems}")
+                                                continue
+                                            break 
+                                        
+                                        while True:
+                                            new_year_input: str = input("\nEnter new year: ").strip()
+                                            if new_year_input == "":
+                                                print("\nError: Year Blank")
+                                                continue
+                                            if not new_year_input.isdigit():
+                                                print(f"\nError: Please enter a valid year [1900-{datetime.datetime.now().year}]")
+                                                continue
+                                            new_year: int = int(new_year_input)
+                                            if not Semester.validate_year(new_year):
+                                                print(f"\nError: Please enter a valid year [1900-{datetime.datetime.now().year}]")
+                                                continue
+                                            break  
+
+                                        new_sem: Semester = Semester(new_semester, new_year)
+                                        course.set_semester(new_sem)
+                                        print(f'\nSemester successfully updated for:\n {course}')
+                                        break
                                     
                                 case '2' : # Edit Inst method
                                     while True : 
-                                        print(f'Valid instruction methods: {Course.valid_inst_methods}')
-                                        new_inst_method:str = input("Enter new instruction method: ")
+                                        print(f'Valid Instruction Methods: {Course.valid_inst_methods}')
+                                        new_inst_method:str = input("\nEnter new instruction method : ").strip().lower()
 
                                         try : 
                                             course.set_inst_method(new_inst_method)
                                         except ValueError as e : 
-                                            print(f'{e}\n')
+                                            print(f'\n{e}')
                                             continue
 
-                                        print('Instruction method successfully edited\n')
+                                        print(f'\nInstruction method successfully updated for:\n {course}')
                                         break
 
                                 case '3' : # Edit status
                                     while True : 
                                         print(f'Valid statuses: {Course.valid_status}')
-                                        new_status:str = input("Enter new status: ")
+                                        new_status:str = input("\nEnter new status: ").strip().lower()
 
                                         try : 
                                             course.set_status(new_status)
                                         except ValueError as e : 
-                                            print(f'{e}\n')
+                                            print(f'\n{e}')
                                             continue 
 
-                                        print('Status successfully edited\n')
+                                        print(f'Status successfully updated for:\n {course}')
                                         break
 
                                 case '4' : # Edit Grade
                                     while True : 
                                         print(f'Valid grades: {Course.valid_grades}')
-                                        new_grade:str = input("Enter new grade: ")
+                                        new_grade:str = input("\nEnter new grade: ").strip().lower()
 
                                         try : 
                                             course.set_grade(new_grade)
                                         except ValueError as e : 
-                                            print(f'{e}\n')
+                                            print(f'\n{e}')
                                             continue
 
-                                        print('Grade successfully edited\n')
+                                        print(f'\nGrade successfully updated for:\n {course}')
                                         break
                                 case '-1' : 
-                                    return -1
+                                    #return -1
+                                    break
                                 case _ : # Default
-                                    print(f'Invalid choice, try again')
+                                    print(f'\nError: Please enter a valid menu option [1-3]')
                             
-
-
                 else:
                     print(f"\nError: Please enter a valid menu option [1-3]")
 
@@ -784,7 +822,7 @@ class advisor :
             print(f"Enter student's name : ")
             while True:
                 try:
-                    first_name:str = str(input("First : "))
+                    first_name:str = str(input("First : ")).strip()
                     if first_name == '-1' : 
                         return -1
                     
@@ -801,7 +839,7 @@ class advisor :
             
             while True:
                 try:
-                    middle_name:str = str(input("Middle : "))
+                    middle_name:str = str(input("Middle : ")).strip()
 
                     if middle_name == '-1' : 
                         return -1
@@ -815,7 +853,7 @@ class advisor :
             
             while True:
                 try:
-                    last_name:str = str(input("Last : "))
+                    last_name:str = str(input("Last : ")).strip()
                     
                     if last_name == '-1' : 
                         return -1
@@ -935,11 +973,11 @@ class advisor :
                     if year == -1 : 
                         return -1
                     if year < 1000 or year > datetime.datetime.now().year:
-                        raise ValueError(f"Error: Please enter a valid year")
+                        raise ValueError(f"Error: Please enter a valid year [1900-{datetime.datetime.now().year}]")
                     else:
                         break
                 except ValueError:
-                     print(f"Error: Please enter a valid year")
+                     print(f"Error: Please enter a valid year [1900-{datetime.datetime.now().year}]")
 
             while True:
                 try:
@@ -948,11 +986,11 @@ class advisor :
                     if month == -1 : 
                         return -1
                     if month < 1 or month > 12:
-                        raise ValueError(f"Error: Please enter a valid month")
+                        raise ValueError(f"Error: Please enter a valid month [1-12] for {year}")
                     else:
                         break
                 except ValueError:
-                    print(f'Error: Please enter a valid month for {year}')
+                    print(f'Error: Please enter a valid month [1-12] for {year}')
 
             while True:
                 try:
@@ -1019,11 +1057,11 @@ class advisor :
             while True:
                 valid_sems = ['summer', 'fall', 'spring']
                 try:
-                    semester:str = str(input("Semester: "))
+                    semester:str = str(input("Semester: ")).strip().lower()
 
                     if semester == '-1' : 
                         return -1
-                    if semester.lower() in valid_sems:
+                    if semester.strip().lower() in valid_sems:
                         break
                     else:
                         raise ValueError(f'Error: Please enter a valid start semester (summer/fall/spring)')
