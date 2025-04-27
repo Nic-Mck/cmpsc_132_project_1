@@ -394,7 +394,6 @@ class Semester:
                 raise ValueError("Invalid input, enter an integer")
         except Exception as e :
             print(f'Error: Please enter a valid semester year [1900-2100] ')
-            #FIXME
             self.__year = 1900
 
     def set_semester(self, semester):
@@ -420,6 +419,15 @@ class Semester:
 
     def __str__(self):
         return f'{self.__semester} {self.__year}'
+    
+    #def get_valid_sems() -> list[str] : 
+       # return super().valid_sems
+    
+    def validate_year(year_to_validate:int) -> bool : 
+        if isinstance(year_to_validate, int) and 1900<=year_to_validate<=2100:
+            return True 
+        else : 
+            return False
     
 class Course:
 
@@ -491,6 +499,10 @@ class Course:
         
     def get_grade(self):
         return self.__grade
+    
+    # Need this function to work with our standard Linked List Search function
+    def get_id_num(self) -> str : 
+        return self.__course_num
     
     def display(self):
         print(f'\n    Course ID: {self.__course_num}\n        Semester Taken: {self.__semester}\n       Instruction Method: {self.__inst_method}\n       Status: {self.__status}\n       Grade: {self.__grade.upper()}')

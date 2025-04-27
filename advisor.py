@@ -5,12 +5,6 @@ from StudentAttributes import *
 import datetime
 import calendar
 
-# Add an Advisor
-# Edit Advisor Info
-# Display Advisor Info 
-# Add students to advisee list+
-# Delete students from advisee list 
-
 class advisor : 
 
     valid_titles = ['admin', 'advisor', 'professor', 'associate professor', 'assistant professor', 'dr.',
@@ -551,8 +545,9 @@ class advisor :
                 print("\n---Edit Course List---")
                 print(f"1. Add Course\n"
                     "2. Remove Course\n"
-                    "3. Go back\n")
-                
+                    "3. Edit Course\n"
+                )
+
                 try:
                     user_choice = input("Enter your choice or -1 to go back: ").strip()
                     if user_choice == "":
@@ -684,7 +679,99 @@ class advisor :
                             break
 
                 elif user_choice == 3:
-                    break
+                    course = None
+                    while True : 
+                        course_to_edit:str = str(input("Enter the name of the course you wish to edit: "))
+                        course = student.get_course_list().search(course_to_edit)
+                        if course : 
+                            course.display()
+                            is_correct:str = input(f'This course was found, is this correct? [1-Yes, 0-No] ')
+                            if is_correct == '1' : break
+                            elif is_correct == '0' : 
+                                print("Wrong course indicated.")
+                            elif is_correct == '-1' : 
+                                return -1
+                        else : 
+                            print(f'Course {course_to_edit} not found, try again.\n')
+
+                    # Course was found
+                    if course : 
+                        while True : 
+                            print(f"\n---Edit Course {course.get_id_num()} Data---\n"
+                                   'Enter -1 at any time to go back\n\n'
+                                   '1. Edit Semester\n'
+                                   '2. Edit Instruction Method\n'
+                                   '3. Edit Course Status\n'
+                                   '4. Edit Course Grade\n')
+                            
+                            choice:str = input("Enter your choice: ")
+
+                            match choice : 
+                                case '1' : # Edit Semester
+                                    while True : 
+                                        print(f'Valid semesters: {Semester.valid_sems}')
+                                        new_semester:str = input("Enter new semester: ")
+                                        new_year:int = int(input("Enter new year: "))
+
+                                        if not new_semester.lower() in Semester.valid_sems :
+                                            print('Invalid semester value, try again\n')
+                                            continue
+                                        elif not Semester.validate_year(new_year) : 
+                                            print('Invalid year value, try again\n')
+                                            continue 
+                                        else : 
+                                            new_sem:Semester = Semester(new_semester, new_year)
+                                            course.set_semester(new_sem)
+                                            print('Semester successfully edited\n')
+                                            break
+                                    
+                                case '2' : # Edit Inst method
+                                    while True : 
+                                        print(f'Valid instruction methods: {Course.valid_inst_methods}')
+                                        new_inst_method:str = input("Enter new instruction method: ")
+
+                                        try : 
+                                            course.set_inst_method(new_inst_method)
+                                        except ValueError as e : 
+                                            print(f'{e}\n')
+                                            continue
+
+                                        print('Instruction method successfully edited\n')
+                                        break
+
+                                case '3' : # Edit status
+                                    while True : 
+                                        print(f'Valid statuses: {Course.valid_status}')
+                                        new_status:str = input("Enter new status: ")
+
+                                        try : 
+                                            course.set_status(new_status)
+                                        except ValueError as e : 
+                                            print(f'{e}\n')
+                                            continue 
+
+                                        print('Status successfully edited\n')
+                                        break
+
+                                case '4' : # Edit Grade
+                                    while True : 
+                                        print(f'Valid grades: {Course.valid_grades}')
+                                        new_grade:str = input("Enter new grade: ")
+
+                                        try : 
+                                            course.set_grade(new_grade)
+                                        except ValueError as e : 
+                                            print(f'{e}\n')
+                                            continue
+
+                                        print('Grade successfully edited\n')
+                                        break
+                                case '-1' : 
+                                    return -1
+                                case _ : # Default
+                                    print(f'Invalid choice, try again')
+                            
+
 
                 else:
                     print(f"\nError: Please enter a valid menu option [1-3]")
