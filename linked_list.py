@@ -1,6 +1,15 @@
+# Names: Nick McKenna, Edward Hu
+# Class: CMPSC132
+# Date of Final Revision: 4-27-2025
+
+# This module represents our custom LinkedList ADT
+# Used in the Student() class for their course list attribute in Student.py
+# Used in the Advisor() class for their Student() list (advisee list) attribute in Advisor.py
+
 import typing
 import node
 
+# Linked List ADT (singly linked)
 class LinkedList :
     def __init__(self) -> None :
         self.head = None

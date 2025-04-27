@@ -1,13 +1,19 @@
+# Names: Nick McKenna, Edward Hu
+# Class: CMPSC132
+# Date of Final Revision: 4-27-2025
+
+# This module is the User Interface for our Academic Advisor Student Management System
+
 import Student
 from StudentAttributes import *
 import Advisor
 import linked_list
 
 
-# FIXME
-# Add an Advisor
+# FIXME (Completed)
+# DONE Add an Advisor
 # DONE Delete an Advisor
-# Edit Advisor Info
+# DONE Edit Advisor Info
 # DONE Display Advisor Info 
 # DONE Add students to advisee list+
 # DONE Delete students from advisee list 

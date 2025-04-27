@@ -1,3 +1,10 @@
+# Names: Nick McKenna, Edward Hu
+# Class: CMPSC132
+# Date of Final Revision: 4-27-2025
+
+# This module represents a node with wrapped data in our LinkedList ADT
+# As specified, encapsulated data is wrapped into a node
+
 import typing
 
 class Node :

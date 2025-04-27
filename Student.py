@@ -1,6 +1,6 @@
 # Names: Nick McKenna, Edward Hu
 # Class: CMPSC132
-# Date of Final Revision: 3-18-2025
+# Date of Final Revision: 4-27-2025
 
 # This module defines students in an advisor system as specified
 
@@ -8,7 +8,7 @@ from StudentAttributes import Name, Address, EmailAddress, PhoneNumber, Date, Se
 
 from linked_list import LinkedList
 
-
+# Student ADT, represents advisees in an advisor's student list
 class Student:
 
     def __init__(self, name ='', address = '', id_num=0, birthdate='', acceptance_date='',
@@ -239,6 +239,7 @@ class Student:
                f'{"Birth Date: ":<20}' + f'{self.get_birthdate()}'f'\n{"Acceptance Date:":<20}{self.get_acceptance_date()}\n'\
                f'{"Semester: ":<20}' + f'{self.get_semester()}\nIntended Major: {self.get_intended_major()}\nCourse List:{self.__course_list}'
 
+# Verification of Basic Functionality & ADT implementations from StudentAttributes.py
 if __name__ == '__main__':
 
     # Setter & Getter Test
