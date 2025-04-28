@@ -145,6 +145,8 @@ class advisor :
                             success = self.edit_home_address(student)
                         case 9 : # Edit Course List
                             success = self.edit_course_list(student)
+                        case 10 : # Go Back
+                            return -1
                         case _ : # Default Case
                             raise Exception("Invalid Submenu Choice")
                     
@@ -165,7 +167,8 @@ class advisor :
             '6. Edit Email Address(s)\n'
             '7. Edit Phone Number(s)\n'
             '8. Edit Home Address\n'
-            '9. Edit Course List\n'
+            '9. Edit Course List\n' \
+            '10. Go Back\n'
             )
         
     def edit_student_name(self, student:Student) -> int :
@@ -552,7 +555,8 @@ class advisor :
                 print(f"\n---Edit Course List for {student.get_name()}---")
                 print(f"1. Add Course\n"
                     "2. Remove Course\n"
-                    "3. Update Existing Course\n"
+                    "3. Update Existing Course\n" \
+                    "4. Go Back\n"
                 )
 
                 try:
@@ -822,7 +826,10 @@ class advisor :
                                     break
                                 case _ : # Default
                                     print(f'\nError: Please enter a valid menu option [1-3]')
-                            
+
+                elif user_choice == 4:
+                    return -1
+
                 else:
                     print(f"\nError: Please enter a valid menu option [1-3]")
 
