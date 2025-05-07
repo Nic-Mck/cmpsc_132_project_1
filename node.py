@@ -10,7 +10,7 @@ import typing
 class Node :
     def __init__(self, data:typing.Any) -> None :
         self.__data = data
-        self.__next = None
+        self.next = None
 
     def get_data(self) :
         return self.__data 
@@ -19,7 +19,10 @@ class Node :
         self.__data = new_data
     
     def get_next(self) : 
-        return self.__next
+        return self.next
     
     def set_next(self, new_next) : 
-        self.__next = new_next
+        self.next = new_next
+
+    def __str__(self):
+        return f"{self.get_data()}"

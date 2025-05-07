@@ -20,13 +20,13 @@ class MyQueue:
         if self.rear:
             self.rear.next = n_node     # Rear next pointer points to new node
             self.rear = n_node          # Rear pointer points to new node
-            print(f'Node ({n_node}) added to queue')
+            print(f'Customer ({str(n_node)}) added to queue')
 
         # Else if rear pointer not null (Queue is empty)
         else:
             self.front = n_node     # Both the front & rear pointers direct to the new node
             self.rear = n_node
-            print(f'First node ({n_node}) in Queue has been initialized')
+            print(f'First customer ({str(n_node)}) in Queue has been added')
 
 
     # This method removes the front of a Queue
@@ -36,7 +36,7 @@ class MyQueue:
         # If front pointer is null (meaning Queue is empty)
         if self.front is None:
             # Notify User & return None
-            print(f'Error: No node to dequeue')
+            print(f'Error: No customer to dequeue')
             return None
 
         # Else, assign an index identifier to the data in front pointer, using the Node() class getter method
@@ -45,7 +45,7 @@ class MyQueue:
         self.front = self.front.next
 
         # Notify user Node has been removed & return the index
-        print(f'Node ({index}) has been removed!')
+        print(f'Customer ({str(index)}) has been removed!')
         return index
 
     def isEmpty(self):
@@ -53,21 +53,21 @@ class MyQueue:
         # If a front and rear pointer exist for the Queue
         if self.front == self.rear and self.front:
             # Queue is not empty
-            print(f'Queue is not empty')
+            print(f'Customer Queue is not empty')
             return False
 
         # Else list is empty, returns True
         else:
-            print(f'Queue is empty')
+            print(f'Customer Queue is empty')
             return True
 
     def display(self):
         if self.front is None:
-            print("Queue is empty")
+            print("Customer Queue is empty")
             return
 
         current = self.front
-        print("Queue contents:")
+        print("Customer Queue contents:")
         while current:
             print(current.get_data(), end=" -> ")
             current = current.next

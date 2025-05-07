@@ -35,7 +35,7 @@ class MyBST:
                         t_pointer.right = n_node
                         break
 
-        print(f'Data ({data}) has been added!')
+        print(f'Customer info ({data}) has been added!')
 
     def test_remove_data(self, key):
         # If Tree Empty
